@@ -10,6 +10,8 @@ namespace Base
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("This is an E-Commerce App!!");
+            Console.ReadLine();
         }
     }
 }
