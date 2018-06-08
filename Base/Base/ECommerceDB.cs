@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Base
 {
-    class Database
+    class ECommerceDB
     {
-        private static Database _instance;
+        private static ECommerceDB _instance;
 
-        private Database() { }
+        private ECommerceDB() { }
 
-        public static Database Instance
+        public static ECommerceDB Instance
         {
             get
             {
-                if(Instance == null)
+                if (_instance == null)
                 {
-                    Instance = new Database();
+                    _instance = new ECommerceDB();
                 }
-                return Instance;
+                return _instance;
             }
         }
 
@@ -31,7 +31,6 @@ namespace Base
         public List<User> UsersList { get; set; }
         public List<ProductCart> ProductCartsList { get; set; }
         public List<Cart> CartsList { get; set; }
-
 
     }
 }
