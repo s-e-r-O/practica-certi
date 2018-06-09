@@ -10,7 +10,7 @@ namespace Base
     {
         private static ECommerceDB _instance;
 
-        private ECommerceDB() { }
+        public ECommerceDB() { }
 
         public static ECommerceDB Instance
         {
