@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Cart.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="Crudable.cs" />
+    <Compile Include="ICrudable.cs" />
     <Compile Include="ECommerceDB.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="ProductCart.cs" />
