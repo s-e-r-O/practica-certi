@@ -8,5 +8,18 @@ namespace Base
 {
     class Cart
     {
+        public List<ProductCart> ProductCarts { get; set; }
+        public string Username { get; set; }
+
+        public void Show()
+        {
+
+            Console.Write("CART:");
+            if (ProductCarts == null) 
+            {
+                Console.Write("Empty ");
+            }
+            Console.WriteLine("(Cart of " + Username + ")");
+        }
     }
 }
