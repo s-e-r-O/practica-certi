@@ -8,5 +8,12 @@ namespace Base
 {
     class Category
     {
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        /*public void Show()
+        {
+            Console.WriteLine("Name: " + Name + ", Description: " + Description);
+        } */
     }
 }

@@ -10,7 +10,9 @@ namespace Base
     {
         private static ECommerceDB _instance;
 
-        private ECommerceDB() { }
+        private ECommerceDB() {
+            this.CategorysList = new List<Category>();
+        }
 
         public static ECommerceDB Instance
         {
