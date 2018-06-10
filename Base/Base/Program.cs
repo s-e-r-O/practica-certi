@@ -8,15 +8,19 @@ namespace Base
 {
     class Program
     {
-        private static ECommerceDB bdlists = ECommerceDB.Instance;
         static void Main(string[] args)
         {
             Console.WriteLine("This is an E-Commerce App!!");
             
             StoreService ss = new StoreService();
             Store store2 = new Store() { Name = "MAC", Line1 = "Av Juan de la Rosa", Line2 = "Edif Torres Rivera", Phone = 4040890 };
-            bdlists.StoresList.Add(store2);
-            ss.Delete("MAC");
+            ss.Create(store2);
+            store2 = new Store() { Name = "Atom", Line1 = "Av Juan de la Rosa", Line2 = "Edif Torres Rivera", Phone = 4040890 };
+            ss.Create(store2);
+            foreach (Store store in ss.Get())
+            {
+                Console.WriteLine(store.Name);
+            }
             Console.ReadLine();
         }
     }
