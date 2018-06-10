@@ -55,7 +55,7 @@ namespace Base
             return true;
         }
 
-        public void ShowCarts()
+        public void Show()
         {
             Console.WriteLine("======== CART LIST ========");
             this.Get().ForEach(cart => { cart.Show(); });

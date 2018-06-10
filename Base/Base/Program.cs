@@ -18,21 +18,21 @@ namespace Base
         static void TestCartService()
         {
             CartService cs = new CartService();
-            Cart cart1 = new Cart() { ProductCarts = null, Username = "Mac" };
-            Cart cart2 = new Cart() { ProductCarts = null, Username = "Tom" };
+            Cart cart1 = new Cart() { Username = "Mac" };
+            Cart cart2 = new Cart() { Username = "Tom" };
             Console.WriteLine("$$$$ Testing CREATE $$$$");
             cs.Create(cart1);
             cs.Create(cart2);
             cs.Create(cart2);
-            cs.ShowCarts();
+            cs.Show();
             Console.WriteLine("$$$$ Testing DELETE $$$$");
             cs.Delete("Tom");
             cs.Delete("AspNet");
-            cs.ShowCarts();
+            cs.Show();
             Console.WriteLine("$$$$ Testing UPDATE $$$$");
-            cs.Update("Tom", new Cart() { ProductCarts = null, Username = "Lola" });
-            cs.Update("Mac", new Cart() { ProductCarts = null, Username = "Lola" });
-            cs.ShowCarts();
+            cs.Update("Tom", new Cart() { Username = "Lola" });
+            cs.Update("Mac", new Cart() { Username = "Lola" });
+            cs.Show();
         }
 
         
