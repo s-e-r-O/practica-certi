@@ -8,6 +8,7 @@ namespace Base
 {
     class Program
     {
+        private static ECommerceDB bdlists = ECommerceDB.Instance;
         static void Main(string[] args)
         {
             Console.WriteLine("This is an E-Commerce App!!");
