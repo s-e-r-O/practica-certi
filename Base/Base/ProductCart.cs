@@ -23,8 +23,7 @@ namespace Base
 
         public void Show()
         {
-            Console.Write("PRODUCT CART:");
-            Console.Write("Code: " + ProductCode + " Delivery: " + SelectedDelivery + " Quantity: " + Quantity);
+            Console.WriteLine("ProductCode: " + ProductCode + ", Delivery: " + SelectedDelivery + ", Quantity: " + Quantity);
         }
     }
 }

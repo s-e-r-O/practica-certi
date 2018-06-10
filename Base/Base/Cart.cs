@@ -30,7 +30,10 @@ namespace Base
             {
                 Console.WriteLine("Empty");
             }
-            else { }
+            else
+            {
+                ProductCarts.ForEach(productCart => { productCart.Show(); });
+            }
         }
     }
 }
