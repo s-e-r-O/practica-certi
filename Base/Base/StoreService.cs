@@ -16,7 +16,6 @@ namespace Base
             _dbContext.StoresList.Add(obj);
             if (_dbContext.StoresList.Count == size1 + 1)
             {
-                Console.WriteLine("successfully created");
                 return true;
             }
             return false;
@@ -24,28 +23,37 @@ namespace Base
 
         public bool Delete(string key)
         {
-            int size1 = _dbContext.StoresList.Count;
-            foreach (object store in _dbContext.StoresList)
+            int index;
+            if ((index = _dbContext.StoresList.FindIndex(Store => { return Store.Name == key; })) < 0)
             {
-                Console.WriteLine(store);
+                Console.WriteLine("The store '" + key + "' does not exist");
+                return false;
             }
-            Store store1 = new Store() { Name = "Apple", Line1 = "Av Juan de la Rosa", Line2 = "Edif Torres Rivera", Phone = 4040890 };
-            _dbContext.StoresList.Remove(store1);
-            if (_dbContext.StoresList.Count == size1 - 1)
-            {
-                return true;
-            }
-            return false;
+            _dbContext.StoresList.RemoveAt(index);
+            return true;
         }
-        
-        public bool Update(string key, Store obj)
-        {
-            throw new NotImplementedException();
-        }
-        
+
         public List<Store> Get()
         {
             return _dbContext.StoresList;
         }
+
+        public bool Update(string key, Store obj)
+        {
+            if (key != obj.Name)
+            {
+                Console.WriteLine("The keys do not match. ( '" + key + "' != '" + obj.Name + "' )");
+                return false;
+            }
+            int index;
+            if ((index = _dbContext.StoresList.FindIndex(cart => { return cart.Name == key; })) < 0)
+            {
+                Console.WriteLine("The store '" + key + "' does not exists");
+                return false;
+            }
+            _dbContext.StoresList[index] = obj;
+            return true;
+        }
     }
-}
+    }
+
