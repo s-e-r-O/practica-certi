@@ -10,7 +10,8 @@ namespace Base
     {
         private static ECommerceDB _instance;
 
-        private ECommerceDB() {
+        public ECommerceDB() {
+            this.StoresList = new List<Store>();
             this.CartsList = new List<Cart>();
         }
 
