@@ -8,14 +8,18 @@ namespace Base
 {
     class ShippingAddressService : ICrudable<ShippingAddress>
     {
-        //change _dbContext to User in the end
-        private static ECommerceDB _dbContext = ECommerceDB.Instance;
+        //private static ECommerceDB _dbContext = ECommerceDB.Instance;
         public User User { private get; set; }
         
         public ShippingAddressService(User user)
         {
             User = user;
         }
+
+        public ShippingAddressService()
+        {
+        }
+
         public bool Create(ShippingAddress obj)
         {
             if (User == null)
@@ -23,12 +27,12 @@ namespace Base
                 Console.WriteLine("No user specified");
                 return false;
             }
-            if (_dbContext.ShippingAddressesList.Exists(shippingAddress => { return shippingAddress.Identifier == obj.Identifier; }))
+            if (User.ShipAdress.Exists(shippingAddress => { return shippingAddress.Identifier == obj.Identifier; }))
             {
-                Console.WriteLine("The user '" + "' already has the shipping address of '" + obj.Identifier);
+                Console.WriteLine("The user '" + User.Username + "' already has the shipping address of '" + obj.Identifier);
                 return false;
             }
-            _dbContext.ShippingAddressesList.Add(obj);
+            User.ShipAdress.Add(obj);
             return true;
         }
 
@@ -40,12 +44,12 @@ namespace Base
                 return false;
             }
             int index;
-            if ((index = _dbContext.ShippingAddressesList.FindIndex(shippingAddress => { return shippingAddress.Identifier == key; })) < 0)
+            if ((index = User.ShipAdress.FindIndex(shippingAddress => { return shippingAddress.Identifier == key; })) < 0)
             {
-                Console.WriteLine("The user '" + "' does not have the shipping address of '" + obj.Identifier);
+                Console.WriteLine("The user '" + User.Username + "' does not have the shipping address of '" + key);
                 return false;
             }
-            _dbContext.ShippingAddressesList.RemoveAt(index);
+            User.ShipAdress.RemoveAt(index);
             return true;
         }
 
@@ -56,14 +60,14 @@ namespace Base
                 Console.WriteLine("No user specified");
                 return null;
             }
-            return _dbContext.ShippingAddressesList;
+            return User.ShipAdress;
         }
 
         public bool Update(string key, ShippingAddress obj)
         {
             if (User == null)
             {
-                Console.WriteLine("No cart was specified.");
+                Console.WriteLine("No User was specified.");
                 return false;
             }
             if (key != obj.Identifier)
@@ -72,13 +76,14 @@ namespace Base
                 return false;
             }
             int index;
-            if ((index = _dbContext.ShippingAddressesList.FindIndex(shippingAddress => { return shippingAddress.Identifier == key; })) < 0)
+            if ((index = User.ShipAdress.FindIndex(shippingAddress => { return shippingAddress.Identifier == key; })) < 0)
             {
-                Console.WriteLine("The user '" + "' does not have the product '" + key + "'.");
+                Console.WriteLine("The user '" + User.Username + "' does not have the product '" + key + "'.");
                 return false;
             }
-            _dbContext.ShippingAddressesList[index] = obj;
+            User.ShipAdress[index] = obj;
             return true;
         }
+
     }
 }
