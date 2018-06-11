@@ -29,7 +29,15 @@ namespace Base
 
         public void Show()
         {
-           
+            Console.WriteLine("(User: "+ Username + ")");
+            Console.WriteLine("(Password: " + Password + ")");
+            Console.WriteLine("Name: " + Name + ")");
+            Console.WriteLine("Last Name: " + LastName + ")");
+            if (ShipAdress.Count == 0)
+            {
+                Console.WriteLine("Empty");
+            }
+            else { }
         }
     }
 }
