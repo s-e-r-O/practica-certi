@@ -30,12 +30,12 @@ namespace Base
             }
         }
 
-        public List<Product> ProductsList { get; set; }
-        public List<Category> CategorysList { get; set; }
-        public List<Store> StoresList { get; set; }
-        public List<ShippingAddress> ShippingAddressesList { get; set; }
-        public List<User> UsersList { get; set; }
-        public List<Cart> CartsList { get; set; }
+        public List<Product> ProductsList { get; private set; }
+        public List<Category> CategorysList { get; private set; }
+        public List<Store> StoresList { get; private set; }
+        public List<ShippingAddress> ShippingAddressesList { get; private set; }
+        public List<User> UsersList { get; private set; }
+        public List<Cart> CartsList { get; private set; }
 
     }
 }
