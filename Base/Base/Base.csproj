@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mockup.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Services\CartService.cs" />
     <Compile Include="Models\Category.cs" />
