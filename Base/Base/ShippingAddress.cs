@@ -14,5 +14,15 @@ namespace Base
         public int Phone { get; set; }
         public string City { get; set; }
         public string Zone { get; set; }
+
+        public void Show()
+        {
+            Console.WriteLine("Identifier: " + Identifier);
+            Console.WriteLine("Line 1: " + Line1);
+            Console.WriteLine("Line 2: " + Line2);
+            Console.WriteLine("Phone: " + Phone);
+            Console.WriteLine("City: " + City);
+            Console.WriteLine("Zone: " + Zone);
+        }
     }
 }

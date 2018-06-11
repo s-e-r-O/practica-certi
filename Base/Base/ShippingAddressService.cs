@@ -61,7 +61,24 @@ namespace Base
 
         public bool Update(string key, ShippingAddress obj)
         {
-            throw new NotImplementedException();
+            if (User == null)
+            {
+                Console.WriteLine("No cart was specified.");
+                return false;
+            }
+            if (key != obj.Identifier)
+            {
+                Console.WriteLine("The keys do not match. ( '" + key + "' != '" + obj.Identifier + "' )");
+                return false;
+            }
+            int index;
+            if ((index = _dbContext.ShippingAddressesList.FindIndex(shippingAddress => { return shippingAddress.Identifier == key; })) < 0)
+            {
+                Console.WriteLine("The user '" + "' does not have the product '" + key + "'.");
+                return false;
+            }
+            _dbContext.ShippingAddressesList[index] = obj;
+            return true;
         }
     }
 }
