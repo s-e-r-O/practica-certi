@@ -54,6 +54,7 @@
     <Compile Include="ShippingAddress.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
