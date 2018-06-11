@@ -15,8 +15,39 @@ namespace Base
             TestCategoryService();
             TestStoreService();
             TestProductCartService();
+            TestProductService();
             Console.ReadLine();
         }
+
+        static void TestProductService()
+        {
+            Category c1 = new Category() { Name = "Para mayores papu :v", Description = "Not for crazy kidsss" };
+            ProductService PS = new ProductService();
+            Product p1 = new Product() { Code = "QWERTY", Name = "Product 1", Category = c1, Delivery = _Delivery.Express, Description = "Very good reco +10", Type = _Type.Digital, Price = 100.5 };
+            Product p2 = new Product() { Code = "JEJE", Name = "Product 2", Category = c1, Delivery = _Delivery.Normal, Description = "Not good, its feik", Type = _Type.Physical, Price = 500.80 };
+
+            PS.Create(p1);
+            PS.Create(p2);
+            PS.Create(p1);
+            foreach (Product p in PS.Get())
+            {
+                p.Show();
+            }
+            PS.Delete("JEJE");
+            foreach (Product p in PS.Get())
+            {
+                p.Show();
+            }
+            PS.Update("QWERTY", p2);
+            foreach (Product p in PS.Get())
+            {
+                p.Show();
+            }
+
+            Console.WriteLine("TESTEADO PAPU, INEFICIENTE PERO TESTEADO :v");
+
+        }
+
         
         static void TestUserService()
         {
@@ -37,6 +68,7 @@ namespace Base
             us.Show();
         }
   
+
         static void TestCartService()
         {
             CartService cs = new CartService();

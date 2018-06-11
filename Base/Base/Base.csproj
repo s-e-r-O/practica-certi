@@ -52,6 +52,7 @@
     <Compile Include="Product.cs" />
     <Compile Include="ProductCart.cs" />
     <Compile Include="ProductCartService.cs" />
+    <Compile Include="ProductService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShippingAddress.cs" />
