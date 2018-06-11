@@ -8,18 +8,16 @@ namespace Base
 {
     class ShippingAddressService : ICrudable<ShippingAddress>
     {
-        //private static ECommerceDB _dbContext = ECommerceDB.Instance;
         public User User { private get; set; }
         
         public ShippingAddressService(User user)
         {
             User = user;
         }
-
         public ShippingAddressService()
         {
         }
-
+        
         public bool Create(ShippingAddress obj)
         {
             if (User == null)
@@ -29,7 +27,7 @@ namespace Base
             }
             if (User.ShipAdress.Exists(shippingAddress => { return shippingAddress.Identifier == obj.Identifier; }))
             {
-                Console.WriteLine("The user '" + User.Username + "' already has the shipping address of '" + obj.Identifier);
+                Console.WriteLine("The user '" + User.Username + "' already has the shipping address of '" + obj.Identifier + "'.");
                 return false;
             }
             User.ShipAdress.Add(obj);
@@ -46,7 +44,7 @@ namespace Base
             int index;
             if ((index = User.ShipAdress.FindIndex(shippingAddress => { return shippingAddress.Identifier == key; })) < 0)
             {
-                Console.WriteLine("The user '" + User.Username + "' does not have the shipping address of '" + key);
+                Console.WriteLine("The user '" + User.Username + "' does not have the shipping address of '" + key + "'.");
                 return false;
             }
             User.ShipAdress.RemoveAt(index);
@@ -67,7 +65,7 @@ namespace Base
         {
             if (User == null)
             {
-                Console.WriteLine("No User was specified.");
+                Console.WriteLine("No user was specified.");
                 return false;
             }
             if (key != obj.Identifier)
@@ -83,7 +81,6 @@ namespace Base
             }
             User.ShipAdress[index] = obj;
             return true;
-        }
-
+        }   
     }
 }
