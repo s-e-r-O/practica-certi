@@ -31,13 +31,23 @@ namespace Base
         {
             Console.WriteLine("(User: "+ Username + ")");
             Console.WriteLine("(Password: " + Password + ")");
-            Console.WriteLine("Name: " + Name + ")");
-            Console.WriteLine("Last Name: " + LastName + ")");
+            Console.WriteLine("(Name: " + Name + ")");
+            Console.WriteLine("(Last Name: " + LastName + ")");
             if (ShipAdress.Count == 0)
             {
-                Console.WriteLine("Empty");
+                Console.WriteLine("No Shipping Address Registered");
             }
-            else { }
+            else {
+                for (int i=0; i<ShipAdress.Count; i++)
+                {
+                    Console.WriteLine("Identifier " + (i+1) + ": " + ShipAdress[i].Identifier);
+                    Console.WriteLine("Line1 " + (i + 1) + ": " + ShipAdress[i].Line1);
+                    Console.WriteLine("Line1 " + (i + 1) + ": " + ShipAdress[i].Line2);
+                    Console.WriteLine("Phone " + (i + 1) + ": " + ShipAdress[i].Phone);
+                    Console.WriteLine("City " + (i + 1) + ": " + ShipAdress[i].City);
+                    Console.WriteLine("Zone " + (i + 1) + ": " + ShipAdress[i].Zone);
+                }
+            }
         }
     }
 }
