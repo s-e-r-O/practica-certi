@@ -8,16 +8,13 @@ namespace Base
 {
     class Program
     {
-        private static ECommerceDB bdlists = ECommerceDB.Instance;
-
         static void Main(string[] args)
         {
             Console.WriteLine("This is an E-Commerce App!!");
+            TestCategoryService();
             TestStoreService();
             TestProductCartService();
             Console.ReadLine();
-            
-            
         }
 
         static void TestCartService()
@@ -102,6 +99,22 @@ namespace Base
                 Console.WriteLine(store.Name + " " + store.Line1 + " " + store.Line2 + " " + store.Phone);
                 
             }
+        }
+  
+        static void TestCategoryService()
+        {
+            CategoryService cs = new CategoryService();
+            Console.WriteLine(cs.Get().Count);
+            Category cat = new Category() { Name = "lalada", Description = "ropachidorixdxd" };
+            Category cat2 = new Category() { Name = "ropiwi", Description = "ropachidorixdxd" };
+            Category cat3 = new Category() { Name = "ropota", Description = "ropachidorixdxd" };
+            cs.Create(cat);
+            cs.Create(cat2);
+            cs.Show();
+            cs.Update("ropiwi", cat3);
+            cs.Show();
+            cs.Delete("ropota");
+            cs.Show();
         }
 
 
