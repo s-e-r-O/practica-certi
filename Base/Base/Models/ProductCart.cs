@@ -6,18 +6,10 @@ using System.Threading.Tasks;
 
 namespace Base
 {
-    enum ShippingDelivery {
-        Express,
-        Normal,
-        InStore,
-        Free,
-        None
-    }
-
     class ProductCart
     {
         public string ProductCode { get; set; }
-        public string SelectedDelivery { get; set; }
+        public _Delivery SelectedDelivery { get; set; }
         public Store Store { get; set; }
         public int Quantity { get; set; }
 
