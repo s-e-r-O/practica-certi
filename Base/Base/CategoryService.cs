@@ -46,10 +46,21 @@ namespace Base
             {
                 if (data.Name.Equals(key))
                 {
-                    data.Name = obj.Name;
-                    data.Description = obj.Description;
-                    Console.WriteLine("Datos modificados exitosamente");
-                    return true;
+                    foreach (Category data1 in categorydb.CategorysList)
+                    {
+                        if (data1.Name.Equals(obj.Name))
+                        {
+                            Console.WriteLine("Ya existe una categoria con este nombre");
+                            return false;
+                        }
+                        else
+                        {
+                            data.Name = obj.Name;
+                            data.Description = obj.Description;
+                            Console.WriteLine("Datos modificados exitosamente");
+                            return true;
+                        }
+                    }
                 }
 
             }
