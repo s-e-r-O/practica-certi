@@ -8,17 +8,15 @@ namespace Base
 {
     class Program
     {
-        private static ECommerceDB bdlists = ECommerceDB.Instance;
-
         static void Main(string[] args)
         {
-            Console.WriteLine("This is an E-Commerce App!!");
+            Console.WriteLine("This is an E-Commerce App!!");   
+            TestUserService();
+            TestCategoryService();
             TestStoreService();
             TestProductCartService();
             TestProductService();
             Console.ReadLine();
-            
-            
         }
 
         static void TestProductService()
@@ -49,6 +47,27 @@ namespace Base
             Console.WriteLine("TESTEADO PAPU, INEFICIENTE PERO TESTEADO :v");
 
         }
+
+        
+        static void TestUserService()
+        {
+            UserService us = new UserService();
+            User user1 = new User() { Username = "Sumorenito19",Password = "camba123", Name="Tomas",LastName="Cafe" };
+            User user2 = new User() { Username = "smitty", Password = "numero1", Name = "Bob", LastName = "Carvajal" };
+            Console.WriteLine("$$$$ Testing CREATE $$$$");
+            us.Create(user1);
+            us.Create(user2);
+            us.Show();
+            Console.WriteLine("$$$$ Testing DELETE $$$$");
+            us.Delete("Sumorenito19");
+            us.Delete("Pepepicapiedras");
+            us.Show();
+            Console.WriteLine("$$$$ Testing UPDATE $$$$");
+            us.Update("smitty", new User() { Username = "Smitty2", Password = "numero2", Name = "Bobi", LastName = "Tomi" });
+            us.Update("Sumorenito19", new User() { Username = "AngelesNegros", Password = "camba345", Name = "Tom", LastName = "Te" });
+            us.Show();
+        }
+  
 
         static void TestCartService()
         {
@@ -133,8 +152,21 @@ namespace Base
                 
             }
         }
-
-
-
+  
+        static void TestCategoryService()
+        {
+            CategoryService cs = new CategoryService();
+            Console.WriteLine(cs.Get().Count);
+            Category cat = new Category() { Name = "lalada", Description = "ropachidorixdxd" };
+            Category cat2 = new Category() { Name = "ropiwi", Description = "ropachidorixdxd" };
+            Category cat3 = new Category() { Name = "ropota", Description = "ropachidorixdxd" };
+            cs.Create(cat);
+            cs.Create(cat2);
+            cs.Show();
+            cs.Update("ropiwi", cat3);
+            cs.Show();
+            cs.Delete("ropota");
+            cs.Show();
+        }
     }
 }

@@ -46,6 +46,7 @@
     <Compile Include="Cart.cs" />
     <Compile Include="CartService.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="CategoryService.cs" />
     <Compile Include="ICrudable.cs" />
     <Compile Include="ECommerceDB.cs" />
     <Compile Include="Product.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Store.cs" />
     <Compile Include="StoreService.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
