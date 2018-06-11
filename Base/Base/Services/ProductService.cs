@@ -16,7 +16,6 @@ namespace Base
             bool check = DBConnections.ProductsList.Any(item => item.Code == obj.Code);
             if (!check) {
                 DBConnections.ProductsList.Add(obj);
-                Console.WriteLine("SUCCESFULLY added the product to the list");
                 return true;
             }
             Console.WriteLine("ERROR while adding product. Product is already on the list");
