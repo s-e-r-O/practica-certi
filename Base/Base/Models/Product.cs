@@ -16,6 +16,7 @@ namespace Base
         public string Description { get; set; }
         public string Type { get; set; }
         public string Delivery { get; set; }
+        public string ImageURL { get; set; }
         public Category Category { get; set; }
 
         public Product() { }       

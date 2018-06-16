@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,17 +13,15 @@ namespace Base
 
         public bool Create(Category obj)
         {
-            foreach (Category data in categorydb.CategorysList)
+            bool check = categorydb.CategorysList.Any(item => item.Name == obj.Name);
+            bool checkNull = IsAnyNullOrEmpty(obj);
+            if (!check && !checkNull)
             {
-                if (data.Name.Equals(obj.Name))
-                {
-                    Console.WriteLine("El nombre ya existe");
-                    return false;
-                }
-
+                categorydb.CategorysList.Add(obj);
+                return true;
             }
-            categorydb.CategorysList.Add(obj);
-            return true;
+            Console.WriteLine("ERROR while adding category. Category is already on the list");
+            return false;
         }
 
         public bool Delete(string key)
@@ -42,29 +41,18 @@ namespace Base
 
         public bool Update(string key, Category obj)
         {
-            foreach (Category data in categorydb.CategorysList)
-            {
-                if (data.Name.Equals(key))
-                {
-                    foreach (Category data1 in categorydb.CategorysList)
-                    {
-                        if (data1.Name.Equals(obj.Name))
-                        {
-                            Console.WriteLine("Ya existe una categoria con este nombre");
-                            return false;
-                        }
-                        else
-                        {
-                            data.Name = obj.Name;
-                            data.Description = obj.Description;
-                            Console.WriteLine("Datos modificados exitosamente");
-                            return true;
-                        }
-                    }
-                }
+            int index = categorydb.CategorysList.FindIndex(category => category.Name == key);
+            bool checkNull = IsAnyNullOrEmpty(obj);
 
+            if (index >= 0 && obj.Name == key && !checkNull)
+            {
+                categorydb.CategorysList[index] = obj;
+                Console.WriteLine("SUCCESFULLY updated the category of the list");
+                return true;
             }
+            Console.WriteLine("ERROR while updating the category.");
             return false;
+
         }
 
         public List<Category> Get()
@@ -80,5 +68,23 @@ namespace Base
             }
             Console.WriteLine("xdxdxdxdxdxdxdxdxdxdxdxdxdxd");
         }
+
+        public bool IsAnyNullOrEmpty(object myObject)
+        {
+            foreach (PropertyInfo pi in myObject.GetType().GetProperties())
+            {
+                if (pi.PropertyType == typeof(string))
+                {
+                    string value = (string)pi.GetValue(myObject);
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
+
+   
 }

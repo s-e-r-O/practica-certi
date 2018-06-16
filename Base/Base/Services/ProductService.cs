@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,10 +15,13 @@ namespace Base
         public bool Create(Product obj)
         {
             bool check = DBConnections.ProductsList.Any(item => item.Code == obj.Code);
-            if (!check) {
+            bool checkNull = IsAnyNullOrEmpty(obj);
+
+            if (!check && !checkNull) {
                 DBConnections.ProductsList.Add(obj);
                 return true;
             }
+
             Console.WriteLine("ERROR while adding product. Product is already on the list");
             return false;
         }
@@ -47,13 +51,31 @@ namespace Base
         public bool Update(string key, Product obj)
         {
             int index = DBConnections.ProductsList.FindIndex(product => product.Code == key);
-            if (index >= 0)
+            bool checkNull = IsAnyNullOrEmpty(obj);
+
+            if (index >= 0 && obj.Name == key && !checkNull)
             {
                 DBConnections.ProductsList[index] = obj;
                 Console.WriteLine("SUCCESFULLY updated the product of the list");
                 return true;
             }
-            Console.WriteLine("ERROR while updating the product. Product is not on the list!");
+            Console.WriteLine("ERROR while updating the product.");
+            return false;
+        }
+
+        public bool IsAnyNullOrEmpty(object myObject)
+        {
+            foreach (PropertyInfo pi in myObject.GetType().GetProperties())
+            {
+                if (pi.PropertyType == typeof(string))
+                {
+                    string value = (string)pi.GetValue(myObject);
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        return true;
+                    }
+                }
+            }
             return false;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,12 +13,14 @@ namespace Base
         
         public bool Create(Store obj)
         {
-            int size1 = _dbContext.StoresList.Count;
-            _dbContext.StoresList.Add(obj);
-            if (_dbContext.StoresList.Count == size1 + 1)
+            bool check = _dbContext.StoresList.Any(item => item.Name == obj.Name);
+            bool checkNull = IsAnyNullOrEmpty(obj);
+            if (!check && !checkNull)
             {
+                _dbContext.StoresList.Add(obj);
                 return true;
             }
+            Console.WriteLine("ERROR while adding store. Store is already on the list");
             return false;
         }
 
@@ -40,20 +43,36 @@ namespace Base
 
         public bool Update(string key, Store obj)
         {
-            if (key != obj.Name)
+            int index = _dbContext.StoresList.FindIndex(store => store.Name == key);
+            bool checkNull = IsAnyNullOrEmpty(obj);
+
+            if (index >= 0 && obj.Name == key && !checkNull)
             {
-                Console.WriteLine("The keys do not match. ( '" + key + "' != '" + obj.Name + "' )");
-                return false;
+                _dbContext.StoresList[index] = obj;
+                Console.WriteLine("SUCCESFULLY updated the store of the list");
+                return true;
             }
-            int index;
-            if ((index = _dbContext.StoresList.FindIndex(cart => { return cart.Name == key; })) < 0)
-            {
-                Console.WriteLine("The store '" + key + "' does not exists");
-                return false;
-            }
-            _dbContext.StoresList[index] = obj;
-            return true;
+            Console.WriteLine("ERROR while updating the store.");
+            return false;
         }
+
+        public bool IsAnyNullOrEmpty(object myObject)
+        {
+            foreach (PropertyInfo pi in myObject.GetType().GetProperties())
+            {
+                if (pi.PropertyType == typeof(string))
+                {
+                    string value = (string)pi.GetValue(myObject);
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
     }
     }
 
