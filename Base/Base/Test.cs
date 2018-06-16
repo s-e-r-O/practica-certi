@@ -27,8 +27,8 @@ namespace Base
         {
             Category c1 = new Category() { Name = "Para mayores papu :v", Description = "Not for crazy kidsss" };
             ProductService PS = new ProductService();
-            Product p1 = new Product() { Code = "QWERTY", Name = "Product 1", Category = c1, Delivery = _Delivery.Express, Description = "Very good reco +10", Type = _Type.Digital, Price = 100.5 };
-            Product p2 = new Product() { Code = "JEJE", Name = "Product 2", Category = c1, Delivery = _Delivery.Normal, Description = "Not good, its feik", Type = _Type.Physical, Price = 500.80 };
+            Product p1 = new Product() { Code = "QWERTY", Name = "Product 1", Category = c1, Delivery = "Express", Description = "Very good reco +10", Type = "Digital", Price = 100.5 };
+            Product p2 = new Product() { Code = "JEJE", Name = "Product 2", Category = c1, Delivery = "Normal", Description = "Not good, its feik", Type = "Physical", Price = 500.80 };
 
             PS.Create(p1);
             PS.Create(p2);
@@ -136,19 +136,19 @@ namespace Base
             cs.Show();
             Console.WriteLine("$$$$ Testing CREATE $$$$");
             pcs.Cart = cart1;
-            pcs.Create(new ProductCart() { ProductCode = "AA", SelectedDelivery = _Delivery.None, Quantity = 2 });
-            pcs.Create(new ProductCart() { ProductCode = "AA", SelectedDelivery = _Delivery.None, Quantity = 2 });
+            pcs.Create(new ProductCart() { ProductCode = "AA", SelectedDelivery = "None", Quantity = 2 });
+            pcs.Create(new ProductCart() { ProductCode = "AA", SelectedDelivery = "None", Quantity = 2 });
             pcs.Cart = cart2;
-            pcs.Create(new ProductCart() { ProductCode = "AA", SelectedDelivery = _Delivery.None, Quantity = 2 });
+            pcs.Create(new ProductCart() { ProductCode = "AA", SelectedDelivery ="None", Quantity = 2 });
             cs.Show();
             cs.Create(cart2);
             cs.Show();
             Console.WriteLine("$$$$ Testing UPDATE $$$$");
             pcs.Cart = cart1;
-            pcs.Update("AA", new ProductCart() { ProductCode = "AA", SelectedDelivery = _Delivery.None, Quantity = 5 });
+            pcs.Update("AA", new ProductCart() { ProductCode = "AA", SelectedDelivery = "None", Quantity = 5 });
             cs.Show();
             pcs.Cart = cart2;
-            pcs.Update("AA", new ProductCart() { ProductCode = "AA", SelectedDelivery = _Delivery.None, Quantity = 5 });
+            pcs.Update("AA", new ProductCart() { ProductCode = "AA", SelectedDelivery = "None", Quantity = 5 });
             cs.Show();
             Console.WriteLine("$$$$ Testing DELETE $$$$");
             pcs.Cart = cart1;

@@ -33,23 +33,23 @@ namespace Base
 
             Product[] products = {
                 new Product() { Code = "peraphone_xi", Name = "Peraphone XI", Description = "The new PeraphoneTM", Category = categories[0],
-                                Delivery = _Delivery.Express, Price = 1299, Type = _Type.Physical },
+                                Delivery = "Express", Price = 1299, Type = "Physical" },
                 new Product() { Code = "gamesphere_5", Name = "Gamesphere 5", Description = "It's not a copy at all", Category = categories[1],
-                                Delivery = _Delivery.InStore, Price = 349, Type = _Type.Physical },
+                                Delivery = "InStore", Price = 349, Type = "Physical" },
                 new Product() { Code = "extreme_vg", Name = "Extreme Video Game", Description = "It's so XTREMEE", Category = categories[1],
-                                Delivery = _Delivery.None, Price = 59, Type = _Type.Digital },
+                                Delivery = "None", Price = 59, Type = "Digital"},
                 new Product() { Code = "man_jacket_1", Name = "Winter Jacket", Description = "For Men", Category = categories[3],
-                                Delivery = _Delivery.Free, Price = 199, Type = _Type.Physical },
+                                Delivery = "Free", Price = 199, Type = "Physical" },
                 new Product() { Code = "leko", Name = "LEKO Brix", Description = "They are not LEGO at all", Category = categories[2],
-                                Delivery = _Delivery.Normal, Price = 129, Type = _Type.Physical },
+                                Delivery = "Normal", Price = 129, Type = "Physical" },
                 new Product() { Code = "draculao_s", Name = "Dracula O's", Description = "Cereal for vampires", Category = categories[4],
-                                Delivery = _Delivery.Express, Price = 8, Type = _Type.Physical },
+                                Delivery = "Express", Price = 8, Type = "Physical" },
                 new Product() { Code = "tv_xl", Name = "TV XL", Description = "A new way to wathc your movies", Category = categories[0],
-                                Delivery = _Delivery.Free, Price = 499, Type = _Type.Physical },
+                                Delivery = "Free", Price = 499, Type = "Physical" },
                 new Product() { Code = "woman_jacket_1", Name = "Winter Jacket", Description = "For Women", Category = categories[3],
-                                Delivery = _Delivery.Free, Price = 249, Type = _Type.Physical },
+                                Delivery = "Free", Price = 249, Type = "Physical" },
                 new Product() { Code = "pirated_windows", Name = "Windows 98", Description = "Remember the old days", Category = categories[0],
-                                Delivery = _Delivery.None, Price = 5, Type = _Type.Digital }
+                                Delivery = "None", Price = 5, Type = "Digital" }
             };
             products.ToList().ForEach(product => { productService.Create(product); });
 
@@ -122,20 +122,20 @@ namespace Base
 
             ProductCart[][] productCarts = {
                 new ProductCart[] {
-                    new ProductCart() { ProductCode="tv_xl", SelectedDelivery=_Delivery.Express, Quantity=1 },
-                    new ProductCart() { ProductCode="leko", SelectedDelivery=_Delivery.Express, Quantity=3 }
+                    new ProductCart() { ProductCode="tv_xl", SelectedDelivery="Express", Quantity=1 },
+                    new ProductCart() { ProductCode="leko", SelectedDelivery="Express", Quantity=3 }
                 },
                 new ProductCart[] {
-                    new ProductCart() { ProductCode="gamesphere_5", SelectedDelivery=_Delivery.Express, Quantity=1 },
-                    new ProductCart() { ProductCode="xtreme_vg", SelectedDelivery=_Delivery.Express, Quantity=5 }
+                    new ProductCart() { ProductCode="gamesphere_5", SelectedDelivery="Express", Quantity=1 },
+                    new ProductCart() { ProductCode="xtreme_vg", SelectedDelivery="Express", Quantity=5 }
                 },
                 new ProductCart[] {
-                    new ProductCart() { ProductCode="man_jacket_1", SelectedDelivery=_Delivery.Express, Quantity=2 },
-                    new ProductCart() { ProductCode="woman_jacket_1", SelectedDelivery=_Delivery.Express, Quantity=2 }
+                    new ProductCart() { ProductCode="man_jacket_1", SelectedDelivery="Express", Quantity=2 },
+                    new ProductCart() { ProductCode="woman_jacket_1", SelectedDelivery="Express", Quantity=2 }
                 },
                 new ProductCart[] {
-                    new ProductCart() { ProductCode="pirated_windows", SelectedDelivery=_Delivery.Express, Quantity=10 },
-                    new ProductCart() { ProductCode="draculao_s", SelectedDelivery=_Delivery.Express, Quantity=11 }
+                    new ProductCart() { ProductCode="pirated_windows", SelectedDelivery="Express", Quantity=10 },
+                    new ProductCart() { ProductCode="draculao_s", SelectedDelivery="Express", Quantity=11 }
                 }
             };
             index = 0;

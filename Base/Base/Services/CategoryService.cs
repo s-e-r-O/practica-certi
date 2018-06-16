@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Base
 {
-    class CategoryService : ICrudable<Category>
+    public class CategoryService : ICrudable<Category>
     {
         private static ECommerceDB categorydb = ECommerceDB.Instance;
 

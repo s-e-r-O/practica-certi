@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Base
 {
-    class ProductService : ICrudable<Product>
+    public class ProductService : ICrudable<Product>
     {
 
         private static ECommerceDB DBConnections = ECommerceDB.Instance;

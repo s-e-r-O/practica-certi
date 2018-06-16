@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Base
 {
-    class ShippingAddress
+    public class ShippingAddress
     {
         public string Identifier { get; set; }
         public string Line1 { get; set; }

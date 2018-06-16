@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Base
 {
-    class ProductCartService : ICrudable<ProductCart>
+    public class ProductCartService : ICrudable<ProductCart>
     {
         private readonly ECommerceDB _dbContext = ECommerceDB.Instance;
         public Cart Cart { private get; set; }

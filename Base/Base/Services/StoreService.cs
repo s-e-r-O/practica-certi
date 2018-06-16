@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Base
 {
-    class StoreService : ICrudable<Store>
+    public class StoreService : ICrudable<Store>
     {
         private static ECommerceDB _dbContext = ECommerceDB.Instance;
         

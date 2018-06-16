@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Base
 {
-    class UserService : ICrudable<User>
+    public class UserService : ICrudable<User>
     {
         private readonly ECommerceDB _dbContext = ECommerceDB.Instance;
 

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Base
 {
-    class ProductCart
+    public class ProductCart
     {
         public string ProductCode { get; set; }
-        public _Delivery SelectedDelivery { get; set; }
+        public string SelectedDelivery { get; set; }
         public Store Store { get; set; }
         public int Quantity { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Base
 {
-    class Cart
+    public class Cart
     {
         private List<ProductCart> _productCarts;
         public List<ProductCart> ProductCarts

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Base
 {
-    class ShippingAddressService : ICrudable<ShippingAddress>
+    public class ShippingAddressService : ICrudable<ShippingAddress>
     {
         public User User { private get; set; }
         
