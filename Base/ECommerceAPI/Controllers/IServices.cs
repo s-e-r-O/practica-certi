@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,10 +9,10 @@ namespace ECommerceAPI.Controllers
 {
     public interface IServices
     {
-        HttpResponseMessage Get(int id);
+        HttpResponseMessage Get(string id);
         HttpResponseMessage Get();
-        HttpResponseMessage Post(Object content);
-        HttpResponseMessage Put(Object res);
-        HttpResponseMessage Delete(Object id);
+        HttpResponseMessage Post(HttpRequestMessage request);
+        HttpResponseMessage Put(HttpRequestMessage request);
+        HttpResponseMessage Delete(string id);
     }
 }
