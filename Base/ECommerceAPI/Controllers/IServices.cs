@@ -12,7 +12,7 @@ namespace ECommerceAPI.Controllers
         HttpResponseMessage Get(string id);
         HttpResponseMessage Get();
         HttpResponseMessage Post(HttpRequestMessage request);
-        HttpResponseMessage Put(HttpRequestMessage request);
+        HttpResponseMessage Put(string id, HttpRequestMessage request);
         HttpResponseMessage Delete(string id);
     }
 }
