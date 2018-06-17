@@ -6,4 +6,8 @@ export class User {
     public name : string;
     public lastName : string;
     public shipAdress : ShippingAddress[];
+    
+    constructor(init? : Partial<User>){
+        Object.assign(this, init);
+    }
 }

@@ -5,7 +5,12 @@ export class Product {
     public name : string;
     public price : string;
     public description : string;
-    public type : number;
-    public delivery : number;
+    public type : string;
+    public delivery : string;
+    public imageURL : string;
     public category : Category;
+    
+    constructor(init? : Partial<Product>){
+        Object.assign(this, init);
+    }
 }
