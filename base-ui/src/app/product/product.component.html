@@ -4,7 +4,7 @@
       <div class="card">
         <img class="card-img" src="{{product.imageURL}}" alt="Card image" style="width: 100%;">
         <div class="card-body">
-            <a class="text-primary" (click)="onClick()">{{product.name}}</a>
+            <a class="text-primary" (click)="onClick(product.code)">{{product.name}}</a>
             <h4>{{product.price}}</h4>
         </div>
       </div>

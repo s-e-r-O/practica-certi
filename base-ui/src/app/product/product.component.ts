@@ -21,9 +21,8 @@ export class ProductComponent implements OnInit {
     this.productService.getAll()
     .subscribe(products => this.products = products);
   }
-  onClick(){
-    this.router.navigate(['/test']);
-    console.log(this.productService.getAll);
+  onClick(code:String){
+    this.router.navigate(['/product-details'],{queryParams: {id:code}});
   }
 
 }
