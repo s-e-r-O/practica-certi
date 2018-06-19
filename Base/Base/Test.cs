@@ -27,8 +27,8 @@ namespace Base
         {
             Category c1 = new Category() { Name = "Para mayores papu :v", Description = "Not for crazy kidsss" };
             ProductService PS = new ProductService();
-            Product p1 = new Product() { Code = "QWERTY", Name = "Product 1", Category = c1, Delivery = "Express", Description = "Very good reco +10", Type = "Digital", Price = 100.5 };
-            Product p2 = new Product() { Code = "JEJE", Name = "Product 2", Category = c1, Delivery = "Normal", Description = "Not good, its feik", Type = "Physical", Price = 500.80 };
+            Product p1 = new Product() { Code = "QWERTY", Name = "Product 1", Category = c1, ShippingDeliveryType  = "Express", Description = "Very good reco +10", Type = "Digital", Price = 100.5 };
+            Product p2 = new Product() { Code = "JEJE", Name = "Product 2", Category = c1, ShippingDeliveryType  = "Normal", Description = "Not good, its feik", Type = "Physical", Price = 500.80 };
 
             PS.Create(p1);
             PS.Create(p2);
