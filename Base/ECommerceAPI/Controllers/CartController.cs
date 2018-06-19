@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Base;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 
 namespace ECommerceAPI.Controllers
@@ -17,7 +20,7 @@ namespace ECommerceAPI.Controllers
             List<ProductCart> pc = prodcartservice.Get();
             string prodcartJSON = JsonConvert.SerializeObject(pc, Formatting.Indented);
             var response = Request.CreateResponse(HttpStatusCode.OK);
-            response.Content = new StringContent(shippingaddressJSON, Encoding.UTF8, "application/json");
+            response.Content = new StringContent(prodcartJSON, Encoding.UTF8, "application/json");
             return response;
         }
 
@@ -105,7 +108,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("api/store/{id}")]
+        [Route("api/cart/{id}")]
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -133,3 +136,4 @@ namespace ECommerceAPI.Controllers
             return response;
         }
     }
+}
