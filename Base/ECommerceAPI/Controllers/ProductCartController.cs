@@ -10,14 +10,14 @@ using System.Web.Http;
 
 namespace ECommerceAPI.Controllers
 {
-    public class CartController : ApiController, IServices
+    public class ProductCartController : ApiController, IServices
     {
         [HttpGet]
         public HttpResponseMessage Get()
         {
-            CartService cartservice = new CartService();
-            List<Cart> cs = cartservice.Get();
-            string prodcartJSON = JsonConvert.SerializeObject(cs, Formatting.Indented);
+            ProductCartService prodcartservice = new ProductCartService();
+            List<ProductCart> pc = prodcartservice.Get();
+            string prodcartJSON = JsonConvert.SerializeObject(pc, Formatting.Indented);
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(prodcartJSON, Encoding.UTF8, "application/json");
             return response;
@@ -27,14 +27,14 @@ namespace ECommerceAPI.Controllers
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
-            CartService cartservice = new CartService();
-            List<Cart> cs = cartservice.Get();
-            foreach (Cart ct in cs)
+            ProductCartService prodcartservice = new ProductCartService();
+            List<ProductCart> pc = prodcartservice.Get();
+            foreach (ProductCart pt in pc)
             {
-                if (ct.Username == id)
+                if (pt.ProductCode == id)
                 {
-                    Cart cart = ct;
-                    string prodcartJSON = JsonConvert.SerializeObject(cart, Formatting.Indented);
+                    ProductCart pdct = pt;
+                    string prodcartJSON = JsonConvert.SerializeObject(pdct, Formatting.Indented);
                     response = Request.CreateResponse(HttpStatusCode.OK);
                     response.Content = new StringContent(prodcartJSON, Encoding.UTF8, "application/json");
                     break;
@@ -54,18 +54,18 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.Unused);
             try
             {
-                String cartJSON = request.ToString();
-                Cart cart = JsonConvert.DeserializeObject<Cart>(cartJSON);
-                CartService cs = new CartService();
-                if (cs.Create(cart))
+                String prodcartJSON = request.ToString();
+                ProductCart prodcart = JsonConvert.DeserializeObject<ProductCart>(prodcartJSON);
+                ProductCartService pcs = new ProductCartService();
+                if (pcs.Create(prodcart))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent("Cart created", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent("Product Cart created", Encoding.UTF8, "application/json");
                 }
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent("An error has ocurred creating Cart", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent("An error has ocurred creating Product Cart", Encoding.UTF8, "application/json");
                 }
             }
             catch
@@ -81,18 +81,18 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.Unused);
             try
             {
-                Cart cart = JsonConvert.DeserializeObject<Cart>(request.ToString());
-                CartService cs = new CartService();
-                cs.Get();
-                if (cs.Update(key, cart))
+                ProductCart prodcart = JsonConvert.DeserializeObject<ProductCart>(request.ToString());
+                ProductCartService pcs = new ProductCartService();
+                pcs.Get();
+                if (pcs.Update(key, prodcart))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent("Cart Updated", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent("Product Cart Updated", Encoding.UTF8, "application/json");
                 }
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent("An error has ocurred updating Cart", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent("An error has ocurred updating Product Cart", Encoding.UTF8, "application/json");
                 }
             }
             catch
@@ -109,17 +109,17 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.Unused);
             try
             {
-                CartService cs = new CartService();
-                cs.Get();
-                if (cs.Delete(id))
+                ProductCartService pcs = new ProductCartService();
+                pcs.Get();
+                if (pcs.Delete(id))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent("Cart deleted", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent("Product Cart deleted", Encoding.UTF8, "application/json");
                 }
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent("An error has ocurred deleting the Cart", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent("An error has ocurred deleting the Product Cart", Encoding.UTF8, "application/json");
                 }
             }
             catch

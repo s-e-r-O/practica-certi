@@ -118,6 +118,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\IServices.cs" />
+    <Compile Include="Controllers\ProductCartController.cs" />
     <Compile Include="Controllers\ShippingAddressController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Global.asax.cs">
