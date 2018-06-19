@@ -9,7 +9,7 @@ import { ShippingAddressService } from '../services/shipping-address.service';
 })
 export class ShippingComponent implements OnInit {
 
-  private shippingAddresses : ShippingAddress[];
+  private shippingAddresses : ShippingAddress[] = [];
   private shippingAddressToEdit : ShippingAddress;
 
   constructor(private shippingAddressService : ShippingAddressService) { 
@@ -41,6 +41,14 @@ export class ShippingComponent implements OnInit {
         if (this.shippingAddressToEdit.identifier === $event.identifier){
           this.shippingAddressToEdit = undefined;
         }
+      }
+    )
+  }
+
+  onCreate($event){
+    this.shippingAddressService.getAll().subscribe(
+      response => {
+        this.shippingAddresses = response;
       }
     )
   }

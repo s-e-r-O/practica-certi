@@ -13,6 +13,7 @@ export class ShippingAddressFormComponent implements OnChanges {
 
   @Input() shippingAddress : ShippingAddress;
   @Output() cancel : EventEmitter<boolean> = new EventEmitter();
+  @Output() create : EventEmitter<boolean> = new EventEmitter();
   private form : FormGroup;
   
   constructor(private shippingAddressService : ShippingAddressService) { 
@@ -43,9 +44,11 @@ export class ShippingAddressFormComponent implements OnChanges {
 
     if (this.form.valid){
       if (this.shippingAddress) {
-        this.shippingAddressService.update(new ShippingAddress(this.form.value)).subscribe(response => console.log(response));
+        this.shippingAddressService.update(new ShippingAddress(this.form.value)).subscribe(response => 
+          this.create.emit(true));
       } else {
-        this.shippingAddressService.create(new ShippingAddress(this.form.value)).subscribe(response => console.log(response));
+        this.shippingAddressService.create(new ShippingAddress(this.form.value)).subscribe(response => 
+          this.create.emit(true));
       }
     }
   }
