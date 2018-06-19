@@ -13,7 +13,6 @@ namespace ECommerceAPI.Controllers
     public class CartController : ApiController, IServices
     {
         [HttpGet]
-        [Route("api/cart")]
         public HttpResponseMessage Get()
         {
             ProductCartService prodcartservice = new ProductCartService();
@@ -25,7 +24,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/cart/{id}")]
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -51,7 +49,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost]
-        [Route("api/cart")]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -79,7 +76,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/cart/{key}")]
         public HttpResponseMessage Put(string key, HttpRequestMessage request)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -108,7 +104,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("api/cart/{id}")]
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -136,4 +131,3 @@ namespace ECommerceAPI.Controllers
             return response;
         }
     }
-}
