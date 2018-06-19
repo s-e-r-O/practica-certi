@@ -29,6 +29,7 @@ namespace ECommerceAPI.Controllers
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
+            string errormessage = "{\"error\": \"The element don't exist\"}";
             ShippingAddressService shippingaddressservice = new ShippingAddressService();
             List<ShippingAddress> sa = shippingaddressservice.Get();
             foreach (ShippingAddress st in sa)
@@ -44,7 +45,7 @@ namespace ECommerceAPI.Controllers
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent("The element don't exist", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
                 }
             }
             return response;
@@ -54,26 +55,29 @@ namespace ECommerceAPI.Controllers
         [Route("api/shippingaddress")]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
+            var body = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.Unused);
+            string errormessage = "{\"error\": \"an error ocurred\"}";
+            string error = "{\"error\": \"error\"}";
+            string successmessage = "{\"success\": \"Shipping Address posted\"}";
             try
             {
-                String shippingaddressJSON = request.ToString();
-                ShippingAddress shippingaddress = JsonConvert.DeserializeObject<ShippingAddress>(shippingaddressJSON);
+                ShippingAddress shippingaddress = JsonConvert.DeserializeObject<ShippingAddress>(body);
                 ShippingAddressService sas = new ShippingAddressService();
                 if (sas.Create(shippingaddress))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent("Shipping Address created", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
                 }
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent("An error has ocurred creating the shipping address", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
                 }
             }
             catch
             {
-                response.Content = new StringContent("Error", Encoding.UTF8, "application/json");
+                response.Content = new StringContent(error, Encoding.UTF8, "application/json");
             }
             return response;
         }
@@ -82,27 +86,30 @@ namespace ECommerceAPI.Controllers
         [Route("api/shippingaddress/{key}")]
         public HttpResponseMessage Put(string key, HttpRequestMessage request)
         {
+            var body = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.Unused);
+            string successmessage = "{\"success\": \"Shipping Address updated\"}";
+            string errormessage = "{\"error\": \"an error ocurred\"}";
+            string error = "{\"success\": \"Error\"}";
             try
             {
-                ShippingAddress shippingaddress = JsonConvert.DeserializeObject<ShippingAddress>(request.ToString());
+                ShippingAddress shippingaddress = JsonConvert.DeserializeObject<ShippingAddress>(body);
                 ShippingAddressService sas = new ShippingAddressService();
-                sas.Get();
                 if (sas.Update(key, shippingaddress))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent("Shipping Address Updated", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
                 }
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent("An error has ocurred updating Store", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
                 }
             }
             catch
             {
                 response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                response.Content = new StringContent("Error", Encoding.UTF8, "application/json");
+                response.Content = new StringContent(error, Encoding.UTF8, "application/json");
             }
             return response;
         }
@@ -112,25 +119,27 @@ namespace ECommerceAPI.Controllers
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
+            string errormessage = "{\"error\": \"An error has ocurred deleting the Shipping Address\"}";
+            string error = "{\"error\": \"error\"}";
+            string successmessage = "{\"success\": \"Shipping Address deleted\"}";
             try
             {
                 ShippingAddressService sas = new ShippingAddressService();
-                sas.Get();
                 if (sas.Delete(id))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent("Shipping Address deleted", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
                 }
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent("An error has ocurred deleting the Shipping Store", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
                 }
             }
             catch
             {
                 response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                response.Content = new StringContent(("Error"), Encoding.UTF8, "application/json");
+                response.Content = new StringContent(error, Encoding.UTF8, "application/json");
 
             }
             return response;

@@ -31,13 +31,6 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.Unused);
             string errormessage = "{\"error\": \"The element don't exist\"}";
             StoreService storeservice = new StoreService();
-            Store[] stores = {
-                new Store() { Name = "Only Cereals", Line1 = "Dream St.", Line2 = "Oakland", Phone=41204930 },
-                new Store() { Name = "Games", Line1 = "Flying Av.", Line2 = "Pallet Town", Phone=12389499 },
-                new Store() { Name = "Just for you", Line1 = "Blv. of Broken Dreams", Line2 = "Greenland", Phone=65415844 },
-                new Store() { Name = "Techs", Line1 = "Bit St.", Line2 = "Silicon Valley", Phone=90028192 }
-            };
-            stores.ToList().ForEach(store1 => { storeservice.Create(store1); });
             List<Store> store = storeservice.Get();
             foreach(Store st in store)
             {
@@ -69,7 +62,6 @@ namespace ECommerceAPI.Controllers
             string successmessage = "{\"success\": \"store posted\"}";
             try
             {
-                String storeJSON = body;
                 Store store = JsonConvert.DeserializeObject<Store>(body);
                 StoreService ss = new StoreService();
                 if (ss.Create(store))
@@ -96,26 +88,28 @@ namespace ECommerceAPI.Controllers
         {
             var body = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.Unused);
+            string successmessage = "{\"success\": \"Store updated\"}";
+            string errormessage = "{\"error\": \"an error ocurred\"}";
+            string error = "{\"error\": \"Error\"}";
             try
             {
                 Store store = JsonConvert.DeserializeObject<Store>(body);
                 StoreService st = new StoreService();
-                st.Get();
                 if (st.Update(key, store))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent("Store Updated", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
                 }
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent("An error has ocurred updating Store", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
                 }
             }
             catch
             {
-                response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                response.Content = new StringContent("Error", Encoding.UTF8, "application/json");
+              response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
+              response.Content = new StringContent(error, Encoding.UTF8, "application/json");
             }
             return response;
         }
@@ -131,7 +125,6 @@ namespace ECommerceAPI.Controllers
             try
             {
                 StoreService st = new StoreService();
-                st.Get();
                 if (st.Delete(id))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
