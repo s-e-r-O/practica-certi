@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Base;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 
 namespace ECommerceAPI.Controllers
@@ -10,19 +13,17 @@ namespace ECommerceAPI.Controllers
     public class CartController : ApiController, IServices
     {
         [HttpGet]
-        [Route("api/cart")]
         public HttpResponseMessage Get()
         {
             ProductCartService prodcartservice = new ProductCartService();
             List<ProductCart> pc = prodcartservice.Get();
             string prodcartJSON = JsonConvert.SerializeObject(pc, Formatting.Indented);
             var response = Request.CreateResponse(HttpStatusCode.OK);
-            response.Content = new StringContent(shippingaddressJSON, Encoding.UTF8, "application/json");
+            response.Content = new StringContent(prodcartJSON, Encoding.UTF8, "application/json");
             return response;
         }
 
         [HttpGet]
-        [Route("api/cart/{id}")]
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -48,7 +49,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost]
-        [Route("api/cart")]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -76,7 +76,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/cart/{key}")]
         public HttpResponseMessage Put(string key, HttpRequestMessage request)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -105,7 +104,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("api/store/{id}")]
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
