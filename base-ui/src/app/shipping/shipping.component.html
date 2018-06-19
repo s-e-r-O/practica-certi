@@ -1,0 +1,4 @@
+<div *ngFor="let shippingAddress of shippingAddresses">
+  <app-shipping-address-view [shippingAddress]="shippingAddress" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-shipping-address-view>
+</div>
+<app-shipping-address-form [shippingAddress]="shippingAddressToEdit" (cancel)="onCancel($event)"></app-shipping-address-form>

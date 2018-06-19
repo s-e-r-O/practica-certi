@@ -1,0 +1,12 @@
+<div *ngIf="shippingAddress">
+  <div>{{ shippingAddress.identifier }}</div>
+  <div>{{ shippingAddress.line1 }}</div>
+  <div>{{ shippingAddress.line2 }}</div>
+  <div>{{ shippingAddress.city }}</div>
+  <div>{{ shippingAddress.zone }}</div>
+  <div>Phone: {{ shippingAddress.phone }}</div>
+  
+  <button type="button" class="btn btn-success">Deliver to this address</button>
+  <button type="button" class="btn" (click)="onEdit($event)">Edit</button>
+  <button type="button" class="btn" (click)="onDelete($event)">Delete</button>
+</div>
