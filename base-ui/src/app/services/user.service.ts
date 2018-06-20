@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from '../models/user';
 import { ShippingAddress } from '../models/shipping-address';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  constructor(private cookieService : CookieService){}
 
   public getAll() : Observable<User[]> {
     return of([
@@ -58,4 +61,11 @@ export class UserService {
     return of({ username: "Aaa" });
   }
 
+  public currentUser() : string {
+    return this.cookieService.get('Username');
+  }
+
+  public isLoggedIn() : boolean {
+    return this.cookieService.check('Username');
+  }
 }
