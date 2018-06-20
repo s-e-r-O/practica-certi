@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Schema.Generation;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -14,27 +15,7 @@ namespace ECommerceAPI.Controllers
     {
 
         ProductService ps = new ProductService();
-        string schemaJson = @"{
-                'description' : 'This describes a product',
-                'type': 'object',
-                'properties': {
-                    'Code': {'type':'string','required':true},
-                    'Name': {'type':'string', 'required':true},
-                    'Price': {'type':'number', 'required':true},
-                    'Description': {'type':'string' , 'required':true},
-                    'Type': {'type':'string','required':true},
-                    'ShippingDeliveryType':{'type':'string','required':true},
-                    'ImageURL':{'type':'string','required':true},
-                    'Category':{
-                                'type':'object',
-                                'properties':{
-                                                'Name':{'type':'string','required':true},
-                                                'Description':{'type':'string','required':true}
-                                             }
-                                }
-                } , 
-                'additionalProperties': false
-            }";
+        JSchemaGenerator schemaGenerator = new JSchemaGenerator();
 
         [HttpGet]
         public HttpResponseMessage Get()
@@ -73,7 +54,9 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
             string responseBody = "{ \"error\": \"There was an error with the format of the object sent in the body.\"}";
 
-            JSchema schema = JSchema.Parse(schemaJson);
+            JSchema schema = schemaGenerator.Generate(typeof(Product));
+            schema.AllowAdditionalProperties = false;
+
             JObject product = JObject.Parse(requestBody);
 
             if (product.IsValid(schema))
@@ -103,7 +86,9 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
             string responseBody = "{ \"error\": \"There was an error with the format of the object sent in the body.\"}";
 
-            JSchema schema = JSchema.Parse(schemaJson);
+            JSchema schema = schemaGenerator.Generate(typeof(Product));
+            schema.AllowAdditionalProperties = false;
+
             JObject product = JObject.Parse(requestBody);
 
             if (product.IsValid(schema))
