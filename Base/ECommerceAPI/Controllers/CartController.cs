@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace ECommerceAPI.Controllers
 {
@@ -19,6 +20,7 @@ namespace ECommerceAPI.Controllers
         JSchemaGenerator schemaGenerator = new JSchemaGenerator();
 
         [HttpGet]
+        [EnableCors(origins: "http://localhost:4200",headers:"*",methods:"*")]
         public HttpResponseMessage Get()
         {
             string jsonCarts = JsonConvert.SerializeObject(cs.Get(), Formatting.Indented);
@@ -28,6 +30,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpGet]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -49,6 +52,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
             var requestBody = request.Content.ReadAsStringAsync().Result;
@@ -86,6 +90,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPut]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Put(string id, HttpRequestMessage request)
         {
             var requestBody = request.Content.ReadAsStringAsync().Result;
@@ -125,6 +130,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpDelete]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
