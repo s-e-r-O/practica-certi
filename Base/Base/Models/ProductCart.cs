@@ -12,6 +12,7 @@ namespace Base
         public string SelectedDelivery { get; set; }
         public Store Store { get; set; }
         public int Quantity { get; set; }
+        public string Username { get; set; }
 
         public void Show()
         {
