@@ -12,36 +12,34 @@ import { CookieService } from 'ngx-cookie-service';
 export class LoginComponent implements OnInit {
 
   form : FormGroup;
+  private invalid : boolean;
   constructor(private userService:UserService, private router: Router, private cookieService: CookieService) { 
     this.form = new FormGroup({
       username: new FormControl(undefined, Validators.required),
       password: new FormControl(undefined, Validators.required),
     });
+    this.invalid = false;
   }
 
   onClick() {
-    for(var control in this.form.controls){
-      this.form.controls[control].markAsTouched();
-    }
+    this.invalid = false;
 
-    if(this.form.valid) {
-      this.userService.getById(this.form.value['username']).subscribe(
-        response => {
-        if(response.password == this.form.value['password']){
-          
-          this.cookieService.set('Username',response.username);
-          this.router.navigate(['/store']);
-
-        }
-        else {
-          
-          this.form.controls['password'].reset();
-        }
+    this.userService.getById(this.form.value['username']).subscribe(
+      response => {
+      if(response.password == this.form.value['password']){
         
-        }
+        this.cookieService.set('Username',response.username);
+        this.router.navigate(['/store']);
 
-      );
-    } 
+      }
+      else {          
+        this.invalid = true;
+        this.form.controls['password'].reset();
+      }
+      
+      }
+
+    );
   }
   ngOnInit() {
   }
