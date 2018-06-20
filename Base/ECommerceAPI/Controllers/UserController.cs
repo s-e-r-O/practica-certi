@@ -9,7 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 
-namespace ECommerceAPI
+namespace ECommerceAPI.controllers
 {
     public class UserController : ApiController, IServices
     {
