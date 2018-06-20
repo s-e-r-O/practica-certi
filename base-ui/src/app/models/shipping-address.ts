@@ -5,6 +5,7 @@ export class ShippingAddress {
     public phone : number;
     public city : string;
     public zone : string;
+    public username : string;
     
     constructor(init? : Partial<ShippingAddress>){
         Object.assign(this, init);

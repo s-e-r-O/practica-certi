@@ -19,6 +19,7 @@ import { MainComponent } from './main/main.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductCartComponent } from './product-cart/product-cart.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ProductCartComponent } from './product-cart/product-cart.component';
     AppRoutingModule,
     NgbModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, 
+    HttpClientModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

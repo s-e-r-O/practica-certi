@@ -1,35 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ShippingAddress } from '../models/shipping-address';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShippingAddressService {
 
+  constructor(private http: HttpClient){}
+
   public getAll() : Observable<ShippingAddress[]> {
-    return of( [
-      new ShippingAddress({identifier: "123", line1: "AAA", line2: "BBB", city: "AAA", phone: 123, zone: "DDD"}),
-      new ShippingAddress({identifier: "123", line1: "AAA", line2: "BBB", city: "AAA", phone: 12341, zone: "DDD"}),
-      new ShippingAddress({identifier: "123", line1: "AAA", line2: "BBB", city: "AAA", phone: 123, zone: "DDD"}),
-      new ShippingAddress({identifier: "123", line1: "AAA", line2: "BBB", city: "AAA", phone: 12341, zone: "DDD"}),
-    ] );
+    return this.http.get<Partial<ShippingAddress>[]>('/api/shippingAddresses').pipe(
+      map((shippingAddresses: Partial<ShippingAddress>[]) => shippingAddresses.map(shippingAddress => new ShippingAddress(shippingAddress)) )
+    );
   }
   
-  public getById(identifier : string) : Observable<ShippingAddress> {
-    return of(new ShippingAddress({identifier: identifier, line1: "AAA", line2: "BBB"}),);
+  public getById(name : string) : Observable<ShippingAddress> {
+    return this.http.get<Partial<ShippingAddress>>('/api/shippingAddresses/' + name).pipe(map((shippingAddress: Partial<ShippingAddress>) => new ShippingAddress(shippingAddress)));
   }
 
   public create(shippingAddress : ShippingAddress) : Observable<{ identifier : string }> {
-    return of({ identifier: "Aaa" });
+    return this.http.post('/api/shippingAddresses', shippingAddress) as Observable<{ identifier : string }>;
   }
   
   public update(shippingAddress : ShippingAddress) : Observable<{ identifier : string }> {
-    return of({ identifier: "Aaa" });
+    return this.http.put('/api/shippingAddresses', shippingAddress) as Observable<{ identifier : string }>;
   }
 
-  public delete(shippingAddress : ShippingAddress) : Observable<{ identifier : string }> {
-    return of({ identifier: "Aaa" });
+  public delete(identifier : string) : Observable<{ identifier : string }> {
+    return this.http.delete('/api/shippingAddresses/' + identifier) as Observable<{ identifier : string }>;
   }
 
 }

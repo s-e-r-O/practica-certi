@@ -1,33 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Store } from '../models/store';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
 
+  constructor(private http: HttpClient){}
+
   public getAll() : Observable<Store[]> {
-    return of([
-      new Store({ name: 'La Casa', line1: 'AAA', line2: 'BBB', phone: 1234}),
-      new Store({ name: 'La Casa 2', line1: 'AAA', line2: 'BBB', phone: 1234})
-    ]);
+    return this.http.get<Partial<Store>[]>('/api/stores').pipe(
+      map((stores: Partial<Store>[]) => stores.map(store => new Store(store)) )
+    );
   }
   
   public getById(name : string) : Observable<Store> {
-    return of(new Store({ name: name, line1: 'AAA', line2: 'BBB', phone: 1234}));
+    return this.http.get<Partial<Store>>('/api/stores/' + name).pipe(map((store: Partial<Store>) => new Store(store)));
   }
 
   public create(store : Store) : Observable<{ name : string }> {
-    return of({ name: 'Aaa' });
+    return this.http.post('/api/stores', store) as Observable<{ name : string }>;
   }
   
   public update(store : Store) : Observable<{ name : string }> {
-    return of({ name: 'Aaa' });
+    return this.http.put('/api/stores', store) as Observable<{ name : string }>;
   }
 
-  public delete(store : Store) : Observable<{ name : string }> {
-    return of({ name: 'Aaa' });
+  public delete(name : string) : Observable<{ name : string }> {
+    return this.http.delete('/api/Stores/' + name) as Observable<{ name : string }>;
   }
 
 }
