@@ -13,25 +13,25 @@ export class ProductCartService {
   constructor(private http: HttpClient){}
 
   public getAll() : Observable<ProductCart[]> {
-    return this.http.get<Partial<ProductCart>[]>('/api/productCarts').pipe(
+    return this.http.get<Partial<ProductCart>[]>('http://localhost:6064/api/productcart').pipe(
       map((productCarts: Partial<ProductCart>[]) => productCarts.map(productCard => new ProductCart(productCard)) )
     );
   }
   
   public getById(productCode : string) : Observable<ProductCart> {
-    return this.http.get<Partial<ProductCart>>('/api/productCarts/' + productCode).pipe(map((productCard: Partial<ProductCart>) => new ProductCart(productCard)));
+    return this.http.get<Partial<ProductCart>>('http://localhost:6064/api/productcart/' + productCode).pipe(map((productCard: Partial<ProductCart>) => new ProductCart(productCard)));
   }
 
   public create(productCard : ProductCart) : Observable<{ productCode : string }> {
-    return this.http.post('/api/productCarts', productCard) as Observable<{ productCode : string }>;
+    return this.http.post('http://localhost:6064/api/productcart', productCard) as Observable<{ productCode : string }>;
   }
   
   public update(productCard : ProductCart) : Observable<{ productCode : string }> {
-    return this.http.put('/api/productCarts', productCard) as Observable<{ productCode : string }>;
+    return this.http.put('http://localhost:6064/api/productcart', productCard) as Observable<{ productCode : string }>;
   }
 
   public delete(productCode : string) : Observable<{ productCode : string }> {
-    return this.http.delete('/api/productCarts/' + productCode) as Observable<{ productCode : string }>;
+    return this.http.delete('http://localhost:6064/api/productcart/' + productCode) as Observable<{ productCode : string }>;
   }
 
 
