@@ -16,7 +16,8 @@ export class ProductService {
         description: "AAAA",
         type: "Digital",
         delivery: "None",
-        imageURL: "http://lorempixel.com/200/200",
+        price: "4.99$",
+        imageURL: "http://lorempixel.com/100/100",
         category: new Category({ name: "Category", description: "BBB"})
       }),
       new Product({
@@ -25,7 +26,7 @@ export class ProductService {
         description: "AAAA",
         type: "Digital",
         delivery: "None",
-        imageURL: "http://lorempixel.com/200/200",
+        imageURL: "http://lorempixel.com/100/100",
         category: new Category({ name: "Category", description: "BBB"})
       })
     ]);
@@ -38,7 +39,8 @@ export class ProductService {
       description: "AAAA",
       type: "Digital",
       delivery: "None",
-      imageURL: "http://lorempixel.com/200/200",
+      price: "4.99$",
+      imageURL: "http://lorempixel.com/100/100",
       category: new Category({ name: "Category", description: "BBB"})
     }));
   }
