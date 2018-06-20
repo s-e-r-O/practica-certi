@@ -29,11 +29,13 @@ namespace Base
 
             // TO-DO: Check if a Product with obj.ProductCode exists
 
-            if (Cart.ProductCarts.Exists(productCart => { return productCart.ProductCode == obj.ProductCode; }))
+            if ( (Cart.ProductCarts.Exists(productCart => { return productCart.ProductCode == obj.ProductCode; })) ||
+                !(_dbContext.ProductsList.Any(item => item.Code == obj.ProductCode)))
             {
                 Console.WriteLine("The cart of user '" + Cart.Username + "' already has the product '" + obj.ProductCode + "'.");
                 return false;
             }
+            _dbContext.ProductCartsList.Add(obj);
             Cart.ProductCarts.Add(obj);
             return true;
         }
@@ -60,7 +62,7 @@ namespace Base
             if (Cart == null)
             {
                 Console.WriteLine("No cart was specified.");
-                return null;
+                return _dbContext.ProductCartsList;
             }
             return Cart.ProductCarts;
         }

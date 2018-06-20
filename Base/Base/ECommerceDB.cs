@@ -17,6 +17,7 @@ namespace Base
             this.CartsList = new List<Cart>();
             this.ProductsList = new List<Product>();
             this.ShippingAddressesList = new List<ShippingAddress>();
+            this.ProductCartsList = new List<ProductCart>();
         }
 
         public static ECommerceDB Instance
@@ -37,6 +38,7 @@ namespace Base
         public List<ShippingAddress> ShippingAddressesList { get; private set; }
         public List<User> UsersList { get; private set; }
         public List<Cart> CartsList { get; private set; }
+        public List<ProductCart> ProductCartsList { get; private set; }
 
     }
 }
