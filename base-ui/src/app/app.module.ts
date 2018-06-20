@@ -6,11 +6,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { TestComponent } from './test/test.component';
+import { MainComponent } from './main/main.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent
+    TestComponent,
+    MainComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
