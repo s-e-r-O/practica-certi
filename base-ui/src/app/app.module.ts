@@ -9,12 +9,20 @@ import { AppRoutingModule } from './/app-routing.module';
 import { TestComponent } from './test/test.component';
 import { LoginComponent } from './login/login.component';
 import { CookieService } from 'ngx-cookie-service';
+import { MainComponent } from './main/main.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { CartComponent } from './cart/cart.component';
+import { ProductCartComponent } from './product-cart/product-cart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TestComponent,
-    LoginComponent
+    LoginComponent,
+    MainComponent,
+    NavbarComponent,
+    CartComponent,
+    ProductCartComponent
   ],
   imports: [
     BrowserModule,

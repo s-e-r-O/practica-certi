@@ -1,0 +1,12 @@
+<h1>Shopping Cart</h1>
+<table>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+    <tr *ngFor="let productCart of products" [product-tr]="productCart" (price)="addPrice($event)">
+    </tr>
+</table>
+Subtotal ({{productsCount}} Items): ${{totalPrice}}

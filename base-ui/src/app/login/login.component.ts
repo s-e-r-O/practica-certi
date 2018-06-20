@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         if(response.password == this.form.value['password']){
           
           this.cookieService.set('Username',response.username);
-          this.router.navigate(['/test']);
+          this.router.navigate(['/']);
 
         }
         else {
