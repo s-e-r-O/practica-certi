@@ -33,23 +33,23 @@ namespace Base
 
             Product[] products = {
                 new Product() { Code = "peraphone_xi", Name = "Peraphone XI", Description = "The new PeraphoneTM", Category = categories[0],
-                                Delivery = "Express", Price = 1299, Type = "Physical" },
+                                ShippingDeliveryType  = "Express", Price = 1299, Type = "Physical" },
                 new Product() { Code = "gamesphere_5", Name = "Gamesphere 5", Description = "It's not a copy at all", Category = categories[1],
-                                Delivery = "InStore", Price = 349, Type = "Physical" },
+                                ShippingDeliveryType  = "InStore", Price = 349, Type = "Physical" },
                 new Product() { Code = "extreme_vg", Name = "Extreme Video Game", Description = "It's so XTREMEE", Category = categories[1],
-                                Delivery = "None", Price = 59, Type = "Digital"},
+                                ShippingDeliveryType  = "None", Price = 59, Type = "Digital"},
                 new Product() { Code = "man_jacket_1", Name = "Winter Jacket", Description = "For Men", Category = categories[3],
-                                Delivery = "Free", Price = 199, Type = "Physical" },
+                                ShippingDeliveryType  = "Free", Price = 199, Type = "Physical" },
                 new Product() { Code = "leko", Name = "LEKO Brix", Description = "They are not LEGO at all", Category = categories[2],
-                                Delivery = "Normal", Price = 129, Type = "Physical" },
+                                ShippingDeliveryType  = "Normal", Price = 129, Type = "Physical" },
                 new Product() { Code = "draculao_s", Name = "Dracula O's", Description = "Cereal for vampires", Category = categories[4],
-                                Delivery = "Express", Price = 8, Type = "Physical" },
+                                ShippingDeliveryType  = "Express", Price = 8, Type = "Physical" },
                 new Product() { Code = "tv_xl", Name = "TV XL", Description = "A new way to wathc your movies", Category = categories[0],
-                                Delivery = "Free", Price = 499, Type = "Physical" },
+                                ShippingDeliveryType  = "Free", Price = 499, Type = "Physical" },
                 new Product() { Code = "woman_jacket_1", Name = "Winter Jacket", Description = "For Women", Category = categories[3],
-                                Delivery = "Free", Price = 249, Type = "Physical" },
+                                ShippingDeliveryType  = "Free", Price = 249, Type = "Physical" },
                 new Product() { Code = "pirated_windows", Name = "Windows 98", Description = "Remember the old days", Category = categories[0],
-                                Delivery = "None", Price = 5, Type = "Digital" }
+                                ShippingDeliveryType  = "None", Price = 5, Type = "Digital" }
             };
             products.ToList().ForEach(product => { productService.Create(product); });
 

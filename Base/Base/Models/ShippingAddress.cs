@@ -14,6 +14,7 @@ namespace Base
         public int Phone { get; set; }
         public string City { get; set; }
         public string Zone { get; set; }
+        public string Username { get; set; }
 
         public void Show()
         {
@@ -23,6 +24,12 @@ namespace Base
             Console.WriteLine("Phone: " + Phone);
             Console.WriteLine("City: " + City);
             Console.WriteLine("Zone: " + Zone);
+            Console.WriteLine("Username: " + Zone);
+        }
+
+        public static implicit operator List<object>(ShippingAddress v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

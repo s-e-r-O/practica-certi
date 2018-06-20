@@ -15,9 +15,8 @@ namespace Base
         public bool Create(Product obj)
         {
             bool check = DBConnections.ProductsList.Any(item => item.Code == obj.Code);
-            bool checkNull = IsAnyNullOrEmpty(obj);
 
-            if (!check && !checkNull) {
+            if (!check) {
                 DBConnections.ProductsList.Add(obj);
                 return true;
             }
@@ -51,9 +50,8 @@ namespace Base
         public bool Update(string key, Product obj)
         {
             int index = DBConnections.ProductsList.FindIndex(product => product.Code == key);
-            bool checkNull = IsAnyNullOrEmpty(obj);
 
-            if (index >= 0 && obj.Name == key && !checkNull)
+            if (index >= 0 && obj.Code == key)
             {
                 DBConnections.ProductsList[index] = obj;
                 Console.WriteLine("SUCCESFULLY updated the product of the list");
@@ -63,20 +61,5 @@ namespace Base
             return false;
         }
 
-        public bool IsAnyNullOrEmpty(object myObject)
-        {
-            foreach (PropertyInfo pi in myObject.GetType().GetProperties())
-            {
-                if (pi.PropertyType == typeof(string))
-                {
-                    string value = (string)pi.GetValue(myObject);
-                    if (string.IsNullOrEmpty(value))
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
     }
 }

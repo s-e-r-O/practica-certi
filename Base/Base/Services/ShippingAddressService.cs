@@ -9,7 +9,8 @@ namespace Base
     public class ShippingAddressService : ICrudable<ShippingAddress>
     {
         public User User { private get; set; }
-        
+        private static ECommerceDB DBConnections = ECommerceDB.Instance;
+
         public ShippingAddressService(User user)
         {
             User = user;
@@ -30,6 +31,7 @@ namespace Base
                 Console.WriteLine("The user '" + User.Username + "' already has the shipping address of '" + obj.Identifier + "'.");
                 return false;
             }
+            DBConnections.ShippingAddressesList.Add(obj);
             User.ShipAdress.Add(obj);
             return true;
         }
@@ -56,7 +58,7 @@ namespace Base
             if (User == null)
             {
                 Console.WriteLine("No user specified");
-                return null;
+                return DBConnections.ShippingAddressesList;
             }
             return User.ShipAdress;
         }

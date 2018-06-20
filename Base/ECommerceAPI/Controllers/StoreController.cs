@@ -13,7 +13,6 @@ namespace ECommerceAPI.Controllers
     public class StoreController : ApiController, IServices 
     {
         [HttpGet]
-        [Route("api/store")]
         public HttpResponseMessage Get()
         {
             StoreService storeservice = new StoreService();
@@ -25,11 +24,10 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/store/{id}")]
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
-            string errormessage = "{\"error\": \"The element don't exist\"}";
+            string errormessage = "{\"error\": \"Not Store matches the id\"}";
             StoreService storeservice = new StoreService();
             List<Store> store = storeservice.Get();
             foreach(Store st in store)
@@ -52,14 +50,12 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost]
-        [Route("api/store")]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.Unused);
-            string errormessage = "{\"error\": \"an error ocurred\"}";
-            string error = "{\"error\": \"error\"}";
-            string successmessage = "{\"success\": \"store posted\"}";
+            string errormessage = "{\"error\": \"There was an error with the format of the object sent in the body\"}";
+            string error = "{\"error\": \"There was an error creating the Store\"}";
             try
             {
                 Store store = JsonConvert.DeserializeObject<Store>(body);
@@ -67,38 +63,36 @@ namespace ECommerceAPI.Controllers
                 if (ss.Create(store))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
+                    response.Content = new StringContent("{\"id\": \"" + store.Name+ "\"}", Encoding.UTF8, "application/json");
                 }
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(error, Encoding.UTF8, "application/json");
                 }
             }
             catch
             {
-                response.Content = new StringContent(error, Encoding.UTF8, "application/json");
+                response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
             }
             return response;
         }
 
         [HttpPut]
-        [Route("api/store/{key}")]
-        public HttpResponseMessage Put(string key, HttpRequestMessage request)
+        public HttpResponseMessage Put(string id, HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.Unused);
-            string successmessage = "{\"success\": \"Store updated\"}";
-            string errormessage = "{\"error\": \"an error ocurred\"}";
-            string error = "{\"error\": \"Error\"}";
+            string errormessage = "{\"error\": \"Not Store matches the id\"}";
+            string error = "{\"error\": \"There was an error with the format of the object sent in the body\"}";
             try
             {
                 Store store = JsonConvert.DeserializeObject<Store>(body);
                 StoreService st = new StoreService();
-                if (st.Update(key, store))
+                if (st.Update(id, store))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
+                    response.Content = new StringContent("{\"id\": \"" + id + "\"}", Encoding.UTF8, "application/json");
                 }
                 else
                 {
@@ -115,20 +109,18 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("api/store/{id}")]
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
             string errormessage = "{\"error\": \"An error has ocurred deleting the Store\"}";
-            string error = "{\"error\": \"error\"}";
-            string successmessage = "{\"success\": \"store deleted\"}";
+            string error = "{\"error\": \"There was an error with the parameter, it should be an unique identifier. \"}";
             try
             {
                 StoreService st = new StoreService();
                 if (st.Delete(id))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
+                    response.Content = new StringContent("{\"id\": \"" + id + "\"}", Encoding.UTF8, "application/json");
                 }
                 else
                 {

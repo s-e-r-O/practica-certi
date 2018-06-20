@@ -15,7 +15,7 @@ namespace Base
         public double Price { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
-        public string Delivery { get; set; }
+        public string ShippingDeliveryType  { get; set; }
         public string ImageURL { get; set; }
         public Category Category { get; set; }
 
@@ -28,7 +28,7 @@ namespace Base
             Console.WriteLine("Price: " + Price);
             Console.WriteLine("Description: " + Description);
             Console.WriteLine("Type: " + Type);
-            Console.WriteLine("Delivery: " + Delivery);
+            Console.WriteLine("ShippingDeliveryType : " + ShippingDeliveryType );
             Console.WriteLine("Category: " + Category.Name);
         }
 
