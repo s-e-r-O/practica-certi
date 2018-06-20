@@ -5,4 +5,13 @@ export class Category {
     constructor(init? : Partial<Category>){
         Object.assign(this, init);
     }
+    
+    
+    set Name(value) {
+        this.name = value;
+    }
+    
+    set Description(value) {
+        this.description = value;
+    }
 }

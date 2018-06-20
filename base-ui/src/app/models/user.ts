@@ -10,4 +10,20 @@ export class User {
     constructor(init? : Partial<User>){
         Object.assign(this, init);
     }
+
+    set Username(value) {
+        this.username = value;
+    }
+    set Password(value) {
+        this.password = value;
+    }
+    set Name(value) {
+        this.name = value;
+    }
+    set LastName(value) {
+        this.lastName = value;
+    }
+    set ShipAdress(value) {
+        this.shipAdress = value;
+    }
 }

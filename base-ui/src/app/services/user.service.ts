@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
-import { ShippingAddress } from '../models/shipping-address';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({

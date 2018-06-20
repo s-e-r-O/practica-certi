@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ShippingAddress } from '../models/shipping-address';
 import { ShippingAddressService } from '../services/shipping-address.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-shipping-address-form',
@@ -16,7 +17,7 @@ export class ShippingAddressFormComponent implements OnChanges {
   @Output() create : EventEmitter<boolean> = new EventEmitter();
   private form : FormGroup;
   
-  constructor(private shippingAddressService : ShippingAddressService) { 
+  constructor(private shippingAddressService : ShippingAddressService, private userService: UserService) { 
     this.form = new FormGroup({
       'identifier' : new FormControl(undefined,Validators.required),
       'line1' : new FormControl(undefined,Validators.required),
@@ -24,6 +25,7 @@ export class ShippingAddressFormComponent implements OnChanges {
       'city' : new FormControl(undefined,Validators.required),
       'phone' : new FormControl(undefined,Validators.required),
       'zone' : new FormControl(undefined,Validators.required),
+      'username' : new FormControl(this.userService.currentUser())
     })
   }
 
@@ -37,7 +39,7 @@ export class ShippingAddressFormComponent implements OnChanges {
 
   onSubmit($event){
     $event.preventDefault();
-
+    
     for (let field in this.form.controls) {
         this.form.controls[field].markAsTouched();
     }

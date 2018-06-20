@@ -9,4 +9,20 @@ export class ProductCart {
     constructor(init? : Partial<ProductCart>){
         Object.assign(this, init);
     }
+    
+    set ProductCode(value) {
+        this.productCode = value;
+    }
+    
+    set SelectedDelivery(value) {
+        this.selectedDelivery = value;
+    }
+    
+    set Store(value) {
+        this.store = value;
+    }
+    
+    set Quantity(value) {
+        this.quantity = value;
+    }
 }

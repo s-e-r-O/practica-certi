@@ -3,16 +3,17 @@ import { Observable, of } from 'rxjs';
 import { ShippingAddress } from '../models/shipping-address';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShippingAddressService {
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private userService : UserService){}
 
   public getAll() : Observable<ShippingAddress[]> {
-    return this.http.get<Partial<ShippingAddress>[]>('http://localhost:6064/api/shippingaddress').pipe(
+    return this.http.get<Partial<ShippingAddress>[]>('http://localhost:6064/api/shippingaddress/' + this.userService.currentUser()).pipe(
       map((shippingAddresses: Partial<ShippingAddress>[]) => shippingAddresses.map(shippingAddress => new ShippingAddress(shippingAddress)) )
     );
   }
