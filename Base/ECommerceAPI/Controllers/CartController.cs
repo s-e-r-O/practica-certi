@@ -95,7 +95,7 @@ namespace ECommerceAPI.Controllers
             {
                 Cart cart = JsonConvert.DeserializeObject<Cart>(body);
                 CartService cs = new CartService();
-                if (cs.Update(key, cart))
+                if (cs.Update(id, cart))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
                     response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
