@@ -16,6 +16,7 @@ namespace Base
             this.StoresList = new List<Store>();
             this.CartsList = new List<Cart>();
             this.ProductsList = new List<Product>();
+            this.ShippingAddressesList = new List<ShippingAddress>();
         }
 
         public static ECommerceDB Instance
