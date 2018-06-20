@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col">
+      <div class="container w-100 mt-5">
+        <div class="row">
+          <app-shipping-address-view class="col-6 h-100" *ngFor="let shippingAddress of shippingAddresses" [shippingAddress]="shippingAddress" (edit)="onEdit($event)" (delete)="onDelete($event)"></app-shipping-address-view>
+            <div class="w-100 d-none d-md-block"></div>
+        </div>
+      </div>  
+    </div>
+    <app-shipping-address-form class="col-6" [shippingAddress]="shippingAddressToEdit" (create)="onCreate($event)" (cancel)="onCancel($event)"></app-shipping-address-form>
+  </div>
+</div>

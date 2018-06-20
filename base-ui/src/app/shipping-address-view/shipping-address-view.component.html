@@ -1,0 +1,30 @@
+<div class="card pl-2 pr-2">
+    <div class="card-body">
+      <div class="row">
+        <div class="small">{{ shippingAddress.identifier }}</div>
+      </div>
+      <div class="row">
+        <div class="small">{{ shippingAddress.line1 }}</div>
+      </div>
+      <div class="row">
+          <div class="small">{{ shippingAddress.line2 }}</div>
+      </div>
+      <div class="row">
+          <div class="small">{{ shippingAddress.city }}</div>
+      </div>
+      <div class="row">
+          <div class="small">{{ shippingAddress.zone }}</div>
+      </div>
+      <div class="row">
+          <div class="small">Phone: {{ shippingAddress.phone }}</div>
+        </div>
+      <br>
+      <div class="row">
+          <button type="button" class="btn btn-success btn-block col">Deliver to this address</button>
+      </div>
+      <div class="row">
+        <button type="button" class="btn btn-outline-secondary col mr-1 mt-2" (click)="onEdit($event)">Edit</button>
+        <button type="button" class="btn btn-outline-danger col ml-1 mt-2" (click)="onDelete($event)">Delete</button>
+      </div>
+    </div>
+  </div>

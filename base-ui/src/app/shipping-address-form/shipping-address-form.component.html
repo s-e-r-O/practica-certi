@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col mt-5">
+      <div class="card card-flat">
+        <div class="card-header bg-dark">
+          <h1 class="text-light" *ngIf="!shippingAddress">Add a new address</h1>
+          <h1 class="text-light" *ngIf="shippingAddress">Update {{ shippingAddress.identifier }}</h1>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+              <div class="form-group with-focus">
+                <div class="text-danger small" 
+                *ngIf="form.controls['identifier'].hasError('required') && (form.controls['identifier'].dirty || form.controls['identifier'].touched)">This field is required</div>
+                <label for="identifier">Address Identifier:</label>
+                <input type="text" class="form-control" id="identifier" formControlName="identifier">
+              </div>
+              <div class="form-group with-focus">
+                <div class="text-danger small" 
+                *ngIf="form.controls['line1'].hasError('required') && (form.controls['line1'].dirty || form.controls['line1'].touched)">This field is required</div>
+                <label for="line1">Address Line 1:</label>
+                <input type="text" class="form-control" id="line1" formControlName="line1">
+              </div>
+              <div class="form-group with-focus">
+                <div class="text-danger small" 
+                *ngIf="form.controls['line2'].hasError('required') && (form.controls['line2'].dirty || form.controls['line2'].touched)">This field is required</div>
+                <label for="line2">Address Line 2:</label>
+                <input type="text" class="form-control" id="line2" formControlName="line2">
+              </div>
+              <div class="form-group with-focus">
+                <div class="text-danger small" 
+                *ngIf="form.controls['city'].hasError('required') && (form.controls['city'].dirty || form.controls['city'].touched)">This field is required</div>
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" formControlName="city">
+              </div>
+              <div class="form-group with-focus">
+                <div class="text-danger small" 
+                *ngIf="form.controls['phone'].hasError('required') && (form.controls['phone'].dirty || form.controls['phone'].touched)">This field is required</div>
+                <label for="phone">Phone</label>
+                <input type="number" class="form-control" id="phone" formControlName="phone">
+              </div>
+              <div class="form-group with-focus">
+                <div class="text-danger small" 
+                *ngIf="form.controls['zone'].hasError('required') && (form.controls['zone'].dirty || form.controls['zone'].touched)">This field is required</div>
+                <label for="zone">Zone</label>
+                <input type="text" class="form-control" id="zone" formControlName="zone">
+              </div>
+              <div class="row">
+
+                <button type="button" class="btn btn-secondary col m-2" [disabled]="!shippingAddress && form.pristine" (click)="onCancel($event)">Cancel</button>
+                <button type="submit" class="btn btn-success col m-2" [disabled]="!form.valid" >Submit</button>
+              </div>
+            </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

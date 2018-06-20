@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <h1>Shopping Cart</h1>
+  <table class="table table-striped border table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th style="width: 20%"></th>
+        <th style="width: 60%"></th>
+        <th style="width: 10%">Price</th>
+        <th style="width: 10%">Quantity</th>
+      </tr>
+    </thead>
+      <tr scope="row" *ngFor="let productCart of products" [product-tr]="productCart" (price)="addPrice($event)"></tr>
+  </table>
+<div class="text-right text-muted">Subtotal ({{productsCount}} Items): ${{totalPrice}}</div>
+<div class="text-left"><a class=" text-muted clickable" routerLink="/shipping">Shipping Address</a></div>
+</div>

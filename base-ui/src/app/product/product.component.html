@@ -1,0 +1,9 @@
+<div class="card h-100 clickable" (click)="onClick(product.code)">
+  <div class="card-img border-bottom text-center">
+    <img class="img-rounded" src="{{product.imageURL}}" alt="{{product.name}}" width="180" height="180">
+  </div>
+  <div class="card-body">
+    <a class="text-primary">{{product.name}}</a>
+    <h4 class="text-right">{{product.price}}</h4>
+  </div>
+</div>
