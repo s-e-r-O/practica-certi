@@ -7,12 +7,14 @@ using System.Web.Http;
 using System.Text;
 using Base;
 using Newtonsoft.Json;
+using System.Web.Http.Cors;
 
 namespace ECommerceAPI.Controllers
 {
     public class ShippingAddressController : ApiController, IServices
     {
         [HttpGet]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Get()
         {
             ShippingAddressService shippingaddressservice = new ShippingAddressService();
@@ -24,6 +26,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpGet]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -51,6 +54,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
@@ -99,6 +103,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPut]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Put(string id, HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
@@ -146,6 +151,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpDelete]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);

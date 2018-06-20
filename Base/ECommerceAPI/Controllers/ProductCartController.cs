@@ -7,12 +7,14 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace ECommerceAPI.Controllers
 {
     public class ProductCartController : ApiController, IServices
     {
         [HttpGet]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Get()
         {
             ProductCartService prodcartservice = new ProductCartService();
@@ -24,6 +26,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpGet]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -49,6 +52,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
@@ -79,6 +83,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPut]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Put(string key, HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
@@ -110,6 +115,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpDelete]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);

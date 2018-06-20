@@ -83,6 +83,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPut]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Put(string id, HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
