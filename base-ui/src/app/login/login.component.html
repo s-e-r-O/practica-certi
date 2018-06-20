@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+<div class="form-group">
+    <label for="username">Username</label>
+    <div class="text-danger small" *ngIf="form.controls['username'].hasError('required') && (form.controls['username'].dirty || form.controls['username'].touched)">Ingresar nombre de usuario</div>
+    <input type="text" class="form-control" id="username" required formControlName="username">
+  </div>
+<div class="form-group">
+    <label for="password">Password</label>
+    <div class="text-danger small" *ngIf="form.controls['password'].hasError('required') && (form.controls['password'].dirty || form.controls['password'].touched)">Ingresar contraseña</div>
+    <input type="password" class="form-control" id="password" required formControlName="password">
+  </div>
+  <input type="submit" value="Submit" (click)="onClick()">
+  
+</form>

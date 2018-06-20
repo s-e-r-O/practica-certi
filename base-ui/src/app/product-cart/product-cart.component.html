@@ -1,0 +1,10 @@
+<td>
+  <img src="{{ product.imageURL }}" width="50" height="50">
+</td>
+<td><a class="text-primary clickable" (click)="onClick()">{{product.name}}</a></td>
+<td>
+  {{product.price}}
+</td>
+<td>
+  <input type="number" min="1" max="99" value="{{ productCart.quantity }}">
+</td>
