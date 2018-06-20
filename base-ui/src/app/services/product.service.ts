@@ -38,6 +38,7 @@ export class ProductService {
       description: "AAAA",
       type: "Digital",
       delivery: "None",
+      price: "$4.99",
       imageURL: "http://lorempixel.com/200/200",
       category: new Category({ name: "Category", description: "BBB"})
     }));
