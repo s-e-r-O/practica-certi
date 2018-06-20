@@ -1,0 +1,116 @@
+{
+    "Product" : [
+        {  
+        "Code" : "peraphone_xi", 
+        "Name" : "Peraphone XI", 
+        "Description" : "The new PeraphoneTM", 
+        "Category" :  { "Name" : "Technology", "Description" : "All tech things" },
+        "ShippingDeliveryType"  : "Express", 
+        "Price" : 1299,
+        "ImageURL" : "https://k34.kn3.net/taringa/1/4/8/4/0/8/2/mariogca/31C.jpg", 
+        "Type" : "Physical" 
+    },
+    { 
+        "Code" : "gamesphere_5", 
+        "Name" : "Gamesphere 5", 
+        "Description" : "It's not a copy at all", 
+        "Category" : { "Name" : "Entertainment", "Description" : "Fun stuff"},
+        "ShippingDeliveryType"  : "InStore", 
+        "Price" : 349, 
+        "ImageURL" : "https://i.redd.it/0458q1dd0d2z.jpg", 
+        "Type" : "Physical" 
+    },
+    { 
+        "Code" : "extreme_vg", 
+        "Name" : "Extreme Video Game", 
+        "Description" : "It's so XTREMEE", 
+        "Category" : { "Name" : "Entertainment", "Description" : "Fun stuff" },
+        "ShippingDeliveryType" : "None", 
+        "Price" : 59, 
+        "ImageURL" : "https://images-na.ssl-images-amazon.com/images/I/41KbVOAvsBL.jpg",
+        "Type" : "Digital"
+    }
+    ],
+    "Category" : [
+        { "Name" : "Technology", "Description" : "All tech things" }, 
+        { "Name" : "Entertainment", "Description" : "Fun stuff" },
+        { "Name" : "Kid Toys", "Description" : "Toys for kids" },
+        { "Name" : "Clothes", "Description" : "Just clothes" },
+        { "Name" : "Food", "Description" : "To eat" }
+    ],
+    "Store": [
+        { "Name" : "Only Cereals", "Line1" : "Dream St.", "Line2" : "Oakland", "Phone":41204930 },
+        { "Name" : "Games", "Line1" : "Flying Av.", "Line2" : "Pallet Town", "Phone":12389499 }
+    ],
+    "ShippingAddress" : [
+        {
+         "Identifier" : "00000", 
+            "City" : "Cochabamba",
+            "Line1" : "C. Caracoles", 
+            "Line2" : "", 
+            "Phone" : 4787657, 
+            "Zone" : "Zona Norte",
+            "Username" : "lol1"
+        },
+        {
+            "Identifier" : "00001", 
+            "City":"Cochabamba",
+            "Line1" :"C. Camarones", 
+            "Line2":"", 
+            "Phone" : 4559403, 
+            "Zone" : "Zona Norte",
+            "Username" : "fabiox"
+        }
+    ],
+    "User": [
+        { "Username":"lol1", "Name":"Lola", "LastName":"Lopez", "Password":"aaa111","ShipAdress":[]},
+        { "Username": "fabiox", "Name":"Fabio", "LastName":"Xavier", "Password":"bbb111","ShipAdress":[]},
+        { "Username": "gup", "Name":"Gonzalo", "LastName" : "Perez", "Password" : "ccc111","ShipAdress":[]},
+        { "Username": "s_O", "Name": "Sandro", "LastName":"Dominguez", "Password" : "aaa222","ShipAdress":[]}
+    ],
+    "ProductCart" : [
+        { "ProductCode":"tv_xl", "SelectedDelivery":"Express", "Store":
+            { "Name" : "Games", "Line1" : "Flying Av.", "Line2" : "Pallet Town", "Phone":12389499 }, "Quantity":1 , "Username":"lol1"},
+        { "ProductCode":"gamesphere_5", "SelectedDelivery":"Express", "Store":
+            { "Name" : "Games", "Line1" : "Flying Av.", "Line2" : "Pallet Town", "Phone":12389499 },"Quantity":1 , "Username":"fabiox"},
+        { "ProductCode":"xtreme_vg", "SelectedDelivery":"Express", "Store":
+            { "Name" : "Games", "Line1" : "Flying Av.", "Line2" : "Pallet Town", "Phone":12389499 },"Quantity":5 , "Username":"gup"}
+    ],
+    "Cart": [
+        { "Username":"lol1", "ProductCarts":[]},
+        { "Username":"fabiox", "ProductCarts":[]},
+        { "Username":"gup", "ProductCarts":[]},
+        { "Username":"s_O", "ProductCarts":[]}
+    ],
+    "SchemaJson" : {
+        "description" : "This describes a product",
+        "type": "object",
+        "properties": {
+            "Code": {"type":"string","required":true},
+            "Name": {"type":"string", "required":true},
+            "Price": {"type":"number", "required":true},
+            "Description": {"type":"string" , "required":true},
+            "Type": {"type":"string","required":true},
+            "ShippingDeliveryType":{"type":"string","required":true},
+            "ImageURL":{"type":"string","required":true},
+            "Category":{
+                        "type":"object",
+                        "properties":{
+                                        "Name":{"type":"string","required":true},
+                                        "Description":{"type":"string","required":true}
+                                     }
+                        }
+        } , 
+        "additionalProperties": false
+    },
+    "schemaJson2" : {
+        "description" : "This describes a category",
+        "type": "object",
+        "properties": { 
+            "Name": {"type":"string"},
+            "Description": {"type":"string"}
+        } , 
+        "additionalProperties": false,
+        "required": [ "Name", "Description" ]
+    }
+}
