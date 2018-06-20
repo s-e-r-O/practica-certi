@@ -54,29 +54,35 @@ namespace ECommerceAPI.Controllers
         {
             var requestBody = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
-            string responseBody = "{ \"error\": \"There was an error with the format of the object sent in the body.\"}";
+            string responseBody = "{ \"error\": \"There was an error with the structure of the object sent in the body.\"}";
 
             JSchema schema = schemaGenerator.Generate(typeof(Category));
             schema.AllowAdditionalProperties = false;
 
-            JObject category = JObject.Parse(requestBody);
-
-            if (category.IsValid(schema))
+            try
             {
-                Category myCategory = JsonConvert.DeserializeObject<Category>(requestBody);
+                JObject category = JObject.Parse(requestBody);
 
-                if (!(cs.Create(myCategory)))
+                if (category.IsValid(schema))
                 {
-                    responseBody = "{ \"error\": \"That category is already on the list.\"}";
-                }
-                else
-                {
-                    responseBody = "{\"id\":\" " + myCategory.Name + "\"}";
-                    response = Request.CreateResponse(HttpStatusCode.OK);
-                }
+                    Category myCategory = JsonConvert.DeserializeObject<Category>(requestBody);
 
+                    if (!(cs.Create(myCategory)))
+                    {
+                        responseBody = "{ \"error\": \"That category is already on the list.\"}";
+                    }
+                    else
+                    {
+                        response = Request.CreateResponse(HttpStatusCode.OK);
+                        responseBody = "{\"id\":\" " + myCategory.Name + "\"}";
+                    }
+                }
             }
-
+            catch
+            {
+                responseBody = "{ \"error\": \"The body of the request is not a valid json format.\"}";
+            }
+           
             response.Content = new StringContent(responseBody, Encoding.UTF8, "application/json");
             return response;
         }
@@ -86,26 +92,33 @@ namespace ECommerceAPI.Controllers
         {
             var requestBody = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
-            string responseBody = "{ \"error\": \"There was an error with the format of the object sent in the body.\"}";
+            string responseBody = "{ \"error\": \"There was an error with the structure of the object sent in the body.\"}";
 
             JSchema schema = schemaGenerator.Generate(typeof(Category));
             schema.AllowAdditionalProperties = false;
 
-            JObject category = JObject.Parse(requestBody);
-
-            if (category.IsValid(schema))
+            try
             {
-                Category myCategory = JsonConvert.DeserializeObject<Category>(requestBody);
+                JObject category = JObject.Parse(requestBody);
 
-                if (!(cs.Update(id, myCategory)))
+                if (category.IsValid(schema))
                 {
-                    responseBody = "{ \"error\": \"The ids doesnt match or the id doest not exist.\"}";
+                    Category myCategory = JsonConvert.DeserializeObject<Category>(requestBody);
+
+                    if (!(cs.Update(id, myCategory)))
+                    {
+                        responseBody = "{ \"error\": \"The ids doesnt match or the id doest not exist.\"}";
+                    }
+                    else
+                    {
+                        response = Request.CreateResponse(HttpStatusCode.OK);
+                        responseBody = "{\"id\":\" " + myCategory.Name + "\"}";
+                    }
                 }
-                else
-                {
-                    response = Request.CreateResponse(HttpStatusCode.OK);
-                    responseBody = "{\"id\":\" " + myCategory.Name + "\"}";
-                }
+            }
+            catch
+            {
+                responseBody = "{ \"error\": \"The body of the request is not a valid json format.\"}";
             }
 
             response.Content = new StringContent(responseBody, Encoding.UTF8, "application/json");

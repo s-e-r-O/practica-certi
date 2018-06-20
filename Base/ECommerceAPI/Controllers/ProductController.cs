@@ -52,27 +52,32 @@ namespace ECommerceAPI.Controllers
         {
             var requestBody = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
-            string responseBody = "{ \"error\": \"There was an error with the format of the object sent in the body.\"}";
+            string responseBody = "{ \"error\": \"There was an error with the structure of the object sent in the body.\"}";
 
             JSchema schema = schemaGenerator.Generate(typeof(Product));
             schema.AllowAdditionalProperties = false;
 
-            JObject product = JObject.Parse(requestBody);
-
-            if (product.IsValid(schema))
+            try
             {
-                Product myProduct = JsonConvert.DeserializeObject<Product>(requestBody);
+                JObject jsonProduct = JObject.Parse(requestBody);
+                if (jsonProduct.IsValid(schema))
+                {
+                    Product myProduct = JsonConvert.DeserializeObject<Product>(requestBody);
 
-                if (!(ps.Create(myProduct)))
-                {
-                    responseBody = "{ \"error\": \"That product is already on the list.\"}";
+                    if (!(ps.Create(myProduct)))
+                    {
+                        responseBody = "{ \"error\": \"That product is already on the list.\"}";
+                    }
+                    else
+                    {
+                        response = Request.CreateResponse(HttpStatusCode.OK);
+                        responseBody = "{\"id\":\" " + myProduct.Code + "\"}";
+                    }
                 }
-                else
-                {
-                    responseBody = "{\"id\":\" " + myProduct.Code + "\"}";
-                    response = Request.CreateResponse(HttpStatusCode.OK);
-                }
-                
+            }
+            catch
+            {
+                responseBody = "{ \"error\": \"The body of the request is not a valid json format.\"}";
             }
 
             response.Content = new StringContent(responseBody, Encoding.UTF8, "application/json");
@@ -89,21 +94,28 @@ namespace ECommerceAPI.Controllers
             JSchema schema = schemaGenerator.Generate(typeof(Product));
             schema.AllowAdditionalProperties = false;
 
-            JObject product = JObject.Parse(requestBody);
-
-            if (product.IsValid(schema))
+            try
             {
-                Product myProduct = JsonConvert.DeserializeObject<Product>(requestBody);
+                JObject jsonProduct = JObject.Parse(requestBody);
 
-                if (!(ps.Update(id,myProduct)))
+                if (jsonProduct.IsValid(schema))
                 {
-                    responseBody = "{ \"error\": \"The ids doesnt match or the id doest not exist.\"}";
+                    Product myProduct = JsonConvert.DeserializeObject<Product>(requestBody);
+
+                    if (!(ps.Update(id, myProduct)))
+                    {
+                        responseBody = "{ \"error\": \"The ids doesnt match or the id doest not exist.\"}";
+                    }
+                    else
+                    {
+                        response = Request.CreateResponse(HttpStatusCode.OK);
+                        responseBody = "{\"id\":\" " + myProduct.Code + "\"}";
+                    }
                 }
-                else
-                {
-                    response = Request.CreateResponse(HttpStatusCode.OK);
-                    responseBody = "{\"id\":\" " + myProduct.Code + "\"}";
-                }
+            }
+            catch
+            {
+                responseBody = "{ \"error\": \"The body of the request is not a valid json format.\"}";
             }
 
             response.Content = new StringContent(responseBody, Encoding.UTF8, "application/json");
