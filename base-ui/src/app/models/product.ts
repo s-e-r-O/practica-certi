@@ -40,4 +40,28 @@ export class Product {
     set Category(value) {
         this.category = value;
     }
+    get Code() {
+        return this.code;
+    }
+    get Name() {
+        return this.name;
+    }
+    get Price() {
+        return this.price;
+    }
+    get Description() {
+        return this.description;
+    }
+    get Type() {
+        return this.type;
+    }
+    get Delivery() {
+        return this.delivery;
+    }
+    get ImageURL() {
+        return this.imageURL;
+    }
+    get Category() {
+        return this.category;
+    }
 }

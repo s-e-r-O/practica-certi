@@ -14,5 +14,12 @@ export class Cart {
     
     set Username(value) {
         this.username = value;
+    }   
+    get ProductCarts() {
+        return this.productCarts;
+    }
+    
+    get Username() {
+        return this.username;
     }
 }

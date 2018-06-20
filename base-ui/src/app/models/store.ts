@@ -21,4 +21,16 @@ export class Store {
     set Phone(value) {
         this.phone = value;
     }
+    get Line1() {
+        return this.line1;
+    }
+    get Line2() {
+        return this.line2;
+    }
+    get Name() {
+        return this.name;
+    }
+    get Phone() {
+        return this.phone;
+    }
 }

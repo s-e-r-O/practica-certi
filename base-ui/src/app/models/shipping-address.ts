@@ -33,4 +33,25 @@ export class ShippingAddress {
     set Zone(value) {
         this.zone = value;
     }
+    get Identifier() {
+        return this.identifier;
+    }
+    get Line1() {
+        return this.line1;
+    }
+    get Line2() {
+        return this.line2;
+    }
+    get Phone() {
+        return this.phone;
+    }
+    get Username() {
+        return this.username;
+    }
+    get City() {
+        return this.city;
+    }
+    get Zone() {
+        return this.zone;
+    }
 }

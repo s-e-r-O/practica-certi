@@ -24,8 +24,7 @@ export class ShippingAddressFormComponent implements OnChanges {
       'line2' : new FormControl(undefined,Validators.required),
       'city' : new FormControl(undefined,Validators.required),
       'phone' : new FormControl(undefined,Validators.required),
-      'zone' : new FormControl(undefined,Validators.required),
-      'username' : new FormControl(this.userService.currentUser())
+      'zone' : new FormControl(undefined,Validators.required)
     })
   }
 

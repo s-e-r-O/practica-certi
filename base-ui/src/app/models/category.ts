@@ -14,4 +14,11 @@ export class Category {
     set Description(value) {
         this.description = value;
     }
+    get Name() {
+        return this.name;
+    }
+    
+    get Description() {
+        return this.description;
+    }
 }

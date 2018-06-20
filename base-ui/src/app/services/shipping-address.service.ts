@@ -23,6 +23,7 @@ export class ShippingAddressService {
   }
 
   public create(shippingAddress : ShippingAddress) : Observable<{ identifier : string }> {
+    shippingAddress.username = this.userService.currentUser();
     return this.http.post('http://localhost:6064/api/shippingaddress', shippingAddress) as Observable<{ identifier : string }>;
   }
   

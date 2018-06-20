@@ -26,4 +26,20 @@ export class User {
     set ShipAdress(value) {
         this.shipAdress = value;
     }
+
+    get Username() {
+        return this.username;
+    }
+    get Password() {
+        return this.password;
+    }
+    get Name() {
+        return this.name;
+    }
+    get LastName() {
+        return this.lastName;
+    }
+    get ShipAdress() {
+        return this.shipAdress;
+    }
 }

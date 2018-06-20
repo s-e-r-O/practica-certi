@@ -25,4 +25,19 @@ export class ProductCart {
     set Quantity(value) {
         this.quantity = value;
     }
+    get ProductCode() {
+        return this.productCode;
+    }
+    
+    get SelectedDelivery() {
+        return this.selectedDelivery;
+    }
+    
+    get Store() {
+        return this.store;
+    }
+    
+    get Quantity() {
+        return this.quantity;
+    }
 }
