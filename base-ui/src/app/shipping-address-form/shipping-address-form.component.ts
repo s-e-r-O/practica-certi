@@ -55,6 +55,7 @@ export class ShippingAddressFormComponent implements OnChanges {
 
   onCancel($event){
     $event.preventDefault();
+    this.form.reset();
     this.cancel.emit(true);
   }
 

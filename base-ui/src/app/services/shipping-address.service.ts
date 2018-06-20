@@ -10,7 +10,9 @@ export class ShippingAddressService {
   public getAll() : Observable<ShippingAddress[]> {
     return of( [
       new ShippingAddress({identifier: "123", line1: "AAA", line2: "BBB", city: "AAA", phone: 123, zone: "DDD"}),
-      new ShippingAddress({identifier: "123", line1: "AAA", line2: "BBB", city: "AAA", phone: 12341, zone: "DDD"})
+      new ShippingAddress({identifier: "123", line1: "AAA", line2: "BBB", city: "AAA", phone: 12341, zone: "DDD"}),
+      new ShippingAddress({identifier: "123", line1: "AAA", line2: "BBB", city: "AAA", phone: 123, zone: "DDD"}),
+      new ShippingAddress({identifier: "123", line1: "AAA", line2: "BBB", city: "AAA", phone: 12341, zone: "DDD"}),
     ] );
   }
   
