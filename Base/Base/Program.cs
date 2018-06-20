@@ -15,7 +15,7 @@ namespace Base
             Console.WriteLine("+        This is an E-Commerce App!!        +");
             Console.WriteLine("+                                           +");
             Console.WriteLine("+++++++++++++++++++++++++++++++++++++++++++++");
-            Mockup.MockData();
+            Test.Run();
             Console.ReadLine();
         }
     }

@@ -1,45 +1,46 @@
-﻿using System;
+﻿using Base;
+using ECommerceAPI.Controllers;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
 using System.Text;
-using Base;
-using Newtonsoft.Json;
+using System.Web.Http;
 
-namespace ECommerceAPI.Controllers
+namespace ECommerceAPI
 {
-    public class ShippingAddressController : ApiController, IServices
+    public class UserController : ApiController, IServices
     {
         [HttpGet]
-        [Route("api/shippingaddress")]
+        [Route("api/User")]
         public HttpResponseMessage Get()
         {
-            ShippingAddressService shippingaddressservice = new ShippingAddressService();
-            List<ShippingAddress> sa = shippingaddressservice.Get();
-            string shippingaddressJSON = JsonConvert.SerializeObject(sa, Formatting.Indented);
+            UserService userservice = new UserService();
+            List<User> user = userservice.Get();
+            string UserJSON = JsonConvert.SerializeObject(user, Formatting.Indented);
             var response = Request.CreateResponse(HttpStatusCode.OK);
-            response.Content = new StringContent(shippingaddressJSON, Encoding.UTF8, "application/json");
+            response.Content = new StringContent(UserJSON, Encoding.UTF8, "application/json");
             return response;
         }
 
         [HttpGet]
-        [Route("api/shippingaddress/{id}")]
+        [Route("api/User/{id}")]
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
             string errormessage = "{\"error\": \"The element don't exist\"}";
-            ShippingAddressService shippingaddressservice = new ShippingAddressService();
-            List<ShippingAddress> sa = shippingaddressservice.Get();
-            foreach (ShippingAddress st in sa)
+            UserService userservice = new UserService();
+            List<User> User = userservice.Get();
+            foreach (User st in User)
             {
-                if (st.Username == id)
+                if (st.Name == id)
                 {
-                    ShippingAddress shad = st;
-                    string shippingaddressJSON = JsonConvert.SerializeObject(shad, Formatting.Indented);
+                    User sto = st;
+                    string UserJSON = JsonConvert.SerializeObject(sto, Formatting.Indented);
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(shippingaddressJSON, Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(UserJSON, Encoding.UTF8, "application/json");
                     break;
                 }
                 else
@@ -52,38 +53,19 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost]
-        [Route("api/shippingaddress")]
+        [Route("api/User")]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.Unused);
             string errormessage = "{\"error\": \"an error ocurred\"}";
             string error = "{\"error\": \"error\"}";
-            string successmessage = "{\"success\": \"Shipping Address posted\"}";
+            string successmessage = "{\"success\": \"User posted\"}";
             try
             {
-                User user = new User();
-                UserService userservice = new UserService();
-                List<User> users = userservice.Get();
-                ShippingAddress shippingaddress = JsonConvert.DeserializeObject<ShippingAddress>(body);
-                string username = shippingaddress.Username;
-                foreach (User us in users)
-                {
-                    if (us.Username == username)
-                    {
-                        user = us;
-                    }
-                    else
-                    {
-                        response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                        response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
-                    }
-                }
-
-                ShippingAddressService sas = new ShippingAddressService();
-                sas.User = user;
-
-                if (sas.Create(shippingaddress))
+                User user = JsonConvert.DeserializeObject<User>(body);
+                UserService ss = new UserService();
+                if (ss.Create(user))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
                     response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
@@ -102,19 +84,19 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/shippingaddress/{key}")]
+        [Route("api/User/{key}")]
         public HttpResponseMessage Put(string key, HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.Unused);
-            string successmessage = "{\"success\": \"Shipping Address updated\"}";
+            string successmessage = "{\"success\": \"User updated\"}";
             string errormessage = "{\"error\": \"an error ocurred\"}";
-            string error = "{\"success\": \"Error\"}";
+            string error = "{\"error\": \"Error\"}";
             try
             {
-                ShippingAddress shippingaddress = JsonConvert.DeserializeObject<ShippingAddress>(body);
-                ShippingAddressService sas = new ShippingAddressService();
-                if (sas.Update(key, shippingaddress))
+                User user = JsonConvert.DeserializeObject<User>(body);
+                UserService st = new UserService();
+                if (st.Update(key, user))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
                     response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
@@ -134,17 +116,17 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("api/shippingaddress/{id}")]
+        [Route("api/User/{id}")]
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
-            string errormessage = "{\"error\": \"An error has ocurred deleting the Shipping Address\"}";
+            string errormessage = "{\"error\": \"An error has ocurred deleting the User\"}";
             string error = "{\"error\": \"error\"}";
-            string successmessage = "{\"success\": \"Shipping Address deleted\"}";
+            string successmessage = "{\"success\": \"User deleted\"}";
             try
             {
-                ShippingAddressService sas = new ShippingAddressService();
-                if (sas.Delete(id))
+                UserService st = new UserService();
+                if (st.Delete(id))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
                     response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
@@ -164,4 +146,5 @@ namespace ECommerceAPI.Controllers
             return response;
         }
     }
+
 }
