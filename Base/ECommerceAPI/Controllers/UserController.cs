@@ -8,12 +8,14 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace ECommerceAPI.controllers
 {
     public class UserController : ApiController, IServices
     {
         [HttpGet]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Get()
         {
             UserService userservice = new UserService();
@@ -25,6 +27,7 @@ namespace ECommerceAPI.controllers
         }
 
         [HttpGet]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -51,6 +54,7 @@ namespace ECommerceAPI.controllers
         }
 
         [HttpPost]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
@@ -80,6 +84,7 @@ namespace ECommerceAPI.controllers
         }
 
         [HttpPut]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Put(string id, HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
@@ -110,6 +115,7 @@ namespace ECommerceAPI.controllers
         }
 
         [HttpDelete]
+        [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
