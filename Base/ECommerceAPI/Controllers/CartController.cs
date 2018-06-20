@@ -51,26 +51,29 @@ namespace ECommerceAPI.Controllers
         [HttpPost]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
+            var body = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.Unused);
+            string errormessage = "{\"error\": \"an error ocurred\"}";
+            string error = "{\"error\": \"error\"}";
+            string successmessage = "{\"success\": \"Cart posted\"}";
             try
             {
-                String cartJSON = request.ToString();
-                Cart cart = JsonConvert.DeserializeObject<Cart>(cartJSON);
+                Cart cart = JsonConvert.DeserializeObject<Cart>(body);
                 CartService cs = new CartService();
                 if (cs.Create(cart))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent("Cart created", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
                 }
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent("An error has ocurred creating Cart", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
                 }
             }
             catch
             {
-                response.Content = new StringContent("Error", Encoding.UTF8, "application/json");
+                response.Content = new StringContent(error, Encoding.UTF8, "application/json");
             }
             return response;
         }
@@ -78,27 +81,30 @@ namespace ECommerceAPI.Controllers
         [HttpPut]
         public HttpResponseMessage Put(string key, HttpRequestMessage request)
         {
+            var body = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.Unused);
+            string successmessage = "{\"success\": \"Cart updated\"}";
+            string errormessage = "{\"error\": \"an error ocurred\"}";
+            string error = "{\"success\": \"Error\"}";
             try
             {
-                Cart cart = JsonConvert.DeserializeObject<Cart>(request.ToString());
+                Cart cart = JsonConvert.DeserializeObject<Cart>(body);
                 CartService cs = new CartService();
-                cs.Get();
                 if (cs.Update(key, cart))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent("Cart Updated", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
                 }
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent("An error has ocurred updating Cart", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
                 }
             }
             catch
             {
                 response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                response.Content = new StringContent("Error", Encoding.UTF8, "application/json");
+                response.Content = new StringContent(error, Encoding.UTF8, "application/json");
             }
             return response;
         }
@@ -107,25 +113,27 @@ namespace ECommerceAPI.Controllers
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
+            string errormessage = "{\"error\": \"An error has ocurred deleting Cart\"}";
+            string error = "{\"error\": \"error\"}";
+            string successmessage = "{\"success\": \"Cart deleted\"}";
             try
             {
                 CartService cs = new CartService();
-                cs.Get();
                 if (cs.Delete(id))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent("Cart deleted", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
                 }
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent("An error has ocurred deleting the Cart", Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
                 }
             }
             catch
             {
                 response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                response.Content = new StringContent(("Error"), Encoding.UTF8, "application/json");
+                response.Content = new StringContent(error, Encoding.UTF8, "application/json");
 
             }
             return response;

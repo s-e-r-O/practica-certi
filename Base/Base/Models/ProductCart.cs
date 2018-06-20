@@ -15,7 +15,7 @@ namespace Base
 
         public void Show()
         {
-            Console.WriteLine("ProductCode: " + ProductCode + ", Delivery: " + SelectedDelivery + ", Quantity: " + Quantity);
+            Console.WriteLine("ProductCode: " + ProductCode + ", Delivery: " + SelectedDelivery + ", Quantity: " + Quantity + "Username: " + Username);
         }
     }
 }
