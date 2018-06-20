@@ -13,7 +13,6 @@ namespace ECommerceAPI.Controllers
     public class StoreController : ApiController, IServices 
     {
         [HttpGet]
-        [Route("api/store")]
         public HttpResponseMessage Get()
         {
             StoreService storeservice = new StoreService();
@@ -25,7 +24,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/store/{id}")]
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -52,7 +50,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost]
-        [Route("api/store")]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
@@ -83,7 +80,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/store/{key}")]
         public HttpResponseMessage Put(string key, HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
@@ -115,7 +111,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("api/store/{id}")]
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);

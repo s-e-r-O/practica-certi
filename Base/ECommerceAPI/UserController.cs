@@ -14,7 +14,6 @@ namespace ECommerceAPI
     public class UserController : ApiController, IServices
     {
         [HttpGet]
-        [Route("api/User")]
         public HttpResponseMessage Get()
         {
             UserService userservice = new UserService();
@@ -26,7 +25,6 @@ namespace ECommerceAPI
         }
 
         [HttpGet]
-        [Route("api/User/{id}")]
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -53,7 +51,6 @@ namespace ECommerceAPI
         }
 
         [HttpPost]
-        [Route("api/User")]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
@@ -84,7 +81,6 @@ namespace ECommerceAPI
         }
 
         [HttpPut]
-        [Route("api/User/{key}")]
         public HttpResponseMessage Put(string key, HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
@@ -116,7 +112,6 @@ namespace ECommerceAPI
         }
 
         [HttpDelete]
-        [Route("api/User/{id}")]
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);

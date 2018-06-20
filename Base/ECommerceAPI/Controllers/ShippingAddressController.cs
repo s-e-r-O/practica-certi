@@ -13,7 +13,6 @@ namespace ECommerceAPI.Controllers
     public class ShippingAddressController : ApiController, IServices
     {
         [HttpGet]
-        [Route("api/shippingaddress")]
         public HttpResponseMessage Get()
         {
             ShippingAddressService shippingaddressservice = new ShippingAddressService();
@@ -25,7 +24,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/shippingaddress/{id}")]
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
@@ -52,7 +50,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost]
-        [Route("api/shippingaddress")]
         public HttpResponseMessage Post(HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
@@ -102,7 +99,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/shippingaddress/{key}")]
         public HttpResponseMessage Put(string key, HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
@@ -134,7 +130,6 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("api/shippingaddress/{id}")]
         public HttpResponseMessage Delete(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
