@@ -43,17 +43,19 @@ namespace Base
 
         public bool Update(string key, Store obj)
         {
-            int index = _dbContext.StoresList.FindIndex(store => store.Name == key);
-            bool checkNull = IsAnyNullOrEmpty(obj);
-
-            if (index >= 0 && obj.Name == key && !checkNull)
+            int index;
+            if ((index = _dbContext.StoresList.FindIndex(store => { return store.Name == key; })) < 0)
             {
-                _dbContext.StoresList[index] = obj;
-                Console.WriteLine("SUCCESFULLY updated the store of the list");
-                return true;
+                Console.WriteLine("The user '" + key + "' does not exist.");
+                return false;
             }
-            Console.WriteLine("ERROR while updating the store.");
-            return false;
+            if (_dbContext.StoresList.Exists(Store => { return Store.Name == obj.Name; }))
+            {
+                Console.WriteLine("The keys do not match. ( '" + key + "' != '" + obj.Name+ "' )");
+                return false;
+            }
+            _dbContext.StoresList[index] = obj;
+            return true;
         }
 
         public bool IsAnyNullOrEmpty(object myObject)

@@ -26,5 +26,10 @@ namespace Base
             Console.WriteLine("Zone: " + Zone);
             Console.WriteLine("Username: " + Zone);
         }
+
+        public static implicit operator List<object>(ShippingAddress v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

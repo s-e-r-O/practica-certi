@@ -28,12 +28,12 @@ namespace ECommerceAPI.controllers
         public HttpResponseMessage Get(string id)
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
-            string errormessage = "{\"error\": \"The element don't exist\"}";
+            string errormessage = "{\"error\": \"Not User matches the id\"}";
             UserService userservice = new UserService();
             List<User> User = userservice.Get();
             foreach (User st in User)
             {
-                if (st.Name == id)
+                if (st.Username == id)
                 {
                     User sto = st;
                     string UserJSON = JsonConvert.SerializeObject(sto, Formatting.Indented);
@@ -55,9 +55,8 @@ namespace ECommerceAPI.controllers
         {
             var body = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.Unused);
-            string errormessage = "{\"error\": \"an error ocurred\"}";
-            string error = "{\"error\": \"error\"}";
-            string successmessage = "{\"success\": \"User posted\"}";
+            string errormessage = "{\"error\": \"There was an error with the format of the object sent in the body\"}";
+            string error = "{\"error\": \"There was an error creating the User\"}";
             try
             {
                 User user = JsonConvert.DeserializeObject<User>(body);
@@ -65,37 +64,36 @@ namespace ECommerceAPI.controllers
                 if (ss.Create(user))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
+                    response.Content = new StringContent("{\"id\": \"" + user.Username + "\"}", Encoding.UTF8, "application/json");
                 }
                 else
                 {
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
+                    response.Content = new StringContent(error, Encoding.UTF8, "application/json");
                 }
             }
             catch
             {
-                response.Content = new StringContent(error, Encoding.UTF8, "application/json");
+                response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
             }
             return response;
         }
 
         [HttpPut]
-        public HttpResponseMessage Put(string key, HttpRequestMessage request)
+        public HttpResponseMessage Put(string id, HttpRequestMessage request)
         {
             var body = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.Unused);
-            string successmessage = "{\"success\": \"User updated\"}";
-            string errormessage = "{\"error\": \"an error ocurred\"}";
-            string error = "{\"error\": \"Error\"}";
+            string errormessage = "{\"error\": \"Not User matches the id\"}";
+            string error = "{\"error\": \"There was an error with the format of the object sent in the body\"}";
             try
             {
                 User user = JsonConvert.DeserializeObject<User>(body);
                 UserService st = new UserService();
-                if (st.Update(key, user))
+                if (st.Update(id, user))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
+                    response.Content = new StringContent("{\"id\": \"" + id + "\"}", Encoding.UTF8, "application/json");
                 }
                 else
                 {
@@ -116,15 +114,14 @@ namespace ECommerceAPI.controllers
         {
             var response = Request.CreateResponse(HttpStatusCode.Unused);
             string errormessage = "{\"error\": \"An error has ocurred deleting the User\"}";
-            string error = "{\"error\": \"error\"}";
-            string successmessage = "{\"success\": \"User deleted\"}";
+            string error = "{\"error\": \"There was an error with the parameter, it should be an unique identifier. \"}";
             try
             {
                 UserService st = new UserService();
                 if (st.Delete(id))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
+                    response.Content = new StringContent("{\"id\": \"" + id + "\"}", Encoding.UTF8, "application/json");
                 }
                 else
                 {
