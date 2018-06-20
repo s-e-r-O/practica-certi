@@ -1,0 +1,13 @@
+<div class="row">
+      <div class="col-sm-4">
+        <img class="card-img" src="{{product.imageURL}}" alt="Product image" width="10%">
+      </div>
+      <div class="col-sm-4">
+        <h4 class="card-title">{{product.name}}</h4>
+        <p class="card-text">{{product.category.name}}</p>
+        <p class="card-text">{{product.price}}</p>
+        <p class="card-text">{{product.code}}</p>
+        <p class="card-text">{{product.description}}</p>
+        <p><button type="button" class="btn btn-success" (click)="onClick()">AGREGAR A CARRO</button></p>
+      </div>
+</div>
