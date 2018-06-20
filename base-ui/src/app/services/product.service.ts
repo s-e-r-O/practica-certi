@@ -81,7 +81,7 @@ export class ProductService {
       type: "Digital",
       delivery: "None",
       price: "$4.99",
-      imageURL: "http://lorempixel.com/200/200",
+      imageURL: "https://images-na.ssl-images-amazon.com/images/I/514GfnjbUCL._SX355_.jpg",
       category: new Category({ name: "Category", description: "BBB"})
     }));
   }

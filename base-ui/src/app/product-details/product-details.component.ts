@@ -23,8 +23,9 @@ export class ProductDetailsComponent implements OnInit {
         this.productService.getById(this.id).subscribe(product => this.product = product);
       })
   }
-  onClick(){
-    this.router.navigate(['/product']);
+  onClick($event){
+    $event.preventDefault();
+    
   }
 
 }
