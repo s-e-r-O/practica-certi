@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +9,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   @Input() username : string;
-  constructor() { }
+  constructor(private cookieService : CookieService, private router : Router) { }
 
   ngOnInit() {
+  }
+
+  onSignOut($event){
+    this.cookieService.delete('Username');
+    this.router.navigate(['/login']);
   }
 
 }
