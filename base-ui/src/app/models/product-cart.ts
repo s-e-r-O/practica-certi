@@ -5,6 +5,7 @@ export class ProductCart {
     public selectedDelivery : string;
     public store : Store;
     public quantity : number;
+    public username : string;
     
     constructor(init? : Partial<ProductCart>){
         Object.assign(this, init);
@@ -12,6 +13,9 @@ export class ProductCart {
     
     set ProductCode(value) {
         this.productCode = value;
+    }
+    set Username(value) {
+        this.username = value;
     }
     
     set SelectedDelivery(value) {
@@ -27,6 +31,9 @@ export class ProductCart {
     }
     get ProductCode() {
         return this.productCode;
+    }
+    get Username() {
+        return this.username;
     }
     
     get SelectedDelivery() {

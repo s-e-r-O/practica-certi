@@ -29,8 +29,7 @@ namespace Base
 
             // TO-DO: Check if a Product with obj.ProductCode exists
 
-            if ( (Cart.ProductCarts.Exists(productCart => { return productCart.ProductCode == obj.ProductCode; })) ||
-                !(_dbContext.ProductsList.Any(item => item.Code == obj.ProductCode)))
+            if ( (Cart.ProductCarts.Exists(productCart => { return productCart.ProductCode == obj.ProductCode; })))
             {
                 Console.WriteLine("The cart of user '" + Cart.Username + "' already has the product '" + obj.ProductCode + "'.");
                 return false;

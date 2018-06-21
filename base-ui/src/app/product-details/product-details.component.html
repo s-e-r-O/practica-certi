@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="product" >
 <div class="row justify-content-md-center">
   <div class="col-6 mt-5">
     <div class="card card-flat">
@@ -16,7 +16,7 @@
             <p class="card-text">{{product.code}}</p>
             <p class="card-text">{{product.description}}</p>
             <br>
-            <button type="button" class="btn btn-success" (click)="onClick($event)">AGREGAR A CARRO</button>
+            <button type="button" class="btn btn-success" (click)="onClick($event)">ADD TO CART</button>
           </div>
         </div>
        </div>
