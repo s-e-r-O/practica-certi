@@ -13,4 +13,55 @@ export class Product {
     constructor(init? : Partial<Product>){
         Object.assign(this, init);
     }
+    
+    
+
+    set Code(value) {
+        this.code = value;
+    }
+    set Name(value) {
+        this.name = value;
+    }
+    set Price(value) {
+        this.price = value;
+    }
+    set Description(value) {
+        this.description = value;
+    }
+    set Type(value) {
+        this.type = value;
+    }
+    set Delivery(value) {
+        this.delivery = value;
+    }
+    set ImageURL(value) {
+        this.imageURL = value;
+    }
+    set Category(value) {
+        this.category = value;
+    }
+    get Code() {
+        return this.code;
+    }
+    get Name() {
+        return this.name;
+    }
+    get Price() {
+        return this.price;
+    }
+    get Description() {
+        return this.description;
+    }
+    get Type() {
+        return this.type;
+    }
+    get Delivery() {
+        return this.delivery;
+    }
+    get ImageURL() {
+        return this.imageURL;
+    }
+    get Category() {
+        return this.category;
+    }
 }
