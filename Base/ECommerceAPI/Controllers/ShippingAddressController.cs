@@ -8,6 +8,7 @@ using System.Text;
 using Base;
 using Newtonsoft.Json;
 using System.Web.Http.Cors;
+using Newtonsoft.Json.Serialization;
 
 namespace ECommerceAPI.Controllers
 {
@@ -19,7 +20,10 @@ namespace ECommerceAPI.Controllers
         {
             ShippingAddressService shippingaddressservice = new ShippingAddressService();
             List<ShippingAddress> sa = shippingaddressservice.Get();
-            string shippingaddressJSON = JsonConvert.SerializeObject(sa, Formatting.Indented);
+            string shippingaddressJSON = JsonConvert.SerializeObject(sa, Formatting.Indented, new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            });
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(shippingaddressJSON, Encoding.UTF8, "application/json");
             return response;
@@ -40,7 +44,10 @@ namespace ECommerceAPI.Controllers
                 {
 
                     shad.Add(st);
-                    string shippingaddressJSON = JsonConvert.SerializeObject(shad, Formatting.Indented);
+                    string shippingaddressJSON = JsonConvert.SerializeObject(shad, Formatting.Indented, new JsonSerializerSettings
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    });
                     response = Request.CreateResponse(HttpStatusCode.OK);
                     response.Content = new StringContent(shippingaddressJSON, Encoding.UTF8, "application/json");
                 }

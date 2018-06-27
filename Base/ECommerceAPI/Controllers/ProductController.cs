@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -23,7 +24,10 @@ namespace ECommerceAPI.Controllers
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Get()
         {
-            string jsonProducts = JsonConvert.SerializeObject(ps.Get(), Formatting.Indented);
+            string jsonProducts = JsonConvert.SerializeObject(ps.Get(), Formatting.Indented, new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            });
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(jsonProducts, Encoding.UTF8, "application/json");
             return response;
@@ -43,7 +47,10 @@ namespace ECommerceAPI.Controllers
             {
                 Product product = myProducts[index];
                 response = Request.CreateResponse(HttpStatusCode.OK);
-                responseBody = JsonConvert.SerializeObject(product, Formatting.Indented);
+                responseBody = JsonConvert.SerializeObject(product, Formatting.Indented, new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                });
             }
 
             response.Content = new StringContent(responseBody, Encoding.UTF8, "application/json");

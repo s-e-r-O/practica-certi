@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,16 +18,17 @@ namespace ECommerceAPI.Controllers
     public class ProductCartController : ApiController, IServices
     {
         JSchemaGenerator schemaGenerator = new JSchemaGenerator();
+
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-
-
-        [HttpGet]
-        
+        [HttpGet]        
         public HttpResponseMessage Get()
         {
             ProductCartService prodcartservice = new ProductCartService();
             List<ProductCart> pc = prodcartservice.Get();
-            string prodcartJSON = JsonConvert.SerializeObject(pc, Formatting.Indented);
+            string prodcartJSON = JsonConvert.SerializeObject(pc, Formatting.Indented, new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            });
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(prodcartJSON, Encoding.UTF8, "application/json");
             return response;
@@ -44,7 +46,10 @@ namespace ECommerceAPI.Controllers
                 if (pt.ProductCode == id)
                 {
                     ProductCart pdct = pt;
-                    string prodcartJSON = JsonConvert.SerializeObject(pdct, Formatting.Indented);
+                    string prodcartJSON = JsonConvert.SerializeObject(pdct, Formatting.Indented, new JsonSerializerSettings
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    });
                     response = Request.CreateResponse(HttpStatusCode.OK);
                     response.Content = new StringContent(prodcartJSON, Encoding.UTF8, "application/json");
                     break;

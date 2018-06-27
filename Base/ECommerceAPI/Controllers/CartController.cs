@@ -1,5 +1,6 @@
 ﻿using Base;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,10 @@ namespace ECommerceAPI.Controllers
         {
             CartService cartservice = new CartService();
             List<Cart> cs = cartservice.Get();
-            string prodcartJSON = JsonConvert.SerializeObject(cs, Formatting.Indented);
+            string prodcartJSON = JsonConvert.SerializeObject(cs, Formatting.Indented, new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            });
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(prodcartJSON, Encoding.UTF8, "application/json");
             return response;
@@ -37,7 +41,10 @@ namespace ECommerceAPI.Controllers
                 if (ct.Username == id)
                 {
                     Cart cart = ct;
-                    string prodcartJSON = JsonConvert.SerializeObject(cart, Formatting.Indented);
+                    string prodcartJSON = JsonConvert.SerializeObject(cart, Formatting.Indented, new JsonSerializerSettings
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    });
                     response = Request.CreateResponse(HttpStatusCode.OK);
                     response.Content = new StringContent(prodcartJSON, Encoding.UTF8, "application/json");
                     break;

@@ -1,6 +1,7 @@
 ﻿using Base;
 using ECommerceAPI.Controllers;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,10 @@ namespace ECommerceAPI.controllers
         {
             UserService userservice = new UserService();
             List<User> user = userservice.Get();
-            string UserJSON = JsonConvert.SerializeObject(user, Formatting.Indented);
+            string UserJSON = JsonConvert.SerializeObject(user, Formatting.Indented, new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            });
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(UserJSON, Encoding.UTF8, "application/json");
             return response;
@@ -39,7 +43,10 @@ namespace ECommerceAPI.controllers
                 if (st.Username == id)
                 {
                     User sto = st;
-                    string UserJSON = JsonConvert.SerializeObject(sto, Formatting.Indented);
+                    string UserJSON = JsonConvert.SerializeObject(sto, Formatting.Indented, new JsonSerializerSettings
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    });
                     response = Request.CreateResponse(HttpStatusCode.OK);
                     response.Content = new StringContent(UserJSON, Encoding.UTF8, "application/json");
                     break;

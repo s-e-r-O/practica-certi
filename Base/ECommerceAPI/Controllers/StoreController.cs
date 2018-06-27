@@ -1,5 +1,6 @@
 ﻿using Base;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,10 @@ namespace ECommerceAPI.Controllers
         {
             StoreService storeservice = new StoreService();
             List<Store> store = storeservice.Get();
-            string storeJSON = JsonConvert.SerializeObject(store, Formatting.Indented);
+            string storeJSON = JsonConvert.SerializeObject(store, Formatting.Indented, new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            });
             var response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(storeJSON, Encoding.UTF8, "application/json");
             return response;
@@ -38,7 +42,10 @@ namespace ECommerceAPI.Controllers
                 if(st.Name == id)
                 {
                     Store sto = st;
-                    string storeJSON = JsonConvert.SerializeObject(sto, Formatting.Indented);
+                    string storeJSON = JsonConvert.SerializeObject(sto, Formatting.Indented, new JsonSerializerSettings
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    });
                     response = Request.CreateResponse(HttpStatusCode.OK);
                     response.Content = new StringContent(storeJSON, Encoding.UTF8, "application/json");
                     break;
