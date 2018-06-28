@@ -1,4 +1,6 @@
 import { Category } from "./category";
+import { ProductCart } from "./product-cart";
+import { Store } from "./store";
 
 export class Product {
     public code : string;
@@ -14,7 +16,15 @@ export class Product {
         Object.assign(this, init);
     }
     
-    
+    buildProductCart(quantity : number, user : string){
+        return new ProductCart({ 
+            "ProductCode":this.code, 
+            "SelectedDelivery":this.delivery, 
+            "Store": new Store({ "Name" : "Games", "Line1" : "Flying Av.", "Line2" : "Pallet Town", "Phone":12389499 }), 
+            "Quantity": quantity, 
+            "Username": user
+        });
+    }
 
     set Code(value) {
         this.code = value;
