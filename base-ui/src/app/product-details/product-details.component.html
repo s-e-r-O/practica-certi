@@ -16,7 +16,10 @@
             <p class="card-text">{{product.code}}</p>
             <p class="card-text">{{product.description}}</p>
             <br>
-            <button type="button" class="btn btn-success" (click)="onClick($event)">ADD TO CART</button>
+            <div class="row">
+              <input class="col-2 text-center" type="number" min="1" max="99" value="{{ quantity }}">
+              <button type="button" class="col-10 btn btn-success" (click)="onClick($event)">ADD TO CART</button>
+            </div>
           </div>
         </div>
        </div>
