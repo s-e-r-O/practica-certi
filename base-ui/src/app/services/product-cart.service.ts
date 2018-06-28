@@ -22,16 +22,17 @@ export class ProductCartService {
     return this.http.get<Partial<ProductCart>>('http://localhost:6064/api/productcart/' + productCode).pipe(map((productCart: Partial<ProductCart>) => new ProductCart(productCart)));
   }
 
-  public create(productCart : ProductCart) : Observable<{ productCode : string }> {
-    return this.http.post('http://localhost:6064/api/productcart', productCart) as Observable<{ productCode : string }>;
+  public create(productCart : ProductCart) : Observable<{ id : string }> {
+    console.log(productCart);
+    return this.http.post('http://localhost:6064/api/productcart', productCart) as Observable<{ id : string }>;
   }
   
-  public update(productCart : ProductCart) : Observable<{ productCode : string }> {
-    return this.http.put('http://localhost:6064/api/productcart', productCart) as Observable<{ productCode : string }>;
+  public update(productCart : ProductCart) : Observable<{ id : string }> {
+    return this.http.put('http://localhost:6064/api/productcart', productCart) as Observable<{ id : string }>;
   }
 
-  public delete(productCode : string) : Observable<{ productCode : string }> {
-    return this.http.delete('http://localhost:6064/api/productcart/' + productCode) as Observable<{ productCode : string }>;
+  public delete(id : string) : Observable<{ id : string }> {
+    return this.http.delete('http://localhost:6064/api/productcart/' + id) as Observable<{ id : string }>;
   }
 
 

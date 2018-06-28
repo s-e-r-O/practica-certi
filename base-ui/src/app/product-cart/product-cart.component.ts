@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class ProductCartComponent implements OnInit {
 
   @Input('product-tr') productCart : ProductCart;
-  @Output('price') price : EventEmitter<number> = new EventEmitter();
+  @Output('price') price : EventEmitter<{code: string,price:number}> = new EventEmitter();
   private product : Product;
   constructor(private productService : ProductService, private router : Router) { }
 
@@ -20,13 +20,17 @@ export class ProductCartComponent implements OnInit {
     this.productService.getById(this.productCart.productCode).subscribe(
       response => { 
         this.product = response;
-        this.price.emit(+this.product.price.replace('$','') * this.productCart.quantity);
+        this.price.emit({ code: this.product.code, price: this.product.price * this.productCart.quantity });
       }
     )
   }
   
   onClick(){
     this.router.navigate(['/product'],{queryParams: {id:this.productCart.productCode}});
+  }
+
+  onChange(){
+    this.price.emit({ code: this.product.code, price: this.product.price * this.productCart.quantity })
   }
 
 }
