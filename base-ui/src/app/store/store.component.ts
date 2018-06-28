@@ -20,8 +20,4 @@ export class StoreComponent implements OnInit {
     this.productService.getAll()
     .subscribe(products => this.products = products);
   }
-  onClick(code:String){
-    this.router.navigate(['/product-details'],{queryParams: {id:code}});
-  }
-
 }

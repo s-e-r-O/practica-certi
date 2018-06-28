@@ -1,10 +1,10 @@
-<td class="text-center">
+<td class="text-center" *ngIf="product">
   <img class="clickable" src="{{ product.imageURL }}" width="100" height="100" (click)="onClick()">
 </td>
-<td><a class="text-primary clickable" (click)="onClick()">{{product.name}}</a></td>
-<td class="align-middle">
-  {{product.price}}
+<td *ngIf="product"><a class="text-primary clickable" (click)="onClick()">{{product.name}}</a></td>
+<td class="align-middle" *ngIf="product">
+  ${{product.price}}
 </td>
-<td class="align-middle">
-  <input class="text-center" type="number" min="1" max="99" value="{{ productCart.quantity }}">
+<td class="align-middle" *ngIf="product">
+  <input class="text-center" type="number" min="1" max="99" [(ngModel)]="productCart.quantity" (change)="onChange()">
 </td>
