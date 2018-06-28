@@ -132,15 +132,15 @@
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\IServices.cs" />
-    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductCartController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ShippingAddressController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\UserController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_Start\Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
