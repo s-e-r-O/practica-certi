@@ -19,7 +19,7 @@ export class ProductDetailsComponent implements OnInit {
   id:string;
   product: Product;
   quantity: number = 1;
-  constructor(private productService: ProductService, private route: ActivatedRoute, 
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute, 
     private productCartService : ProductCartService, private userService : UserService) { }
 
   ngOnInit() {
@@ -33,10 +33,10 @@ export class ProductDetailsComponent implements OnInit {
     $event.preventDefault();
     this.productCartService.create(this.product.buildProductCart(this.quantity, this.userService.currentUser())).subscribe(
       response => {
-        console.log(response);
+        this.router.navigate(['/cart']);
       },
       error => {
-        console.log(error);
+        this.router.navigate(['/cart']);
       }
     );
   }

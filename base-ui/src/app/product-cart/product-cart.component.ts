@@ -3,6 +3,7 @@ import { ProductCart } from '../models/product-cart';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
 import { Router } from '@angular/router';
+import { ProductCartService } from '../services/product-cart.service';
 
 @Component({
   selector: '[product-tr]',
@@ -14,7 +15,7 @@ export class ProductCartComponent implements OnInit {
   @Input('product-tr') productCart : ProductCart;
   @Output('price') price : EventEmitter<{code: string,price:number}> = new EventEmitter();
   private product : Product;
-  constructor(private productService : ProductService, private router : Router) { }
+  constructor(private productService : ProductService, private router : Router, private productCartService : ProductCartService) { }
 
   ngOnInit() {
     this.productService.getById(this.productCart.productCode).subscribe(
@@ -30,7 +31,10 @@ export class ProductCartComponent implements OnInit {
   }
 
   onChange(){
-    this.price.emit({ code: this.product.code, price: this.product.price * this.productCart.quantity })
+    this.price.emit({ code: this.product.code, price: this.product.price * this.productCart.quantity });
+    this.productCartService.update(this.productCart).subscribe(
+      response => { }, error => { console.log(error); }
+    )
   }
 
 }
