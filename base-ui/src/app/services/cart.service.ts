@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+
+import { Observable, Subject } from 'rxjs';
 import { Cart } from '../models/cart';
 import { ProductCart } from '../models/product-cart';
 import { Store } from '../models/store';
@@ -10,8 +11,11 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CartService {
-
   
+  private addedProductToCartSource = new Subject<void>();
+    
+  addedProduct$ = this.addedProductToCartSource.asObservable();
+
   constructor(private http: HttpClient){}
 
   public getAll() : Observable<Cart[]> {
@@ -34,5 +38,9 @@ export class CartService {
 
   public delete(username : string) : Observable<{ username : string }> {
     return this.http.delete('http://localhost:6064/api/cart/' + username) as Observable<{ username : string }>;
+  }
+
+  public updateProductNumbers(){
+    this.addedProductToCartSource.next();
   }
 }

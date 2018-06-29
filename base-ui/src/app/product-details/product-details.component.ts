@@ -33,6 +33,7 @@ export class ProductDetailsComponent implements OnInit {
     $event.preventDefault();
     this.productCartService.create(this.product.buildProductCart(this.quantity, this.userService.currentUser())).subscribe(
       response => {
+        this.cartService.updateProductNumbers();
         this.router.navigate(['/cart']);
       },
       error => {

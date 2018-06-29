@@ -30,10 +30,9 @@ export class CartComponent implements OnInit {
     this.totalPrice = 0;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {  }
+  
   addPrice($event){
-    console.log($event);
     let ind : number;
     if((ind = this.prices.findIndex(p => p.code === $event.code))>-1){
       this.prices[ind].price = $event.price;
@@ -46,21 +45,23 @@ export class CartComponent implements OnInit {
   onClick(){
     this.router.navigate(['/shipping'])
   }
-  onDestroy($event){
-    var index = this.products.findIndex(product => product.productCode === $event);
-    if(index > -1 ){
+
+  onDelete($event){
+
+    this.cartService.updateProductNumbers();
+    let index : number;
+
+    if((index = this.products.findIndex(product => product.productCode === $event))> -1 ){
       this.products.splice(index,1);
       this.productsCount--;
-    }
-    var index2 = this.prices.findIndex(price => price.code === $event);
-    if(index2 > -1 ){
-      this.prices.splice(index2,1);
-      this.totalPrice = 0;
-      this.prices.forEach(p => this.totalPrice += p.price);
-    }
-    if(this.productsCount ===0){
-      this.router.navigate(["/store"]);
-
+      if((index = this.prices.findIndex(price => price.code === $event)) > -1 ){
+        this.prices.splice(index,1);
+        this.totalPrice = 0;
+        this.prices.forEach(p => this.totalPrice += p.price);
+      }
+      if(this.productsCount === 0){
+        this.router.navigate(["/store"]);
+      }
     }
   }
 }
