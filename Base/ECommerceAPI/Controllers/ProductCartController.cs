@@ -155,30 +155,42 @@ namespace ECommerceAPI.Controllers
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         public HttpResponseMessage Delete(string id)
         {
-            var response = Request.CreateResponse(HttpStatusCode.Unused);
-            string errormessage = "{\"error\": \"An error has ocurred deleting Product Cart\"}";
-            string error = "{\"error\": \"error\"}";
-            string successmessage = "{\"success\": \"Product Cart deleted\"}";
+           
+            var response = Request.CreateResponse(HttpStatusCode.BadRequest);
+            string responseBody = "{ \"error\": \"A product with that id does not exist.\"}";
+
             try
             {
-                ProductCartService pcs = new ProductCartService();
-                if (pcs.Delete(id))
+                String[] auxString = id.Split('-');
+                string productID = auxString[0];
+                string username = auxString[1];
+
+                CartService cs = new CartService();
+                List<Cart> myCarts = cs.Get();
+                int index = myCarts.FindIndex(cart => cart.Username == username);
+                if (index >= 0)
                 {
-                    response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(successmessage, Encoding.UTF8, "application/json");
+                    ProductCartService pcs = new ProductCartService(myCarts[index]);
+                    if (!(pcs.Delete(productID)))
+                    {
+                        responseBody = "{ \"error\": \"That user doesnt have that product in the cart.\"}";
+                    }
+                    else
+                    {
+                        response = Request.CreateResponse(HttpStatusCode.OK);
+                        responseBody = "{\"id\":\" " + productID + "\"}";
+                    }
                 }
                 else
                 {
-                    response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
+                    responseBody = "{ \"error\": \"That user doesnt have a cart.\"}";
                 }
             }
             catch
             {
-                response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                response.Content = new StringContent(error, Encoding.UTF8, "application/json");
-
+                responseBody = "{ \"error\": \"The id passed by URL should be productid-username.\"}";
             }
+            response.Content = new StringContent(responseBody, Encoding.UTF8, "application/json");
             return response;
         }
     }
