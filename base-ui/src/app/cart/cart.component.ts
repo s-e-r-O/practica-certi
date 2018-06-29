@@ -3,6 +3,7 @@ import { ProductCart } from '../models/product-cart';
 import { ProductCartService } from '../services/product-cart.service';
 import { CartService } from '../services/cart.service';
 import { UserService } from '../services/user.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +18,7 @@ export class CartComponent implements OnInit {
   private prices : {code: string, price:number}[];
   private totalPrice;
 
-  constructor(private cartService : CartService, private userService : UserService) { 
+  constructor(private cartService : CartService, private userService : UserService, private router: Router) { 
     this.cartService.getById(this.userService.currentUser()).subscribe(
       response => { 
         console.log(response);
@@ -41,5 +42,8 @@ export class CartComponent implements OnInit {
     }
     this.totalPrice = 0;
     this.prices.forEach(p => this.totalPrice += p.price);
+  }
+  onClick(){
+    this.router.navigate(['/shipping'])
   }
 }
