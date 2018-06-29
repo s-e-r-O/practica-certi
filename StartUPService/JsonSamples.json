@@ -1,42 +1,42 @@
 {
     "Product" : [
         {  
-        "Code" : "peraphone_xi", 
-        "Name" : "Peraphone XI", 
-        "Description" : "The new PeraphoneTM", 
-        "Category" :  { "Name" : "Technology", "Description" : "All tech things" },
-        "ShippingDeliveryType"  : "Express", 
-        "Price" : 1299,
-        "ImageURL" : "https://k34.kn3.net/taringa/1/4/8/4/0/8/2/mariogca/31C.jpg", 
-        "Type" : "Physical" 
+        "code" : "peraphone_xi", 
+        "name" : "Peraphone XI", 
+        "description" : "The new PeraphoneTM", 
+        "category" :  { "name" : "Technology", "description" : "All tech things" },
+        "shippingDeliveryType"  : "Express", 
+        "price" : 1299,
+        "imageURL" : "https://k34.kn3.net/taringa/1/4/8/4/0/8/2/mariogca/31C.jpg", 
+        "type" : "Physical" 
     },
     { 
-        "Code" : "gamesphere_5", 
-        "Name" : "Gamesphere 5", 
-        "Description" : "It's not a copy at all", 
-        "Category" : { "Name" : "Entertainment", "Description" : "Fun stuff"},
-        "ShippingDeliveryType"  : "InStore", 
-        "Price" : 349, 
-        "ImageURL" : "https://i.redd.it/0458q1dd0d2z.jpg", 
-        "Type" : "Physical" 
+        "code" : "gamesphere_5", 
+        "name" : "Gamesphere 5", 
+        "description" : "It's not a copy at all", 
+        "category" : { "name" : "Entertainment", "description" : "Fun stuff"},
+        "shippingDeliveryType"  : "InStore", 
+        "price" : 349, 
+        "imageURL" : "https://i.redd.it/0458q1dd0d2z.jpg", 
+        "type" : "Physical" 
     },
     { 
-        "Code" : "extreme_vg", 
-        "Name" : "Extreme Video Game", 
-        "Description" : "It's so XTREMEE", 
-        "Category" : { "Name" : "Entertainment", "Description" : "Fun stuff" },
-        "ShippingDeliveryType" : "None", 
-        "Price" : 59, 
-        "ImageURL" : "https://images-na.ssl-images-amazon.com/images/I/41KbVOAvsBL.jpg",
-        "Type" : "Digital"
+        "code" : "extreme_vg", 
+        "name" : "Extreme Video Game", 
+        "description" : "It's so XTREMEE", 
+        "category" : { "name" : "Entertainment", "description" : "Fun stuff" },
+        "shippingDeliveryType" : "None", 
+        "price" : 59, 
+        "imageURL" : "https://images-na.ssl-images-amazon.com/images/I/41KbVOAvsBL.jpg",
+        "type" : "Digital"
     }
     ],
     "Category" : [
-        { "Name" : "Technology", "Description" : "All tech things" }, 
-        { "Name" : "Entertainment", "Description" : "Fun stuff" },
-        { "Name" : "Kid Toys", "Description" : "Toys for kids" },
-        { "Name" : "Clothes", "Description" : "Just clothes" },
-        { "Name" : "Food", "Description" : "To eat" }
+        { "name" : "Technology", "description" : "All tech things" }, 
+        { "name" : "Entertainment", "description" : "Fun stuff" },
+        { "name" : "Kid Toys", "description" : "Toys for kids" },
+        { "name" : "Clothes", "description" : "Just clothes" },
+        { "name" : "Food", "description" : "To eat" }
     ],
     "Store": [
         { "Name" : "Only Cereals", "Line1" : "Dream St.", "Line2" : "Oakland", "Phone":41204930 },
