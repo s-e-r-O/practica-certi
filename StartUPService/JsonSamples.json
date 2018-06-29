@@ -1,42 +1,99 @@
 {
     "Product" : [
         {  
-        "Code" : "peraphone_xi", 
-        "Name" : "Peraphone XI", 
-        "Description" : "The new PeraphoneTM", 
-        "Category" :  { "Name" : "Technology", "Description" : "All tech things" },
-        "ShippingDeliveryType"  : "Express", 
-        "Price" : 1299,
-        "ImageURL" : "https://k34.kn3.net/taringa/1/4/8/4/0/8/2/mariogca/31C.jpg", 
-        "Type" : "Physical" 
+        "code" : "peraphone_xi", 
+        "name" : "Peraphone XI", 
+        "description" : "The new PeraphoneTM", 
+        "category" :  { "name" : "Technology", "description" : "All tech things" },
+        "shippingDeliveryType"  : "Express", 
+        "price" : 1299,
+        "imageURL" : "https://k34.kn3.net/taringa/1/4/8/4/0/8/2/mariogca/31C.jpg", 
+        "type" : "Physical" 
     },
     { 
-        "Code" : "gamesphere_5", 
-        "Name" : "Gamesphere 5", 
-        "Description" : "It's not a copy at all", 
-        "Category" : { "Name" : "Entertainment", "Description" : "Fun stuff"},
-        "ShippingDeliveryType"  : "InStore", 
-        "Price" : 349, 
-        "ImageURL" : "https://i.redd.it/0458q1dd0d2z.jpg", 
-        "Type" : "Physical" 
+        "code" : "gamesphere_5", 
+        "name" : "Gamesphere 5", 
+        "description" : "It's not a copy at all", 
+        "category" : { "name" : "Entertainment", "description" : "Fun stuff"},
+        "shippingDeliveryType"  : "InStore", 
+        "price" : 349, 
+        "imageURL" : "https://i.redd.it/0458q1dd0d2z.jpg", 
+        "type" : "Physical" 
     },
     { 
-        "Code" : "extreme_vg", 
-        "Name" : "Extreme Video Game", 
-        "Description" : "It's so XTREMEE", 
-        "Category" : { "Name" : "Entertainment", "Description" : "Fun stuff" },
-        "ShippingDeliveryType" : "None", 
-        "Price" : 59, 
-        "ImageURL" : "https://images-na.ssl-images-amazon.com/images/I/41KbVOAvsBL.jpg",
-        "Type" : "Digital"
+        "code" : "extreme_vg", 
+        "name" : "Extreme Video Game", 
+        "description" : "It's so XTREMEE", 
+        "category" : { "name" : "Entertainment", "description" : "Fun stuff" },
+        "shippingDeliveryType" : "None", 
+        "price" : 59, 
+        "imageURL" : "https://images-na.ssl-images-amazon.com/images/I/41KbVOAvsBL.jpg",
+        "type" : "Digital"
+    },
+    { "code" : "man_jacket_1", 
+        "Name" : "Winter Jacket", 
+        "Description" : "For Men", 
+        "Category" : { "name" : "Clothes", "description" :"Just clothes" },
+        "ShippingDeliveryType"  : "Free", 
+        "Price" : 199, 
+        "imageURL" : "https://ae01.alicdn.com/kf/HTB1VHa.FVXXXXXSXXXXq6xXFXXXf/112626313/HTB1VHa.FVXXXXXSXXXXq6xXFXXXf.jpg",
+        "Type" : "Physical" 
+    },
+    
+    { "code" : "leko", 
+        "Name" :"LEKO Brix", 
+        "Description" :"They are not LEGO at all", 
+        "Category" : { "name" : "Kid Toys", "description" : "Toys for kids" },
+        "ShippingDeliveryType"  :"Normal", 
+        "Price" :  129, 
+        "imageURL" : "https://cdn.shopify.com/s/files/1/1553/8473/products/10698-1.jpg",
+        "Type" : "Physical" 
+    },
+    
+    { "code" : "draculao_s", 
+        "Name" : "Dracula O's", 
+        "Description" : "Cereal for vampires", 
+        "Category" : { "name" : "Food", "description" :  "To eat" },
+        "ShippingDeliveryType"  :"Express", 
+        "Price" : 8, 
+        "imageURL" : "http://images.fanpop.com/images/image_uploads/Count-Chocula-cereal-534373_371_525.jpg",
+        "Type" : "Physical" 
+    },
+    { "code" : "tv_xl", 
+        "Name" : "TV XL", 
+        "Description" :"A new way to watch your movies", 
+        "Category" : { "name" : "Entertainment", "description" :  "Fun stuff" },
+        "ShippingDeliveryType"  :"Free", 
+        "Price" : 499, 
+        "imageURL" :"https://latribunadeensenada.com/wp-content/uploads/2014/06/lg-105-inch-curved-ultra-hd-tv-xl-768x512.jpg",
+        "Type" : "Physical" 
+    },
+    { "code" : "woman_jacket_1", 
+        "Name" : "Winter Jacket", 
+        "Description" : "For Women", 
+        "Category" : { "name" : "Clothes", "description" :"Just clothes" },
+        "ShippingDeliveryType"  : "Free", 
+        "Price" : 249, 
+        "imageURL" : "https://ae01.alicdn.com/kf/HTB1VHa.FVXXXXXSXXXXq6xXFXXXf/112626313/HTB1VHa.FVXXXXXSXXXXq6xXFXXXf.jpg",
+        "Type" : "Physical" 
+    },
+    {  
+        "code" : "pirated_windows", 
+        "name" : "Windows 98", 
+        "description" : "Remember the old days", 
+        "category" :  { "name" : "Technology", "description" : "All tech things" },
+        "shippingDeliveryType"  : "None", 
+        "price" : 5,
+        "imageURL" : "https://2.bp.blogspot.com/-x6TsmWMCOTs/WflH9BL778I/AAAAAAAABLc/s0GbJXFIGPAGpAPlEIZovh8kqDMabB61QCLcBGAs/s1600/241835-microsoft-windows-98-98se-included-games-windows-front-cover.jpg", 
+        "type" : "Digital" 
     }
     ],
     "Category" : [
-        { "Name" : "Technology", "Description" : "All tech things" }, 
-        { "Name" : "Entertainment", "Description" : "Fun stuff" },
-        { "Name" : "Kid Toys", "Description" : "Toys for kids" },
-        { "Name" : "Clothes", "Description" : "Just clothes" },
-        { "Name" : "Food", "Description" : "To eat" }
+        { "name" : "Technology", "description" : "All tech things" }, 
+        { "name" : "Entertainment", "description" : "Fun stuff" },
+        { "name" : "Kid Toys", "description" : "Toys for kids" },
+        { "name" : "Clothes", "description" : "Just clothes" },
+        { "name" : "Food", "description" : "To eat" }
     ],
     "Store": [
         { "Name" : "Only Cereals", "Line1" : "Dream St.", "Line2" : "Oakland", "Phone":41204930 },
@@ -50,11 +107,11 @@
         { "Username": "s_O", "Name": "Sandro", "LastName":"Dominguez", "Password" : "aaa222","ShipAdress":[]}
     ],
     "ProductCart" : [
-        { "ProductCode":"tv_xl", "SelectedDelivery":"Express", "Store":
+        { "Productcode":"tv_xl", "SelectedDelivery":"Express", "Store":
             { "Name" : "Games", "Line1" : "Flying Av.", "Line2" : "Pallet Town", "Phone":12389499 }, "Quantity":1 , "Username":"lol1"},
-        { "ProductCode":"gamesphere_5", "SelectedDelivery":"Express", "Store":
+        { "Productcode":"gamesphere_5", "SelectedDelivery":"Express", "Store":
             { "Name" : "Games", "Line1" : "Flying Av.", "Line2" : "Pallet Town", "Phone":12389499 },"Quantity":1 , "Username":"fabiox"},
-        { "ProductCode":"xtreme_vg", "SelectedDelivery":"Express", "Store":
+        { "Productcode":"xtreme_vg", "SelectedDelivery":"Express", "Store":
             { "Name" : "Games", "Line1" : "Flying Av.", "Line2" : "Pallet Town", "Phone":12389499 },"Quantity":5 , "Username":"gup"}
     ],
     "Cart": [
@@ -62,36 +119,5 @@
         { "Username":"fabiox", "ProductCarts":[]},
         { "Username":"gup", "ProductCarts":[]},
         { "Username":"s_O", "ProductCarts":[]}
-    ],
-    "SchemaJson" : {
-        "description" : "This describes a product",
-        "type": "object",
-        "properties": {
-            "Code": {"type":"string","required":true},
-            "Name": {"type":"string", "required":true},
-            "Price": {"type":"number", "required":true},
-            "Description": {"type":"string" , "required":true},
-            "Type": {"type":"string","required":true},
-            "ShippingDeliveryType":{"type":"string","required":true},
-            "ImageURL":{"type":"string","required":true},
-            "Category":{
-                        "type":"object",
-                        "properties":{
-                                        "Name":{"type":"string","required":true},
-                                        "Description":{"type":"string","required":true}
-                                     }
-                        }
-        } , 
-        "additionalProperties": false
-    },
-    "schemaJson2" : {
-        "description" : "This describes a category",
-        "type": "object",
-        "properties": { 
-            "Name": {"type":"string"},
-            "Description": {"type":"string"}
-        } , 
-        "additionalProperties": false,
-        "required": [ "Name", "Description" ]
-    }
+    ]
 }
