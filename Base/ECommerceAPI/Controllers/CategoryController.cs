@@ -17,9 +17,8 @@ namespace ECommerceAPI.Controllers
 {
     public class CategoryController : ApiController
     {
-
         CategoryService cs = new CategoryService();
-        JSchemaGenerator schemaGenerator = new JSchemaGenerator();
+        static JSchema schema = Schemas.Instance.CategorySchema;
 
         [HttpGet]
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
@@ -67,12 +66,11 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
             string responseBody = "{ \"error\": \"There was an error with the structure of the object sent in the body.\"}";
 
-            JSchema schema = schemaGenerator.Generate(typeof(Category));
             schema.AllowAdditionalProperties = false;
 
             try
             {
-                JObject category = JObject.Parse(requestBody);
+                JObject category = JObject.Parse(requestBody);  
 
                 if (category.IsValid(schema))
                 {
@@ -106,7 +104,6 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
             string responseBody = "{ \"error\": \"There was an error with the structure of the object sent in the body.\"}";
 
-            JSchema schema = schemaGenerator.Generate(typeof(Category));
             schema.AllowAdditionalProperties = false;
 
             try
