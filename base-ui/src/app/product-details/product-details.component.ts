@@ -3,9 +3,9 @@ import { ProductService } from '../services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../models/product';
 import { ProductCartService } from '../services/product-cart.service';
-import { ProductCart } from '../models/product-cart';
-import { Store } from '../models/store';
 import { UserService } from '../services/user.service';
+import { CartService } from '../services/cart.service';
+import { Cart } from '../models/cart';
 
 
 
@@ -20,7 +20,7 @@ export class ProductDetailsComponent implements OnInit {
   product: Product;
   quantity: number = 1;
   constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute, 
-    private productCartService : ProductCartService, private userService : UserService) { }
+    private productCartService : ProductCartService, private userService : UserService, private cartService : CartService) { }
 
   ngOnInit() {
     this.route.queryParams
@@ -36,7 +36,18 @@ export class ProductDetailsComponent implements OnInit {
         this.router.navigate(['/cart']);
       },
       error => {
-        this.router.navigate(['/cart']);
+        this.cartService.create(new Cart({username: this.userService.currentUser(), productCarts: []})).subscribe(
+          response => {
+            this.productCartService.create(this.product.buildProductCart(this.quantity, this.userService.currentUser())).subscribe(
+              response => {
+                this.router.navigate(['/cart']);
+              },
+              error => {
+                console.log(error);
+              }
+            );
+          }
+        )
       }
     );
   }
