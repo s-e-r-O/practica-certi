@@ -135,6 +135,7 @@
     <Compile Include="Controllers\IServices.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductCartController.cs" />
+    <Compile Include="Controllers\Schemas.cs" />
     <Compile Include="Controllers\ShippingAddressController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Global.asax.cs">

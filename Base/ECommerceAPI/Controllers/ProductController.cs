@@ -18,7 +18,7 @@ namespace ECommerceAPI.Controllers
     {
 
         ProductService ps = new ProductService();
-        JSchemaGenerator schemaGenerator = new JSchemaGenerator();
+        static JSchema schema = Schemas.Instance.ProductSchema;
 
         [HttpGet]
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
@@ -66,7 +66,6 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
             string responseBody = "{ \"error\": \"There was an error with the structure of the object sent in the body.\"}";
 
-            JSchema schema = schemaGenerator.Generate(typeof(Product));
             schema.AllowAdditionalProperties = false;
 
             try
@@ -104,7 +103,6 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
             string responseBody = "{ \"error\": \"There was an error with the format of the object sent in the body.\"}";
 
-            JSchema schema = schemaGenerator.Generate(typeof(Product));
             schema.AllowAdditionalProperties = false;
 
             try
