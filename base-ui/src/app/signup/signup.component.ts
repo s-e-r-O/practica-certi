@@ -4,6 +4,7 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
+import { MAX_LENGTH_VALIDATOR } from '@angular/forms/src/directives/validators';
 
 @Component({
   selector: 'app-signup',
@@ -52,15 +53,22 @@ export class SignupComponent implements OnInit {
 			  this.form.controls['lastname'].reset();
 			  this.form.controls['password'].reset();
 			  this.form.controls['confirmPassword'].reset();
+			  this.timeout();
 			  }, error => {
 				  this.errorAlert = true;
 				  this.message = "This username already exists. Please Choose other username";
-				  this.form.controls['username'].reset();
 				  this.form.controls['password'].reset();
 			  	  this.form.controls['confirmPassword'].reset();
 			  });
   		}
-  	}
+	  }	  
+  }
+
+  timeout() {
+	setTimeout( () => { 
+		console.log('Test');
+		this.router.navigate(['/login']);
+	}, 3000);
   }
 
 }
