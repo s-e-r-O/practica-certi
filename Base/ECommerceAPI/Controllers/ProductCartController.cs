@@ -17,7 +17,6 @@ namespace ECommerceAPI.Controllers
 {
     public class ProductCartController : ApiController, IServices
     {
-        JSchemaGenerator schemaGenerator = new JSchemaGenerator();
 
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         [HttpGet]        
@@ -70,14 +69,8 @@ namespace ECommerceAPI.Controllers
             var requestBody = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
             string responseBody = "{ \"error\": \"There was an error with the structure of the object sent in the body.\"}";
-            
-            JSchema schema = schemaGenerator.Generate(typeof(ProductCart));
-            schema.AllowAdditionalProperties = false;
             try
             {
-                JObject jsonProductCart = JObject.Parse(requestBody);
-                if (jsonProductCart.IsValid(schema))
-                {
                     ProductCart myProductCart = JsonConvert.DeserializeObject<ProductCart>(requestBody);
                     CartService cs = new CartService();
                     List < Cart > myCarts = cs.Get();
@@ -99,7 +92,6 @@ namespace ECommerceAPI.Controllers
                     {
                         responseBody = "{ \"error\": \"That user doesnt have a cart.\"}";
                     }
-                 }
             }
             catch
             {
@@ -117,14 +109,8 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
             string responseBody = "{ \"error\": \"There was an error with the structure of the object sent in the body.\"}";
 
-            JSchema schema = schemaGenerator.Generate(typeof(ProductCart));
-            schema.AllowAdditionalProperties = false;
-
             try
             {
-                JObject jsonProductCart = JObject.Parse(requestBody);
-                if (jsonProductCart.IsValid(schema))
-                {
                     ProductCart myProductCart = JsonConvert.DeserializeObject<ProductCart>(requestBody);
                     CartService cs = new CartService();
                     List<Cart> myCarts = cs.Get();
@@ -146,7 +132,7 @@ namespace ECommerceAPI.Controllers
                     {
                         responseBody = "{ \"error\": \"That user doesnt have a cart.\"}";
                     }
-                }
+                
             }
             catch
             {
