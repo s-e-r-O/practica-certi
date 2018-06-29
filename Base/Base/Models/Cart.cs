@@ -22,6 +22,7 @@ namespace Base
             private set { }
         }
         public string Username { get; set; }
+        public string ShippingAddress { get; set; }
         public void Show()
         {
             Console.WriteLine("(Cart of " + Username + ")");
