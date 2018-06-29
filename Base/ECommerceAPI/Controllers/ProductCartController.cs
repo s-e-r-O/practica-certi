@@ -15,9 +15,8 @@ using System.Web.Http.Cors;
 
 namespace ECommerceAPI.Controllers
 {
-    public class ProductCartController : ApiController
+    public class ProductCartController : ApiController, IServices
     {
-        JSchemaGenerator schemaGenerator = new JSchemaGenerator();
 
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         [HttpGet]        
@@ -65,48 +64,47 @@ namespace ECommerceAPI.Controllers
 
         [HttpPost]
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-        public HttpResponseMessage Post(/*HttpRequestMessage request*/[FromBody] ProductCart productCart)
+        public HttpResponseMessage Post(HttpRequestMessage request)
         {
+            var requestBody = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
             string responseBody = "{ \"error\": \"There was an error with the structure of the object sent in the body.\"}";
-            if (ModelState.IsValid)
+            try
             {
-                //var requestBody = request.Content.ReadAsStringAsync().Result;
-            
-                //JSchema schema = schemaGenerator.Generate(typeof(ProductCart));
-                //schema.AllowAdditionalProperties = false;
-                try
+                ProductCart myProductCart = JsonConvert.DeserializeObject<ProductCart>(requestBody);
+                CartService cs = new CartService();
+                List < Cart > myCarts = cs.Get();
+                int index = myCarts.FindIndex(cart => cart.Username == myProductCart.Username);
+                if (index >= 0)
                 {
-                    //JObject jsonProductCart = JObject.Parse(requestBody);
-                    //if (jsonProductCart.IsValid(schema))
-                    //{
-                        ProductCart myProductCart = productCart;//JsonConvert.DeserializeObject<ProductCart>(requestBody);
-                        CartService cs = new CartService();
-                        List < Cart > myCarts = cs.Get();
-                        int index = myCarts.FindIndex(cart => cart.Username == myProductCart.Username);
-                        if (index >= 0)
-                        {
-                            ProductCartService pcs = new ProductCartService(myCarts[index]);
-                            if (!(pcs.Create(myProductCart)))
-                            {
-                                responseBody = "{ \"error\": \"That product is already on the cart.\"}";
-                            }
-                            else
-                            {
-                                response = Request.CreateResponse(HttpStatusCode.OK);
-                                responseBody = "{\"id\":\" " + myProductCart.ProductCode + "\"}";
-                            }
-                        }
-                        else
-                        {
-                            responseBody = "{ \"error\": \"That user doesnt have a cart.\"}";
-                        }
-                     //}
+                    ProductCartService pcs = new ProductCartService(myCarts[index]);
+                    if (!(pcs.Create(myProductCart)))
+                    {
+                        responseBody = "{ \"error\": \"That product is already on the cart.\"}";
+                    }
+                    else
+                    {
+                        response = Request.CreateResponse(HttpStatusCode.OK);
+                        responseBody = "{\"id\":\" " + myProductCart.ProductCode + "\"}";
+                    }
                 }
-                catch
+                else
                 {
-                    responseBody = "{ \"error\": \"The body of the request is not a valid json format.\"}";
+                    if (cs.Create(new Cart { Username = myProductCart.Username }))
+                    {
+                        index = myCarts.FindIndex(cart => cart.Username == myProductCart.Username);
+                        ProductCartService pcs = new ProductCartService(myCarts[index]);
+                        if ((pcs.Create(myProductCart)))
+                        {
+                            response = Request.CreateResponse(HttpStatusCode.OK);
+                            responseBody = "{\"id\":\" " + myProductCart.ProductCode + "\"}";
+                        }
+                    }
                 }
+            }
+            catch
+            {
+                responseBody = "{ \"error\": \"The body of the request is not a valid json format.\"}";
             }
             response.Content = new StringContent(responseBody, Encoding.UTF8, "application/json");
             return response;
@@ -114,48 +112,40 @@ namespace ECommerceAPI.Controllers
 
         [HttpPut]
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
-        public HttpResponseMessage Put(string id, /*HttpRequestMessage request*/[FromBody] ProductCart productCart)
+        public HttpResponseMessage Put(string id, HttpRequestMessage request)
         {
-            //var requestBody = request.Content.ReadAsStringAsync().Result;
+            var requestBody = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
             string responseBody = "{ \"error\": \"There was an error with the structure of the object sent in the body.\"}";
-            if (ModelState.IsValid)
-            {
-                //JSchema schema = schemaGenerator.Generate(typeof(ProductCart));
-                //schema.AllowAdditionalProperties = false;
 
-                try
-                {
-                    //JObject jsonProductCart = JObject.Parse(requestBody);
-                    //if (jsonProductCart.IsValid(schema))
-                    //{
-                        ProductCart myProductCart = productCart;
-                        CartService cs = new CartService();
-                        List<Cart> myCarts = cs.Get();
-                        int index = myCarts.FindIndex(cart => cart.Username == myProductCart.Username);
-                        if (index >= 0)
-                        {
-                            ProductCartService pcs = new ProductCartService(myCarts[index]);
-                            if (!(pcs.Update(id, myProductCart)))
-                            {
-                                responseBody = "{ \"error\": \"The cart of the use does not have that product, or the key doesnt match.\"}";
-                            }
-                            else
-                            {
-                                response = Request.CreateResponse(HttpStatusCode.OK);
-                                responseBody = "{\"id\":\" " + myProductCart.ProductCode + "\"}";
-                            }
-                        }
-                        else
+            try
+            {
+                    ProductCart myProductCart = JsonConvert.DeserializeObject<ProductCart>(requestBody);
+                    CartService cs = new CartService();
+                    List<Cart> myCarts = cs.Get();
+                    int index = myCarts.FindIndex(cart => cart.Username == myProductCart.Username);
+                    if (index >= 0)
+                    {
+                        ProductCartService pcs = new ProductCartService(myCarts[index]);
+                        if (!(pcs.Update(id,myProductCart)))
                         {
                             responseBody = "{ \"error\": \"That user doesnt have a cart.\"}";
                         }
-                    //}
-                }
-                catch
-                {
-                    responseBody = "{ \"error\": \"The body of the request is not a valid json format.\"}";
-                }
+                        else
+                        {
+                            response = Request.CreateResponse(HttpStatusCode.OK);
+                            responseBody = "{\"id\":\" " + myProductCart.ProductCode + "\"}";
+                        }
+                    }
+                    else
+                    {
+                        responseBody = "{ \"error\": \"That user doesnt have a cart.\"}";
+                    }
+                
+            }
+            catch
+            {
+                responseBody = "{ \"error\": \"The body of the request is not a valid json format.\"}";
             }
             response.Content = new StringContent(responseBody, Encoding.UTF8, "application/json");
             return response;

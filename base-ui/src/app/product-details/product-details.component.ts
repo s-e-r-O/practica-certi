@@ -36,18 +36,7 @@ export class ProductDetailsComponent implements OnInit {
         this.router.navigate(['/cart']);
       },
       error => {
-        this.cartService.create(new Cart({username: this.userService.currentUser(), productCarts: []})).subscribe(
-          response => {
-            this.productCartService.create(this.product.buildProductCart(this.quantity, this.userService.currentUser())).subscribe(
-              response => {
-                this.router.navigate(['/cart']);
-              },
-              error => {
-                console.log(error);
-              }
-            );
-          }
-        )
+        this.router.navigate(['/cart']);
       }
     );
   }
