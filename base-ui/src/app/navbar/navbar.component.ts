@@ -26,6 +26,8 @@ export class NavbarComponent implements OnInit {
     this.cartService.getById(this.username).subscribe(
       response => {
         this.productCount = response.productCarts.length;
+      }, error => {
+        this.productCount = 0;
       }
     )
   }

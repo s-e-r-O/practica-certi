@@ -6,6 +6,7 @@ import { ProductCart } from '../models/product-cart';
 import { Store } from '../models/store';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class CartService {
     
   addedProduct$ = this.addedProductToCartSource.asObservable();
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private userService : UserService){}
 
   public getAll() : Observable<Cart[]> {
     return this.http.get<Partial<Cart>[]>('http://localhost:6064/api/cart').pipe(
@@ -36,8 +37,8 @@ export class CartService {
     return this.http.put('http://localhost:6064/api/cart', cart) as Observable<{ username : string }>;
   }
 
-  public delete(username : string) : Observable<{ username : string }> {
-    return this.http.delete('http://localhost:6064/api/cart/' + username) as Observable<{ username : string }>;
+  public delete() : Observable<{ username : string }> {
+    return this.http.delete('http://localhost:6064/api/cart/' + this.userService.currentUser()) as Observable<{ username : string }>;
   }
 
   public updateProductNumbers(){

@@ -42,26 +42,6 @@ namespace ECommerceAPI.Controllers
             });
             response = Request.CreateResponse(HttpStatusCode.OK);
             response.Content = new StringContent(shippingaddressJSON, Encoding.UTF8, "application/json");
-            /*List<ShippingAddress> shad = new List<ShippingAddress>();
-            foreach (ShippingAddress st in sa)
-            {
-                if (st.Username == id)
-                {
-
-                    shad.Add(st);
-                    string shippingaddressJSON = JsonConvert.SerializeObject(shad, Formatting.Indented, new JsonSerializerSettings
-                    {
-                        ContractResolver = new CamelCasePropertyNamesContractResolver()
-                    });
-                    response = Request.CreateResponse(HttpStatusCode.OK);
-                    response.Content = new StringContent(shippingaddressJSON, Encoding.UTF8, "application/json");
-                }
-                else
-                {
-                    response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                    response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
-                }
-            }*/
             return response;
         }
 
