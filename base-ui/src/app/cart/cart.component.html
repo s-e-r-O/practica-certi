@@ -12,5 +12,6 @@
       <tr scope="row" *ngFor="let productCart of products" [product-tr]="productCart" (price)="addPrice($event)"></tr>
   </table>
 <div class="text-right text-muted">Subtotal ({{productsCount}} Items): ${{totalPrice}}</div>
-<div class="text-left"><a class=" text-muted clickable" routerLink="/shipping">Shipping Address</a></div>
+<div *ngIf="productsCount !== 0" class="row justify-content-end">
+  <button type="button" class="btn btn-success col-3 mt-4" (click)="onClick() ">BUY</button>
 </div>
