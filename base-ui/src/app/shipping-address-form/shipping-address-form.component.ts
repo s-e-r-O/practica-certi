@@ -19,7 +19,6 @@ export class ShippingAddressFormComponent implements OnChanges {
   
   constructor(private shippingAddressService : ShippingAddressService) { 
     this.form = new FormGroup({
-      'identifier' : new FormControl(undefined,Validators.required),
       'line1' : new FormControl(undefined,Validators.required),
       'line2' : new FormControl(undefined,Validators.required),
       'city' : new FormControl(undefined,Validators.required),

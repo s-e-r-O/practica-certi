@@ -4,6 +4,7 @@ import { ShippingAddress } from '../models/shipping-address';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UserService } from './user.service';
+import { UUID } from 'angular2-uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class ShippingAddressService {
 
   public create(shippingAddress : ShippingAddress) : Observable<{ id : string }> {
     shippingAddress.username = this.userService.currentUser();
+    shippingAddress.identifier = UUID.UUID();
     return this.http.post('http://localhost:6064/api/shippingaddress', shippingAddress) as Observable<{ id : string }>;
   }
   

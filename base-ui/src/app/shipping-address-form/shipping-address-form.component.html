@@ -4,16 +4,10 @@
       <div class="card card-flat">
         <div class="card-header bg-dark">
           <h1 class="text-light" *ngIf="!shippingAddress">Add a new address</h1>
-          <h1 class="text-light" *ngIf="shippingAddress">Update {{ shippingAddress.identifier }}</h1>
+          <h1 class="text-light" *ngIf="shippingAddress">Edit this address</h1>
         </div>
         <div class="card-body">
             <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
-              <div class="form-group with-focus">
-                <div class="text-danger small" 
-                *ngIf="form.controls['identifier'].hasError('required') && (form.controls['identifier'].dirty || form.controls['identifier'].touched)">This field is required</div>
-                <label for="identifier">Address Identifier:</label>
-                <input type="text" class="form-control" id="identifier" formControlName="identifier">
-              </div>
               <div class="form-group with-focus">
                 <div class="text-danger small" 
                 *ngIf="form.controls['line1'].hasError('required') && (form.controls['line1'].dirty || form.controls['line1'].touched)">This field is required</div>

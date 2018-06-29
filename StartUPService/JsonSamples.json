@@ -42,26 +42,7 @@
         { "Name" : "Only Cereals", "Line1" : "Dream St.", "Line2" : "Oakland", "Phone":41204930 },
         { "Name" : "Games", "Line1" : "Flying Av.", "Line2" : "Pallet Town", "Phone":12389499 }
     ],
-    "ShippingAddress" : [
-        {
-         "Identifier" : "00000", 
-            "City" : "Cochabamba",
-            "Line1" : "C. Caracoles", 
-            "Line2" : "", 
-            "Phone" : 4787657, 
-            "Zone" : "Zona Norte",
-            "Username" : "lol1"
-        },
-        {
-            "Identifier" : "00001", 
-            "City":"Cochabamba",
-            "Line1" :"C. Camarones", 
-            "Line2":"", 
-            "Phone" : 4559403, 
-            "Zone" : "Zona Norte",
-            "Username" : "fabiox"
-        }
-    ],
+    "ShippingAddress" : [ ],
     "User": [
         { "Username":"lol1", "Name":"Lola", "LastName":"Lopez", "Password":"aaa111","ShipAdress":[]},
         { "Username": "fabiox", "Name":"Fabio", "LastName":"Xavier", "Password":"bbb111","ShipAdress":[]},
