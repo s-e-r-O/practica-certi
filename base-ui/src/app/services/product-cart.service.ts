@@ -31,8 +31,8 @@ export class ProductCartService {
     return this.http.put('http://localhost:6064/api/productcart/'+productCart.productCode, productCart) as Observable<{ id : string }>;
   }
 
-  public delete(id : string) : Observable<{ id : string }> {
-    return this.http.delete('http://localhost:6064/api/productcart/' + id) as Observable<{ id : string }>;
+  public delete(id : string, username : string) : Observable<{ id : string }> {
+    return this.http.delete('http://localhost:6064/api/productcart/' + id+"-"+username) as Observable<{ id : string }>;
   }
 
 
