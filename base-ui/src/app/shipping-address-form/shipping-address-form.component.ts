@@ -43,8 +43,10 @@ export class ShippingAddressFormComponent implements OnChanges {
     }
 
     if (this.form.valid){
-      if (this.shippingAddress) {
-        this.shippingAddressService.update(new ShippingAddress(this.form.value)).subscribe(response => {
+      if (this.shippingAddress) { 
+        let shippingAddressToUpdate = new ShippingAddress(this.form.value);
+        shippingAddressToUpdate.identifier = this.shippingAddress.identifier;
+        this.shippingAddressService.update(shippingAddressToUpdate).subscribe(response => {
           this.create.emit(true);
           this.form.reset();
         });

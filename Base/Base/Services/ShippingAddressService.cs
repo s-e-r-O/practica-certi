@@ -38,18 +38,24 @@ namespace Base
 
         public bool Delete(string key)
         {
-            if (User == null)
-            {
-                Console.WriteLine("No cart was specified.");
-                return false;
-            }
+            //if (User == null)
+            //{
+            //    Console.WriteLine("No cart was specified.");
+            //    return false;
+            //}
             int index;
-            if ((index = User.ShipAdress.FindIndex(shippingAddress => { return shippingAddress.Identifier == key; })) < 0)
+            //if ((index = User.ShipAdress.FindIndex(shippingAddress => { return shippingAddress.Identifier == key; })) < 0)
+            //{
+            //    Console.WriteLine("The user '" + User.Username + "' does not have the shipping address of '" + key + "'.");
+            //    return false;
+            //}
+            //User.ShipAdress.RemoveAt(index);
+            if ((index = DBConnections.ShippingAddressesList.FindIndex(shippingAddress => { return shippingAddress.Identifier == key; })) < 0)
             {
-                Console.WriteLine("The user '" + User.Username + "' does not have the shipping address of '" + key + "'.");
+                Console.WriteLine("The shipping address doesn't exist");
                 return false;
             }
-            User.ShipAdress.RemoveAt(index);
+            DBConnections.ShippingAddressesList.RemoveAt(index);
             return true;
         }
 
@@ -65,23 +71,29 @@ namespace Base
 
         public bool Update(string key, ShippingAddress obj)
         {
-            if (User == null)
-            {
-                Console.WriteLine("No user was specified.");
-                return false;
-            }
+            //if (User == null)
+            //{
+            //    Console.WriteLine("No user was specified.");
+            //    return false;
+            //}
             if (key != obj.Identifier)
             {
                 Console.WriteLine("The keys do not match. ( '" + key + "' != '" + obj.Identifier + "' )");
                 return false;
             }
             int index;
-            if ((index = User.ShipAdress.FindIndex(shippingAddress => { return shippingAddress.Identifier == key; })) < 0)
+            //if ((index = User.ShipAdress.FindIndex(shippingAddress => { return shippingAddress.Identifier == key; })) < 0)
+            //{
+            //    Console.WriteLine("The user '" + User.Username + "' does not have the product '" + key + "'.");
+            //    return false;
+            //}
+            //User.ShipAdress[index] = obj;
+            if((index = DBConnections.ShippingAddressesList.FindIndex(shippingAddress => { return shippingAddress.Identifier == key; })) <0)
             {
-                Console.WriteLine("The user '" + User.Username + "' does not have the product '" + key + "'.");
+                Console.WriteLine("The shipping address doesn't exist");
                 return false;
             }
-            User.ShipAdress[index] = obj;
+            DBConnections.ShippingAddressesList[index] = obj;
             return true;
         }   
     }

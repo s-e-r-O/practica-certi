@@ -36,8 +36,13 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.Unused);
             string errormessage = "{\"error\": \"Not Shipping Address matches the id\"}";
             ShippingAddressService shippingaddressservice = new ShippingAddressService();
-            List<ShippingAddress> sa = shippingaddressservice.Get();
-            List<ShippingAddress> shad = new List<ShippingAddress>();
+            string shippingaddressJSON = JsonConvert.SerializeObject(shippingaddressservice.Get().Where(shippingAddress => shippingAddress.Username == id), Formatting.Indented, new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            });
+            response = Request.CreateResponse(HttpStatusCode.OK);
+            response.Content = new StringContent(shippingaddressJSON, Encoding.UTF8, "application/json");
+            /*List<ShippingAddress> shad = new List<ShippingAddress>();
             foreach (ShippingAddress st in sa)
             {
                 if (st.Username == id)
@@ -56,7 +61,7 @@ namespace ECommerceAPI.Controllers
                     response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
                     response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
                 }
-            }
+            }*/
             return response;
         }
 
@@ -119,25 +124,9 @@ namespace ECommerceAPI.Controllers
             string error = "{\"error\": \"There was an error with the format of the object sent in the body\"}";
             try
             {
-                User user = new User();
-                UserService userservice = new UserService();
-                List<User> users = userservice.Get();
                 ShippingAddress shippingaddress = JsonConvert.DeserializeObject<ShippingAddress>(body);
                 ShippingAddressService sas = new ShippingAddressService();
-                string username = shippingaddress.Username;
-                foreach (User us in users)
-                {
-                    if (us.Username == username)
-                    {
-                        user = us;
-                    }
-                    else
-                    {
-                        response = Request.CreateResponse(HttpStatusCode.ExpectationFailed);
-                        response.Content = new StringContent(errormessage, Encoding.UTF8, "application/json");
-                    }
-                }
-                sas.User = user;
+                
                 if (sas.Update(id, shippingaddress))
                 {
                     response = Request.CreateResponse(HttpStatusCode.OK);

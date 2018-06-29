@@ -24,7 +24,7 @@ export class ShippingAddressViewComponent implements OnInit {
   }
 
   onDelete($event){
-    $event.preventDefault();
+    $event.preventDefault();    
     this.shippingAddressService.delete(this.shippingAddress.identifier).subscribe(
       response => {
         this.delete.emit(this.shippingAddress);

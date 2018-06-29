@@ -39,9 +39,9 @@ export class ShippingComponent implements OnInit {
     this.shippingAddressService.getAll().subscribe(
       response => {
         this.shippingAddresses = response;
-        if (this.shippingAddressToEdit.identifier === $event.identifier){
-          this.shippingAddressToEdit = undefined;
-        }
+        
+      }, error => {
+        console.log(error);
       }
     )
   }
