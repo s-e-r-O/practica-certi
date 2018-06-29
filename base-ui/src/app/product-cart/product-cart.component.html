@@ -9,5 +9,5 @@
   <input class="text-center" type="number" min="1" max="99" [(ngModel)]="productCart.quantity" (change)="onChange()">
 </td>
 <td class="align-middle">
-    <button class="btn btn-danger" (click)="onDelete()">DELETE</button>
+    <button class="btn btn-danger" (click)="onDelete()" [disabled]="this.disableDelete"> DELETE</button>
 </td>

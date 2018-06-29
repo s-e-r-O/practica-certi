@@ -19,15 +19,20 @@ export class CartComponent implements OnInit {
   private totalPrice;
 
   constructor(private cartService : CartService, private userService : UserService, private router: Router) { 
-    this.cartService.getById(this.userService.currentUser()).subscribe(
-      response => { 
-        console.log(response);
-        this.products = response.productCarts; 
-        this.productsCount = this.products.length;
-      }
-    );
     this.prices = [];
     this.totalPrice = 0;
+    this.cartService.getById(this.userService.currentUser()).subscribe(
+      response => { 
+        this.products = response.productCarts; 
+        this.productsCount = this.products.length;
+        if (this.productsCount === 0){
+          this.router.navigate(["/store"]);          
+        }
+      },
+      error => {
+        this.router.navigate(["/store"]);
+      }
+    );
   }
 
   ngOnInit() {  }

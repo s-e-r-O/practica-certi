@@ -17,14 +17,19 @@ export class ProductCartComponent implements OnInit {
   @Input('product-tr') productCart : ProductCart;
   @Output('price') price : EventEmitter<{code: string,price:number}> = new EventEmitter();
   @Output('delete') delete : EventEmitter<string> = new EventEmitter();
+
   private product : Product;
+  private disableDelete : boolean;
+
   constructor(private productService : ProductService, private router : Router, private productCartService : ProductCartService, private userService: UserService) { }
 
   ngOnInit() {
+    this.disableDelete = true;
     this.productService.getById(this.productCart.productCode).subscribe(
       response => { 
         this.product = response;
         this.price.emit({ code: this.product.code, price: this.product.price * this.productCart.quantity });
+        this.disableDelete = false;
       }
     )
   }
@@ -41,8 +46,13 @@ export class ProductCartComponent implements OnInit {
   }
 
   onDelete(){
+    this.disableDelete = true;
     this.productCartService.delete(this.product.code,this.userService.currentUser()).subscribe(
-      response => { this.delete.emit(this.product.code);}
+      response => { this.delete.emit(this.product.code);}, 
+      err => { 
+        console.log(err); 
+        this.disableDelete = false;
+      }
     );
   }
 
