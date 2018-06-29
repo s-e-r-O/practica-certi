@@ -17,7 +17,6 @@ namespace ECommerceAPI.Controllers
 {
     public class ProductCartController : ApiController, IServices
     {
-        JSchemaGenerator schemaGenerator = new JSchemaGenerator();
 
         [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
         [HttpGet]        
@@ -70,36 +69,38 @@ namespace ECommerceAPI.Controllers
             var requestBody = request.Content.ReadAsStringAsync().Result;
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
             string responseBody = "{ \"error\": \"There was an error with the structure of the object sent in the body.\"}";
-            
-            JSchema schema = schemaGenerator.Generate(typeof(ProductCart));
-            schema.AllowAdditionalProperties = false;
             try
             {
-                JObject jsonProductCart = JObject.Parse(requestBody);
-                if (jsonProductCart.IsValid(schema))
+                ProductCart myProductCart = JsonConvert.DeserializeObject<ProductCart>(requestBody);
+                CartService cs = new CartService();
+                List < Cart > myCarts = cs.Get();
+                int index = myCarts.FindIndex(cart => cart.Username == myProductCart.Username);
+                if (index >= 0)
                 {
-                    ProductCart myProductCart = JsonConvert.DeserializeObject<ProductCart>(requestBody);
-                    CartService cs = new CartService();
-                    List < Cart > myCarts = cs.Get();
-                    int index = myCarts.FindIndex(cart => cart.Username == myProductCart.Username);
-                    if (index >= 0)
+                    ProductCartService pcs = new ProductCartService(myCarts[index]);
+                    if (!(pcs.Create(myProductCart)))
                     {
+                        responseBody = "{ \"error\": \"That product is already on the cart.\"}";
+                    }
+                    else
+                    {
+                        response = Request.CreateResponse(HttpStatusCode.OK);
+                        responseBody = "{\"id\":\" " + myProductCart.ProductCode + "\"}";
+                    }
+                }
+                else
+                {
+                    if (cs.Create(new Cart { Username = myProductCart.Username }))
+                    {
+                        index = myCarts.FindIndex(cart => cart.Username == myProductCart.Username);
                         ProductCartService pcs = new ProductCartService(myCarts[index]);
-                        if (!(pcs.Create(myProductCart)))
-                        {
-                            responseBody = "{ \"error\": \"That product is already on the cart.\"}";
-                        }
-                        else
+                        if ((pcs.Create(myProductCart)))
                         {
                             response = Request.CreateResponse(HttpStatusCode.OK);
                             responseBody = "{\"id\":\" " + myProductCart.ProductCode + "\"}";
                         }
                     }
-                    else
-                    {
-                        responseBody = "{ \"error\": \"That user doesnt have a cart.\"}";
-                    }
-                 }
+                }
             }
             catch
             {
@@ -117,14 +118,8 @@ namespace ECommerceAPI.Controllers
             var response = Request.CreateResponse(HttpStatusCode.BadRequest);
             string responseBody = "{ \"error\": \"There was an error with the structure of the object sent in the body.\"}";
 
-            JSchema schema = schemaGenerator.Generate(typeof(ProductCart));
-            schema.AllowAdditionalProperties = false;
-
             try
             {
-                JObject jsonProductCart = JObject.Parse(requestBody);
-                if (jsonProductCart.IsValid(schema))
-                {
                     ProductCart myProductCart = JsonConvert.DeserializeObject<ProductCart>(requestBody);
                     CartService cs = new CartService();
                     List<Cart> myCarts = cs.Get();
@@ -134,7 +129,7 @@ namespace ECommerceAPI.Controllers
                         ProductCartService pcs = new ProductCartService(myCarts[index]);
                         if (!(pcs.Update(id,myProductCart)))
                         {
-                            responseBody = "{ \"error\": \"The cart of the use does not have that product, or the key doesnt match.\"}";
+                            responseBody = "{ \"error\": \"That user doesnt have a cart.\"}";
                         }
                         else
                         {
@@ -146,7 +141,7 @@ namespace ECommerceAPI.Controllers
                     {
                         responseBody = "{ \"error\": \"That user doesnt have a cart.\"}";
                     }
-                }
+                
             }
             catch
             {

@@ -20,6 +20,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductCartComponent } from './product-cart/product-cart.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     MainComponent,
     NavbarComponent,
     CartComponent,
-    ProductCartComponent
+    ProductCartComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

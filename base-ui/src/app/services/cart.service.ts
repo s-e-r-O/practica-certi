@@ -24,8 +24,8 @@ export class CartService {
     return this.http.get<Partial<Cart>>('http://localhost:6064/api/cart/' + username).pipe(map((cart: Partial<Cart>) => new Cart(cart)));
   }
 
-  public create(cart : Cart) : Observable<{ username : string }> {
-    return this.http.post('http://localhost:6064/api/cart', cart) as Observable<{ username : string }>;
+  public create(cart : Cart) : Observable<{ id : string }> {
+    return this.http.post('http://localhost:6064/api/cart', cart) as Observable<{ id : string }>;
   }
   
   public update(cart : Cart) : Observable<{ username : string }> {
