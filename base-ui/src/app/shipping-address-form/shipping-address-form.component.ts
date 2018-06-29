@@ -17,7 +17,7 @@ export class ShippingAddressFormComponent implements OnChanges {
   @Output() create : EventEmitter<boolean> = new EventEmitter();
   private form : FormGroup;
   
-  constructor(private shippingAddressService : ShippingAddressService, private userService: UserService) { 
+  constructor(private shippingAddressService : ShippingAddressService) { 
     this.form = new FormGroup({
       'identifier' : new FormControl(undefined,Validators.required),
       'line1' : new FormControl(undefined,Validators.required),
@@ -30,7 +30,7 @@ export class ShippingAddressFormComponent implements OnChanges {
 
   ngOnChanges() {
     if (this.shippingAddress) {
-      this.form.setValue(this.shippingAddress);
+      this.form.patchValue(this.shippingAddress);
     } else {
       this.form.reset();
     }
@@ -45,11 +45,15 @@ export class ShippingAddressFormComponent implements OnChanges {
 
     if (this.form.valid){
       if (this.shippingAddress) {
-        this.shippingAddressService.update(new ShippingAddress(this.form.value)).subscribe(response => 
-          this.create.emit(true));
+        this.shippingAddressService.update(new ShippingAddress(this.form.value)).subscribe(response => {
+          this.create.emit(true);
+          this.form.reset();
+        });
       } else {
-        this.shippingAddressService.create(new ShippingAddress(this.form.value)).subscribe(response => 
-          this.create.emit(true));
+        this.shippingAddressService.create(new ShippingAddress(this.form.value)).subscribe(response => {
+          this.create.emit(true)
+          this.form.reset();
+        });
       }
     }
   }

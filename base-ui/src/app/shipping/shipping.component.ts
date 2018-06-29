@@ -16,6 +16,7 @@ export class ShippingComponent implements OnInit {
     this.shippingAddressService.getAll().subscribe(
       response => {
         this.shippingAddresses = response;
+        console.log(response);
       }
     )
   }

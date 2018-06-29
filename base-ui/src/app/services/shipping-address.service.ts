@@ -22,17 +22,18 @@ export class ShippingAddressService {
     return this.http.get<Partial<ShippingAddress>>('http://localhost:6064/api/shippingaddress/' + name).pipe(map((shippingAddress: Partial<ShippingAddress>) => new ShippingAddress(shippingAddress)));
   }
 
-  public create(shippingAddress : ShippingAddress) : Observable<{ identifier : string }> {
+  public create(shippingAddress : ShippingAddress) : Observable<{ id : string }> {
     shippingAddress.username = this.userService.currentUser();
-    return this.http.post('http://localhost:6064/api/shippingaddress', shippingAddress) as Observable<{ identifier : string }>;
+    return this.http.post('http://localhost:6064/api/shippingaddress', shippingAddress) as Observable<{ id : string }>;
   }
   
-  public update(shippingAddress : ShippingAddress) : Observable<{ identifier : string }> {
-    return this.http.put('http://localhost:6064/api/shippingaddress', shippingAddress) as Observable<{ identifier : string }>;
+  public update(shippingAddress : ShippingAddress) : Observable<{ id : string }> {
+    shippingAddress.username = this.userService.currentUser();
+    return this.http.put('http://localhost:6064/api/shippingaddress/'+shippingAddress.identifier, shippingAddress) as Observable<{ id : string }>;
   }
 
-  public delete(identifier : string) : Observable<{ identifier : string }> {
-    return this.http.delete('http://localhost:6064/api/shippingaddress/' + identifier) as Observable<{ identifier : string }>;
+  public delete(identifier : string) : Observable<{ id : string }> {
+    return this.http.delete('http://localhost:6064/api/shippingaddress/' + identifier) as Observable<{ id : string }>;
   }
 
 }
